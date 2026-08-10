@@ -153,4 +153,8 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
 # Development email backend
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+MAILERS = {
+    "default": {
+        "ENGINE": "django.core.mail.backends.console.EmailBackend",
+    },
+}

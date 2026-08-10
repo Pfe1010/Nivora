@@ -1,12 +1,10 @@
-{% extends 'include/_base.html' %}
+{% extends "include/_base.html" %}
 
 {% load static %}
 
-
 {% block title %}
-    Nivora
+    Nivora — Ideas Worth Discovering
 {% endblock %}
-
 
 {% block extra_css %}
 
@@ -17,226 +15,186 @@
 
 {% endblock %}
 
-
 {% block content %}
 
-<!-- HERO -->
+<!-- =========================================
+     SIMPLE HEADER
+========================================= -->
 
-<section class="hero">
+<header class="site-header">
 
-    <div class="hero-glow hero-glow-one"></div>
-    <div class="hero-glow hero-glow-two"></div>
+    <div class="container nav-container">
 
-    <div class="container hero-grid">
+        <a
+            href="/"
+            class="site-logo"
+        >
 
-        <div class="hero-content">
+            <span class="logo-mark">
+                N
+            </span>
 
-            <div class="hero-kicker">
+            <span class="logo-name">
+                Nivora
+            </span>
 
-                <span class="kicker-dot"></span>
+        </a>
 
+    </div>
+
+</header>
+
+<!-- =========================================
+     WELCOME HERO
+========================================= -->
+
+<section class="welcome-page">
+
+    <div class="welcome-background"></div>
+
+    <div class="container welcome-container">
+
+        <!-- Hero Content -->
+
+        <div class="welcome-content">
+
+            <span class="welcome-eyebrow">
                 WELCOME TO NIVORA
+            </span>
 
-            </div>
+            <h1 class="welcome-title">
 
-
-            <h1 class="hero-title">
-
-                Ideas that
-                <span>stay</span>
-                with you.
+                Ideas worth
+                <span>discovering.</span>
 
             </h1>
 
+            <p class="welcome-description">
 
-            <p class="hero-description">
-
-                A thoughtful space for stories,
-                technology, creativity and ideas
-                that make you stop, think and
-                discover something new.
+                A place for thoughtful stories, fresh perspectives,
+                and ideas that make you stop, think, and see things
+                a little differently.
 
             </p>
 
+            <!-- Authentication Actions -->
 
-            <div class="hero-actions">
+            <div class="welcome-actions">
 
                 <a
-                    href="#articles"
-                    class="btn btn-primary"
+                    href="{% url 'account_login' %}"
+                    class="login-link"
                 >
-
-                    Explore Articles
-
-                    <span>↗</span>
-
+                    Log In
                 </a>
 
+                <a
+                    href="{% url 'account_signup' %}"
+                    class="signup-link"
+                >
+                    Sign Up
+                </a>
 
                 <a
                     href="#donate"
-                    class="btn btn-secondary"
+                    class="welcome-donate-link"
                 >
-
                     Donate Us
-
                 </a>
 
             </div>
 
-
-            <div class="hero-meta">
-
-                <span>
-                    EST. 2026
-                </span>
-
-                <span class="meta-line"></span>
-
-                <span>
-                    STORIES · IDEAS · PERSPECTIVES
-                </span>
-
-            </div>
-
         </div>
 
+        <!-- Visual -->
 
-        <div class="hero-visual">
+        <div class="welcome-visual">
 
-            <div class="visual-orbit orbit-one"></div>
-            <div class="visual-orbit orbit-two"></div>
+            <div class="visual-circle visual-circle-one"></div>
 
+            <div class="visual-circle visual-circle-two"></div>
 
-            <div class="editorial-card">
+            <div class="visual-card">
 
-                <div class="card-header">
+                <div class="visual-card-top">
 
-                    <span>
-                        NIVORA / 001
-                    </span>
+                    <span class="visual-dot"></span>
 
-                    <span>
-                        2026
+                    <span class="visual-label">
+                        NIVORA
                     </span>
 
                 </div>
 
+                <div class="visual-card-content">
 
-                <div class="card-content">
-
-                    <span class="card-label">
-                        EDITORIAL
+                    <span class="visual-small-text">
+                        READ. THINK. DISCOVER.
                     </span>
 
                     <h2>
-                        Curiosity is
-                        where every
-                        story begins.
+                        Stories that
+                        stay with you.
                     </h2>
 
-                </div>
-
-
-                <div class="card-footer">
-
-                    <span>
-                        READ · THINK · DISCOVER
-                    </span>
-
-                    <span class="card-arrow">
-                        ↗
-                    </span>
+                    <p>
+                        Explore ideas from different perspectives
+                        and discover something new.
+                    </p>
 
                 </div>
 
-            </div>
+                <div class="visual-card-line"></div>
 
-
-            <div class="floating-note note-one">
-                01
-            </div>
-
-            <div class="floating-note note-two">
-                IDEAS
             </div>
 
         </div>
 
     </div>
 
+    <!-- Scroll -->
 
-    <div class="scroll-hint">
+    <div class="welcome-scroll">
 
-        <span class="scroll-line"></span>
+        <span>
+            SCROLL TO EXPLORE
+        </span>
 
-        SCROLL TO DISCOVER
+        <div class="scroll-line"></div>
 
     </div>
 
 </section>
 
-
-
-<!-- INTRO -->
+<!-- =========================================
+     ABOUT SECTION
+========================================= -->
 
 <section
-    class="intro-section"
+    class="welcome-intro"
     id="about"
 >
 
-    <div class="container intro-grid">
+    <div class="container intro-container">
 
-        <div class="intro-title">
-
-            <span class="section-number">
-                01
-            </span>
-
-            <h2>
-                Read.<br>
-                Think.<br>
-                Discover.
-            </h2>
-
+        <div class="intro-label">
+            ABOUT NIVORA
         </div>
 
+        <div class="intro-content">
 
-        <div class="intro-text">
-
-            <span class="section-label">
-                ABOUT NIVORA
-            </span>
-
-            <p class="intro-lead">
-                Welcome to a space built
-                around ideas.
-            </p>
+            <h2>
+                More than just
+                another blog.
+            </h2>
 
             <p>
-
-                Nivora is a place where stories,
-                experiences and knowledge come
-                together.
-
-                We write about technology,
-                creativity, personal experiences
-                and interesting ideas that make
-                us curious.
-
+                Nivora is a space created for people
+                who enjoy discovering new ideas,
+                reading meaningful stories and
+                looking at familiar things from
+                a different perspective.
             </p>
-
-
-            <a
-                href="#articles"
-                class="text-link"
-            >
-
-                Start exploring
-
-                <span>→</span>
-
-            </a>
 
         </div>
 
@@ -244,176 +202,66 @@
 
 </section>
 
+<!-- =========================================
+     FEATURES
+========================================= -->
 
-
-<!-- EXPLORE -->
-
-<section
-    class="explore-section"
-    id="articles"
->
+<section class="welcome-features">
 
     <div class="container">
 
-        <div class="section-heading">
+        <div class="features-grid">
 
-            <div>
+            <article class="feature-card">
 
-                <span class="section-label">
-                    EXPLORE
+                <span class="feature-number">
+                    01
                 </span>
 
-                <h2>
-                    Something for
-                    every curiosity.
-                </h2>
+                <h3>
+                    Discover
+                </h3>
 
-            </div>
-
-
-            <span class="section-counter">
-                02 / 04
-            </span>
-
-        </div>
-
-
-        <div
-            class="topic-grid"
-            id="categories"
-        >
-
-            <article class="topic-card">
-
-                <div class="topic-top">
-
-                    <span>01</span>
-
-                    <span class="topic-icon">
-                        ↗
-                    </span>
-
-                </div>
-
-
-                <div class="topic-content">
-
-                    <span class="topic-label">
-                        BUILD
-                    </span>
-
-                    <h3>
-                        Technology
-                    </h3>
-
-                    <p>
-                        Development, tools,
-                        programming and the
-                        future of technology.
-                    </p>
-
-                </div>
+                <p>
+                    Find stories and ideas that
+                    introduce you to perspectives
+                    you may not have considered before.
+                </p>
 
             </article>
 
+            <article class="feature-card">
 
-            <article class="topic-card">
+                <span class="feature-number">
+                    02
+                </span>
 
-                <div class="topic-top">
+                <h3>
+                    Explore
+                </h3>
 
-                    <span>02</span>
-
-                    <span class="topic-icon">
-                        ↗
-                    </span>
-
-                </div>
-
-
-                <div class="topic-content">
-
-                    <span class="topic-label">
-                        CREATE
-                    </span>
-
-                    <h3>
-                        Creativity
-                    </h3>
-
-                    <p>
-                        Ideas, design and the
-                        creative process behind
-                        meaningful work.
-                    </p>
-
-                </div>
+                <p>
+                    Dive deeper into topics that
+                    interest you and explore them
+                    from different angles.
+                </p>
 
             </article>
 
+            <article class="feature-card">
 
-            <article class="topic-card">
+                <span class="feature-number">
+                    03
+                </span>
 
-                <div class="topic-top">
+                <h3>
+                    Connect
+                </h3>
 
-                    <span>03</span>
-
-                    <span class="topic-icon">
-                        ↗
-                    </span>
-
-                </div>
-
-
-                <div class="topic-content">
-
-                    <span class="topic-label">
-                        THINK
-                    </span>
-
-                    <h3>
-                        Knowledge
-                    </h3>
-
-                    <p>
-                        Concepts, discoveries
-                        and things worth knowing.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-            <article class="topic-card">
-
-                <div class="topic-top">
-
-                    <span>04</span>
-
-                    <span class="topic-icon">
-                        ↗
-                    </span>
-
-                </div>
-
-
-                <div class="topic-content">
-
-                    <span class="topic-label">
-                        LIFE
-                    </span>
-
-                    <h3>
-                        Experiences
-                    </h3>
-
-                    <p>
-                        Personal stories,
-                        perspectives and lessons
-                        from everyday life.
-                    </p>
-
-                </div>
+                <p>
+                    Become part of a growing community
+                    of curious minds and passionate readers.
+                </p>
 
             </article>
 
@@ -423,54 +271,40 @@
 
 </section>
 
-
-
-<!-- DONATE -->
+<!-- =========================================
+     DONATE SECTION
+========================================= -->
 
 <section
-    class="donate-section"
+    class="welcome-donate"
     id="donate"
 >
 
-    <div class="container donate-grid">
+    <div class="container donate-container">
 
-        <div class="donate-heading">
+        <div class="donate-content">
 
-            <span class="section-label">
+            <span class="donate-eyebrow">
                 SUPPORT NIVORA
             </span>
 
             <h2>
-                Good ideas
-                deserve a
-                place to grow.
+                Help us keep
+                ideas moving.
             </h2>
 
-        </div>
-
-
-        <div class="donate-content">
-
             <p>
-
-                Nivora is built around independent
-                writing, curiosity and sharing ideas.
-
                 If you enjoy what we create,
-                your support helps us keep going.
-
+                your support helps us continue
+                building Nivora and sharing
+                meaningful content.
             </p>
-
 
             <a
                 href="#"
                 class="donate-button"
             >
-
                 Donate Us
-
-                <span>↗</span>
-
             </a>
 
         </div>

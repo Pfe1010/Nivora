@@ -1,0 +1,174 @@
+{% extends "include/_base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+    Sign Up — Nivora
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/auth.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="auth-page">
+
+
+    <!-- Auth Header -->
+
+    <header class="auth-header">
+
+        <div class="container auth-header-inner">
+
+
+            <a
+                href="{% url 'welcome' %}"
+                class="auth-logo"
+            >
+
+                <span class="auth-logo-mark">
+                    N
+                </span>
+
+                <span class="auth-logo-name">
+                    Nivora
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'welcome' %}"
+                class="auth-back"
+            >
+                ← Back to Nivora
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- Signup -->
+
+    <main class="auth-main">
+
+        <div class="auth-card">
+
+
+            <div class="auth-heading">
+
+                <span class="eyebrow">
+                    JOIN NIVORA
+                </span>
+
+                <h1>
+                    Create account
+                </h1>
+
+                <p>
+                    Create your account and start exploring Nivora.
+                </p>
+
+            </div>
+
+
+
+            <form
+                method="post"
+                action="{% url 'account_signup' %}"
+                class="auth-form"
+            >
+
+                {% csrf_token %}
+
+
+                {% if form.non_field_errors %}
+
+                    <div class="auth-error">
+
+                        {{ form.non_field_errors }}
+
+                    </div>
+
+                {% endif %}
+
+
+
+                {% for field in form %}
+
+                    <div>
+
+                        {{ field.label_tag }}
+
+                        {{ field }}
+
+                        {% if field.help_text %}
+                            <small>
+                                {{ field.help_text }}
+                            </small>
+                        {% endif %}
+
+
+                        {% if field.errors %}
+
+                            <div class="auth-error">
+
+                                {{ field.errors }}
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+
+
+                <button
+                    type="submit"
+                    class="auth-submit"
+                >
+                    Sign Up
+                </button>
+
+
+            </form>
+
+
+
+            <!-- Links -->
+
+            <div class="auth-links">
+
+                <p>
+
+                    Already have an account?
+
+                    <a href="{% url 'account_login' %}">
+                        Log In
+                    </a>
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+{% endblock %}

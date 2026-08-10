@@ -1,0 +1,643 @@
+/* =========================================
+   NIVORA AUTH PAGES
+========================================= */
+
+/* =========================================
+   AUTH PAGE
+========================================= */
+
+.auth-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5f3ee 0%,
+            #f8f6f2 50%,
+            #f1edf6 100%
+        );
+
+}
+
+/* =========================================
+   AUTH HEADER
+========================================= */
+
+.auth-header {
+
+    height: 78px;
+
+    display: flex;
+
+    align-items: center;
+
+    border-bottom:
+        1px solid
+        var(--border);
+
+    background:
+        rgba(248, 246, 242, 0.88);
+
+    backdrop-filter:
+        blur(14px);
+
+    -webkit-backdrop-filter:
+        blur(14px);
+
+}
+
+.auth-header-inner {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+/* Logo */
+
+.auth-logo {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+}
+
+.auth-logo-mark {
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #fff;
+
+    background:
+        var(--navy);
+
+    border-radius: 11px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+}
+
+.auth-logo-name {
+
+    color:
+        var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+}
+
+/* Back link */
+
+.auth-back {
+
+    color:
+        var(--violet);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.auth-back:hover {
+
+    opacity: 0.75;
+
+    transform:
+        translateX(-3px);
+
+}
+
+/* =========================================
+   AUTH CONTENT
+========================================= */
+
+.auth-main {
+
+    flex: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        70px 0;
+
+}
+
+.auth-card {
+
+    width:
+        min(
+            440px,
+            calc(100% - 30px)
+        );
+
+    padding:
+        38px;
+
+    background:
+        rgba(255, 255, 255, 0.78);
+
+    border:
+        1px solid
+        rgba(23, 34, 56, 0.09);
+
+    border-radius:
+        18px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(23, 34, 56, 0.10);
+
+    backdrop-filter:
+        blur(15px);
+
+    -webkit-backdrop-filter:
+        blur(15px);
+
+    animation:
+        authCardIn
+        0.6s
+        ease
+        both;
+}
+
+@keyframes authCardIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+/* =========================================
+   AUTH HEADING
+========================================= */
+
+.auth-heading {
+
+    margin-bottom:
+        30px;
+
+}
+
+.auth-heading .eyebrow {
+
+    display: block;
+
+    margin-bottom:
+        10px;
+
+    color:
+        var(--violet);
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        2px;
+
+}
+
+.auth-heading h1 {
+
+    margin: 0;
+
+    color:
+        var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        38px;
+
+    line-height:
+        1.1;
+
+    letter-spacing:
+        -1px;
+
+}
+
+.auth-heading p {
+
+    margin-top:
+        10px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        13px;
+
+    line-height:
+        1.7;
+
+}
+
+/* =========================================
+   FORM
+========================================= */
+
+.auth-form {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        17px;
+
+}
+
+.auth-form p {
+
+    margin: 0;
+
+}
+
+.auth-form label {
+
+    display:
+        block;
+
+    margin-bottom:
+        7px;
+
+    color:
+        var(--navy);
+
+    font-size:
+        12px;
+
+    font-weight:
+        600;
+
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+
+    width:
+        100%;
+
+    height:
+        48px;
+
+    padding:
+        0 14px;
+
+    color:
+        var(--text);
+
+    background:
+        rgba(255, 255, 255, 0.75);
+
+    border:
+        1px solid
+        #ddd9d1;
+
+    border-radius:
+        8px;
+
+    outline:
+        none;
+
+    font-size:
+        13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+
+}
+
+.auth-form input[type="text"]:focus,
+.auth-form input[type="email"]:focus,
+.auth-form input[type="password"]:focus {
+
+    background:
+        #fff;
+
+    border-color:
+        var(--violet);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(118, 87, 166, 0.09);
+
+}
+
+/* =========================================
+   REMEMBER ME
+========================================= */
+
+.auth-form .remember-me {
+
+    display:
+        flex;
+
+    flex-direction:
+        row;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    margin:
+        0;
+
+}
+
+.auth-form .remember-me input[type="checkbox"] {
+
+    appearance:
+        auto;
+
+    -webkit-appearance:
+        auto;
+
+    width:
+        15px;
+
+    height:
+        15px;
+
+    min-width:
+        15px;
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    accent-color:
+        var(--violet);
+
+    cursor:
+        pointer;
+
+}
+
+.auth-form .remember-me label {
+
+    display:
+        inline;
+
+    margin:
+        0;
+
+    color:
+        #70747d;
+
+    font-size:
+        12px;
+
+    font-weight:
+        400;
+
+    cursor:
+        pointer;
+
+}
+
+/* =========================================
+   SUBMIT BUTTON
+========================================= */
+
+.auth-submit {
+
+    width:
+        100%;
+
+    height:
+        49px;
+
+    margin-top:
+        5px;
+
+    color:
+        #fff;
+
+    background:
+        var(--violet);
+
+    border:
+        1px solid
+        var(--violet);
+
+    border-radius:
+        8px;
+
+    cursor:
+        pointer;
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+.auth-submit:hover {
+
+    background:
+        var(--violet-light);
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(118, 87, 166, 0.20);
+
+}
+
+/* =========================================
+   LINKS
+========================================= */
+
+.auth-links {
+
+    margin-top:
+        22px;
+
+    padding-top:
+        20px;
+
+    border-top:
+        1px solid
+        var(--border);
+
+    text-align:
+        center;
+
+}
+
+.auth-links p {
+
+    margin:
+        7px 0;
+
+    color:
+        var(--muted);
+
+    font-size:
+        12px;
+
+}
+
+.auth-links a {
+
+    color:
+        var(--violet);
+
+    font-weight:
+        600;
+
+}
+
+.auth-links a:hover {
+
+    text-decoration:
+        underline;
+
+}
+
+/* =========================================
+   ERROR
+========================================= */
+
+.auth-error {
+
+    padding:
+        10px 12px;
+
+    margin-bottom:
+        4px;
+
+    color:
+        #a33e4a;
+
+    background:
+        rgba(163, 62, 74, 0.06);
+
+    border:
+        1px solid
+        rgba(163, 62, 74, 0.15);
+
+    border-radius:
+        7px;
+
+    font-size:
+        12px;
+
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .auth-header {
+
+        height:
+            70px;
+
+    }
+
+    .auth-main {
+
+        padding:
+            40px 0;
+
+    }
+
+    .auth-card {
+
+        padding:
+            28px 22px;
+
+    }
+
+    .auth-heading h1 {
+
+        font-size:
+            32px;
+
+    }
+
+}
