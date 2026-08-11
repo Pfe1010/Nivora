@@ -1,0 +1,639 @@
+/* =========================================
+   NIVORA — EMAIL VERIFICATION SENT
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: #252b38;
+
+    background:
+        #f5f3ee;
+
+}
+
+
+a {
+    text-decoration: none;
+}
+
+
+/* =========================================
+   PAGE
+========================================= */
+
+.verification-page {
+
+    position: relative;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        40px 20px;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.background-shape {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    filter:
+        blur(1px);
+
+}
+
+
+.shape-one {
+
+    width: 430px;
+
+    height: 430px;
+
+    top: -260px;
+
+    right: -180px;
+
+    background:
+        rgba(118, 87, 166, 0.07);
+
+}
+
+
+.shape-two {
+
+    width: 350px;
+
+    height: 350px;
+
+    bottom: -230px;
+
+    left: -170px;
+
+    background:
+        rgba(23, 34, 56, 0.045);
+
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.verification-card {
+
+    position: relative;
+
+    z-index: 2;
+
+    width:
+        min(480px, 100%);
+
+    padding:
+        42px 42px 30px;
+
+    border:
+        1px solid #e1ded8;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.94);
+
+    box-shadow:
+        0 25px 70px
+        rgba(23, 34, 56, 0.075);
+
+    text-align: center;
+
+    animation:
+        cardAppear 0.55s ease both;
+
+}
+
+
+@keyframes cardAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(14px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+.brand {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 35px;
+
+}
+
+
+.brand-mark {
+
+    width: 40px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #172238;
+
+    color: #ffffff;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 7px 18px
+        rgba(23, 34, 56, 0.13);
+
+}
+
+
+.brand-name {
+
+    color: #172238;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================
+   EMAIL ICON
+========================================= */
+
+.email-icon-wrapper {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-bottom: 23px;
+
+}
+
+
+.email-icon {
+
+    width: 72px;
+
+    height: 72px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid #e1d9e8;
+
+    border-radius: 18px;
+
+    background:
+        #f4eff7;
+
+    color: #7657a6;
+
+}
+
+
+.email-icon svg {
+
+    width: 31px;
+
+    height: 31px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.45;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.verification-content {
+
+    max-width: 390px;
+
+    margin:
+        0 auto;
+
+}
+
+
+.eyebrow {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #7657a6;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+}
+
+
+.verification-content h1 {
+
+    margin:
+        0 0 14px;
+
+    color: #172238;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 34px;
+
+    font-weight: 600;
+
+    letter-spacing: -0.5px;
+
+}
+
+
+.main-text {
+
+    margin: 0;
+
+    color: #737780;
+
+    font-size: 12px;
+
+    line-height: 1.85;
+
+}
+
+
+.secondary-text {
+
+    margin:
+        18px 0 0;
+
+    color: #999ba2;
+
+    font-size: 10.5px;
+
+    line-height: 1.7;
+
+}
+
+
+.secondary-text strong {
+
+    color: #777983;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================
+   ACTION
+========================================= */
+
+.verification-actions {
+
+    margin-top: 30px;
+
+}
+
+
+.login-button {
+
+    min-height: 46px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 18px;
+
+    padding:
+        0 20px 0 23px;
+
+    border-radius: 9px;
+
+    background: #172238;
+
+    color: #ffffff;
+
+    font-size: 11.5px;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 8px 20px
+        rgba(23, 34, 56, 0.14);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.login-button span {
+
+    font-size: 17px;
+
+    font-weight: 400;
+
+    transition:
+        transform 0.2s ease;
+
+}
+
+
+.login-button:hover {
+
+    background: #253451;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(23, 34, 56, 0.18);
+
+}
+
+
+.login-button:hover span {
+
+    transform:
+        translateX(3px);
+
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.verification-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    margin-top: 30px;
+
+    padding-top: 22px;
+
+    border-top:
+        1px solid #ece9e4;
+
+    color: #a1a2a7;
+
+    font-size: 9.5px;
+
+}
+
+
+.verification-footer a {
+
+    color: #7657a6;
+
+    font-weight: 600;
+
+    transition:
+        color 0.2s ease;
+
+}
+
+
+.verification-footer a:hover {
+
+    color: #5d4387;
+
+}
+
+
+/* =========================================
+   COPYRIGHT
+========================================= */
+
+.copyright {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin:
+        18px 0 0;
+
+    color: #aaa9a5;
+
+    font-size: 9px;
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .verification-page {
+
+        padding:
+            25px 15px;
+
+    }
+
+
+    .verification-card {
+
+        padding:
+            34px 23px 26px;
+
+        border-radius: 17px;
+
+    }
+
+
+    .brand {
+
+        margin-bottom: 30px;
+
+    }
+
+
+    .email-icon {
+
+        width: 66px;
+
+        height: 66px;
+
+    }
+
+
+    .verification-content h1 {
+
+        font-size: 30px;
+
+    }
+
+
+    .main-text {
+
+        font-size: 11.5px;
+
+    }
+
+
+    .secondary-text {
+
+        font-size: 10px;
+
+    }
+
+
+    .verification-actions {
+
+        margin-top: 27px;
+
+    }
+
+
+    .login-button {
+
+        width: 100%;
+
+    }
+
+}
+
+
+@media (max-width: 360px) {
+
+    .verification-card {
+
+        padding:
+            30px 18px 23px;
+
+    }
+
+
+    .verification-content h1 {
+
+        font-size: 27px;
+
+    }
+
+
+    .verification-footer {
+
+        flex-direction: column;
+
+        gap: 3px;
+
+    }
+
+}

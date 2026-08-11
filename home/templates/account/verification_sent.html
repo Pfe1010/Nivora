@@ -1,0 +1,184 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Verify Your Email — Nivora
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/verification_sent.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="verification-page">
+
+
+        <!-- Background Decoration -->
+
+        <div class="background-shape shape-one"></div>
+        <div class="background-shape shape-two"></div>
+
+
+
+        <!-- Verification Card -->
+
+        <section class="verification-card">
+
+
+            <!-- Logo -->
+
+            <a
+                href="/"
+                class="brand"
+            >
+
+                <span class="brand-mark">
+                    N
+                </span>
+
+                <span class="brand-name">
+                    Nivora
+                </span>
+
+            </a>
+
+
+
+            <!-- Email Icon -->
+
+            <div class="email-icon-wrapper">
+
+                <div class="email-icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+
+                        <rect
+                            x="3"
+                            y="5"
+                            width="18"
+                            height="14"
+                            rx="2"
+                        />
+
+                        <path
+                            d="M3 7l9 6 9-6"
+                        />
+
+                    </svg>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Content -->
+
+            <div class="verification-content">
+
+                <span class="eyebrow">
+                    ONE LAST STEP
+                </span>
+
+
+                <h1>
+                    Check your email.
+                </h1>
+
+
+                <p class="main-text">
+
+                    We've sent you a verification link.
+                    Open the email and click the link
+                    to confirm your email address and
+                    finish creating your Nivora account.
+
+                </p>
+
+
+                <p class="secondary-text">
+
+                    Didn't receive the email?
+
+                    <strong>
+                        Check your spam or junk folder.
+                    </strong>
+
+                </p>
+
+            </div>
+
+
+
+            <!-- Actions -->
+
+            <div class="verification-actions">
+
+                <a
+                    href="{% url 'account_login' %}"
+                    class="login-button"
+                >
+
+                    Back to Login
+
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- Footer -->
+
+            <div class="verification-footer">
+
+                <span>
+                    Need help?
+                </span>
+
+                <a href="/">
+                    Return to Nivora
+                </a>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- Bottom Text -->
+
+        <p class="copyright">
+
+            © 2026 Nivora. All rights reserved.
+
+        </p>
+
+
+    </main>
+
+</body>
+
+</html>

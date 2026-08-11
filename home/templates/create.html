@@ -1,0 +1,284 @@
+{% extends "include/_base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+    Create Post — Nivora
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/create.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="create-page">
+
+    <!-- Top Header -->
+    <header class="create-header">
+
+        <a
+            href="{% url 'dashboard' %}"
+            class="create-back"
+        >
+            <span class="back-icon">
+                ←
+            </span>
+
+            <span>
+                Dashboard
+            </span>
+        </a>
+
+
+        <a
+            href="/"
+            class="create-logo"
+        >
+            <span class="create-logo-mark">
+                N
+            </span>
+
+            <span class="create-logo-name">
+                Nivora
+            </span>
+        </a>
+
+    </header>
+
+
+    <!-- Main -->
+    <main class="create-main">
+
+        <div class="create-heading">
+
+            <span class="create-eyebrow">
+                SHARE SOMETHING
+            </span>
+
+            <h1>
+                Create a post.
+            </h1>
+
+            <p>
+                Share an idea, a story or something
+                worth discovering with the Nivora community.
+            </p>
+
+        </div>
+
+
+        <!-- Form Card -->
+        <div class="create-card">
+
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+                class="create-form"
+            >
+
+                {% csrf_token %}
+
+
+                {% if form.non_field_errors %}
+
+                    <div class="form-errors">
+                        {{ form.non_field_errors }}
+                    </div>
+
+                {% endif %}
+
+
+                <!-- Media Upload -->
+                <div class="form-section">
+
+                    <label class="form-label">
+                        Media
+                    </label>
+
+
+                    <label
+                        for="{{ form.media.id_for_label }}"
+                        class="upload-area"
+                        id="uploadArea"
+                    >
+
+                        <div class="upload-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path d="M12 16V4"/>
+                                <path d="m7 9 5-5 5 5"/>
+                                <path d="M5 20h14"/>
+                            </svg>
+
+                        </div>
+
+
+                        <div class="upload-content">
+
+                            <strong>
+                                Choose an image or video
+                            </strong>
+
+                            <span>
+                                Click here to browse files
+                            </span>
+
+                        </div>
+
+
+                        <span class="upload-types">
+                            JPG · PNG · WEBP · MP4 · WEBM
+                        </span>
+
+
+                        {{ form.media }}
+
+                    </label>
+
+
+                    {% if form.media.errors %}
+
+                        <div class="field-error">
+                            {{ form.media.errors }}
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- File Preview -->
+                    <div
+                        class="file-preview"
+                        id="filePreview"
+                    >
+
+                        <div
+                            class="preview-media"
+                            id="previewMedia"
+                        ></div>
+
+
+                        <div class="preview-info">
+
+                            <strong id="fileName">
+                                Selected file
+                            </strong>
+
+                            <span id="fileSize">
+                                0 KB
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="remove-file"
+                            id="removeFile"
+                            aria-label="Remove selected file"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Description -->
+                <div class="form-section">
+
+                    <div class="description-header">
+
+                        <label
+                            for="{{ form.description.id_for_label }}"
+                            class="form-label"
+                        >
+                            Caption
+                        </label>
+
+                        <span id="characterCount">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    {{ form.description }}
+
+
+                    {% if form.description.errors %}
+
+                        <div class="field-error">
+                            {{ form.description.errors }}
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Actions -->
+                <div class="form-actions">
+
+                    <a
+                        href="{% url 'dashboard' %}"
+                        class="cancel-button"
+                    >
+                        Cancel
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="publish-button"
+                    >
+
+                        <span>
+                            Publish Post
+                        </span>
+
+                        <span class="publish-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- Bottom Note -->
+        <p class="create-note">
+
+            Your post will be published under
+            <strong>{{ user.username }}</strong>.
+
+        </p>
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script src="{% static 'js/create.js' %}"></script>
+
+{% endblock %}

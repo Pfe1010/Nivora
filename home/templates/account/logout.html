@@ -2,67 +2,51 @@
 
 {% load static %}
 
-{% block title %}Log Out — Nivora{% endblock %}
-
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% block title %}
+    Logout — Nivora
 {% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/logout.css' %}">
+{% endblock %}
 
 {% block content %}
 
-<section class="auth-page">
+<main class="logout-page">
 
-    <div class="auth-container">
+    <section class="logout-card">
 
-        <div class="auth-card">
-
-            <div class="auth-brand">
-                <span class="auth-brand-symbol">N</span>
-            </div>
-
-            <h1 class="auth-title">
-                Leaving Nivora?
-            </h1>
-
-            <p class="logout-message">
-                Are you sure you want to log out
-                of your Nivora account?
-            </p>
-
-
-            <form
-                method="post"
-                action="{% url 'account_logout' %}"
-            >
-
-                {% csrf_token %}
-
-                <div class="logout-actions">
-
-                    <a
-                        href="/"
-                        class="auth-secondary"
-                    >
-                        Stay Logged In
-                    </a>
-
-
-                    <button
-                        type="submit"
-                        class="auth-submit"
-                    >
-                        Log Out
-                    </button>
-
-                </div>
-
-            </form>
-
+        <div class="logout-brand">
+            N
         </div>
 
-    </div>
+        <h1>
+            Leaving Nivora?
+        </h1>
 
-</section>
+        <p>
+            Are you sure you want to log out of your Nivora account?
+        </p>
+
+        <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+
+            <div class="logout-actions">
+
+                <a href="{% url 'dashboard' %}" class="stay-button">
+                    Stay Logged In
+                </a>
+
+                <button type="submit" class="logout-button">
+                    Log Out
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+</main>
 
 {% endblock %}

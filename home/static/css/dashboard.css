@@ -1,0 +1,750 @@
+/* =========================================
+   DASHBOARD
+========================================= */
+
+.dashboard-page {
+    min-height: 100vh;
+    background: #f7f6f2;
+    color: #17233d;
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.dashboard-main {
+    width: calc(100% - 320px);
+    min-height: 100vh;
+    padding: 88px 7.5% 80px;
+    box-sizing: border-box;
+}
+
+
+.activity-section {
+    width: 100%;
+    max-width: 1220px;
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.activity-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 38px;
+}
+
+
+.activity-eyebrow {
+    display: block;
+
+    margin-bottom: 20px;
+
+    color: #7046c8;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    letter-spacing: 5px;
+}
+
+
+.activity-title {
+    margin: 0;
+
+    color: #17233d;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: clamp(52px, 5vw, 76px);
+    font-weight: 700;
+
+    line-height: 0.98;
+    letter-spacing: -2px;
+}
+
+
+.activity-actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+
+    padding-bottom: 8px;
+}
+
+
+.post-count {
+    color: #69809e;
+
+    font-size: 15px;
+    font-weight: 500;
+}
+
+
+.create-post-small {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 22px;
+
+    min-height: 48px;
+    padding: 0 20px;
+
+    border: 1px solid #dcd5ea;
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    color: #17233d;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.create-post-small span {
+    color: #7046c8;
+    font-size: 20px;
+}
+
+
+.create-post-small:hover {
+    background: #f3eefb;
+    border-color: #cfc1e8;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   POSTS
+========================================= */
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+
+/* =========================================
+   POST CARD
+========================================= */
+
+.post-card {
+    width: 100%;
+
+    overflow: hidden;
+
+    border: 1px solid #ddd9e5;
+    border-radius: 22px;
+
+    background: #ffffff;
+}
+
+
+.post-media {
+    width: 100%;
+
+    background: #111827;
+
+    overflow: hidden;
+}
+
+
+.post-image,
+.post-video {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-height: 680px;
+
+    object-fit: cover;
+}
+
+
+.post-video {
+    background: #000;
+}
+
+
+/* =========================================
+   POST INFO
+========================================= */
+
+.post-info {
+    padding: 20px 24px 22px;
+}
+
+
+.post-description {
+    margin: 0 0 10px;
+
+    color: #17233d;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    line-height: 1.6;
+
+    word-break: break-word;
+}
+
+
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #71829a;
+
+    font-size: 13px;
+}
+
+
+.post-author {
+    color: #17233d;
+    font-weight: 600;
+}
+
+
+.post-dot {
+    color: #a9aebb;
+}
+
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.empty-state {
+    width: 100%;
+    min-height: 520px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 60px 30px;
+
+    border: 1px dashed #d9d3e2;
+    border-radius: 22px;
+
+    background: #fbfaff;
+
+    text-align: center;
+}
+
+
+.empty-icon {
+    width: 66px;
+    height: 66px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 28px;
+
+    border-radius: 50%;
+
+    background: #eee8f8;
+
+    color: #7046c8;
+
+    font-size: 32px;
+    font-weight: 300;
+}
+
+
+.empty-state h2 {
+    margin: 0 0 12px;
+
+    color: #17233d;
+
+    font-size: 23px;
+    font-weight: 700;
+}
+
+
+.empty-state p {
+    margin: 0 0 30px;
+
+    color: #6b7e9b;
+
+    font-size: 17px;
+
+    line-height: 1.6;
+}
+
+
+.create-post-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 34px;
+
+    min-width: 300px;
+    min-height: 60px;
+
+    padding: 0 28px;
+
+    border-radius: 12px;
+
+    background: #17233d;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.create-post-button:hover {
+    background: #243354;
+    transform: translateY(-2px);
+}
+
+
+.create-arrow {
+    color: #c18aff;
+
+    font-size: 23px;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.dashboard-sidebar {
+    position: fixed;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 320px;
+
+    box-sizing: border-box;
+
+    padding: 50px 48px 42px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #17233d;
+
+    color: #ffffff;
+
+    z-index: 100;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.dashboard-logo {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    color: #ffffff;
+
+    text-decoration: none;
+}
+
+
+.logo-mark {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: #ffffff;
+
+    color: #17233d;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 38px;
+    font-weight: 700;
+}
+
+
+.logo-name {
+    color: #ffffff;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 34px;
+    font-weight: 700;
+
+    letter-spacing: -1px;
+}
+
+
+/* =========================================
+   USER
+========================================= */
+
+.sidebar-user {
+    margin-top: 110px;
+}
+
+
+.sidebar-label {
+    display: block;
+
+    margin-bottom: 26px;
+
+    color: #bf80ff;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 5px;
+}
+
+
+.sidebar-username {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: #ffffff;
+
+    font-size: 18px;
+}
+
+
+.sidebar-email {
+    display: block;
+
+    color: #aab9d3;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================
+   DIVIDER
+========================================= */
+
+.sidebar-divider {
+    width: 100%;
+    height: 1px;
+
+    margin-top: 44px;
+
+    background: rgba(255, 255, 255, 0.18);
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+
+    gap: 30px;
+
+    margin-top: 70px;
+}
+
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+
+    gap: 24px;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 19px;
+    font-weight: 700;
+
+    transition: color 0.2s ease;
+}
+
+
+.sidebar-icon {
+    width: 34px;
+
+    color: #c080ff;
+
+    font-size: 31px;
+
+    line-height: 1;
+
+    text-align: center;
+}
+
+
+.sidebar-link:hover {
+    color: #c080ff;
+}
+
+
+/* =========================================
+   SIDEBAR BOTTOM
+========================================= */
+
+.sidebar-bottom {
+    margin-top: auto;
+
+    padding-top: 30px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+
+.sidebar-brand {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: #bf80ff;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 5px;
+}
+
+
+.sidebar-bottom p {
+    margin: 0;
+
+    color: #aab9d3;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .dashboard-sidebar {
+        width: 290px;
+        padding-left: 36px;
+        padding-right: 36px;
+    }
+
+
+    .dashboard-main {
+        width: calc(100% - 290px);
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+
+    .activity-title {
+        font-size: 58px;
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .dashboard-page {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .dashboard-main {
+        width: 100%;
+
+        order: 1;
+
+        padding: 55px 24px 45px;
+    }
+
+
+    .dashboard-sidebar {
+        position: relative;
+
+        top: auto;
+        right: auto;
+        bottom: auto;
+
+        order: 2;
+
+        width: 100%;
+        min-height: auto;
+
+        padding: 35px 24px;
+    }
+
+
+    .sidebar-user {
+        margin-top: 45px;
+    }
+
+
+    .sidebar-nav {
+        margin-top: 45px;
+    }
+
+
+    .sidebar-bottom {
+        margin-top: 45px;
+    }
+
+
+    .activity-header {
+        align-items: flex-start;
+        flex-direction: column;
+
+        margin-bottom: 28px;
+    }
+
+
+    .activity-title {
+        font-size: 48px;
+        letter-spacing: -1.5px;
+    }
+
+
+    .activity-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+
+    .post-image,
+    .post-video {
+        max-height: 500px;
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .dashboard-main {
+        padding: 40px 16px 35px;
+    }
+
+
+    .activity-eyebrow {
+        margin-bottom: 15px;
+
+        font-size: 11px;
+
+        letter-spacing: 4px;
+    }
+
+
+    .activity-title {
+        font-size: 39px;
+    }
+
+
+    .activity-actions {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+
+    .create-post-small {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+
+    .post-card {
+        border-radius: 16px;
+    }
+
+
+    .post-info {
+        padding: 16px 18px 18px;
+    }
+
+
+    .empty-state {
+        min-height: 430px;
+
+        padding: 40px 20px;
+    }
+
+
+    .empty-state p {
+        font-size: 15px;
+    }
+
+
+    .create-post-button {
+        width: 100%;
+        min-width: 0;
+
+        box-sizing: border-box;
+    }
+
+
+    .dashboard-sidebar {
+        padding: 30px 22px;
+    }
+
+
+    .logo-mark {
+        width: 52px;
+        height: 52px;
+
+        font-size: 32px;
+    }
+
+
+    .logo-name {
+        font-size: 30px;
+    }
+
+}

@@ -1,0 +1,164 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Confirm Email — Nivora
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/email_confirm.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="confirm-page">
+
+
+        <!-- Background Decoration -->
+
+        <div class="background-shape shape-one"></div>
+        <div class="background-shape shape-two"></div>
+
+
+
+        <!-- Confirmation Card -->
+
+        <section class="confirm-card">
+
+
+            <!-- Logo -->
+
+            <a
+                href="/"
+                class="brand"
+            >
+
+                <span class="brand-mark">
+                    N
+                </span>
+
+                <span class="brand-name">
+                    Nivora
+                </span>
+
+            </a>
+
+
+
+            <!-- Success Icon -->
+
+            <div class="success-icon-wrapper">
+
+                <div class="success-icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            d="M5 12.5l4.2 4.2L19 7"
+                        />
+
+                    </svg>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Content -->
+
+            <div class="confirm-content">
+
+                <span class="eyebrow">
+                    EMAIL VERIFICATION
+                </span>
+
+
+                <h1>
+                    Your email is verified.
+                </h1>
+
+
+                <p>
+                    Your email address has been successfully
+                    confirmed. Your Nivora account is now ready.
+                </p>
+
+            </div>
+
+
+
+            <!-- Action -->
+
+            <div class="confirm-actions">
+
+                <a
+                    href="{% url 'account_login' %}"
+                    class="continue-button"
+                >
+
+                    <span>
+                        Continue to Login
+                    </span>
+
+                    <span class="button-arrow">
+                        →
+                    </span>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- Footer -->
+
+            <div class="confirm-footer">
+
+                <span>
+                    Welcome to
+                </span>
+
+                <a href="/">
+                    Nivora
+                </a>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- Copyright -->
+
+        <p class="copyright">
+
+            © 2026 Nivora. All rights reserved.
+
+        </p>
+
+
+    </main>
+
+</body>
+
+</html>

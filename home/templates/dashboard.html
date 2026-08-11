@@ -1,0 +1,334 @@
+{% extends "include/_base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+    Dashboard — Nivora
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/dashboard.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="dashboard-page">
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="dashboard-main">
+
+        <section class="activity-section">
+
+
+            <!-- Section Header -->
+
+            <div class="activity-header">
+
+                <div>
+
+                    <span class="activity-eyebrow">
+                        ACTIVITY
+                    </span>
+
+                    <h1 class="activity-title">
+                        Recent activity
+                    </h1>
+
+                </div>
+
+
+                {% if posts %}
+
+                    <div class="activity-actions">
+
+                        <span class="post-count">
+                            {{ posts|length }} post{% if posts|length != 1 %}s{% endif %}
+                        </span>
+
+                        <a
+                            href="{% url 'create' %}"
+                            class="create-post-small"
+                        >
+                            Create post
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- =========================
+                 POSTS
+            ========================== -->
+
+            <div class="posts-container">
+
+
+                {% for post in posts %}
+
+
+                    <article class="post-card">
+
+
+                        <!-- Media -->
+
+                        <div class="post-media">
+
+
+                            {% if ".mp4" in post.media.name|lower or ".webm" in post.media.name|lower or ".mov" in post.media.name|lower %}
+
+                                <video
+                                    class="post-video"
+                                    controls
+                                    preload="metadata"
+                                >
+                                    <source
+                                        src="{{ post.media.url }}"
+                                    >
+
+                                    Your browser does not support video playback.
+
+                                </video>
+
+
+                            {% else %}
+
+                                <img
+                                    src="{{ post.media.url }}"
+                                    alt="Post media"
+                                    class="post-image"
+                                >
+
+                            {% endif %}
+
+
+                        </div>
+
+
+                        <!-- Post Information -->
+
+                        <div class="post-info">
+
+
+                            {% if post.description %}
+
+                                <p class="post-description">
+                                    {{ post.description }}
+                                </p>
+
+                            {% endif %}
+
+
+                            <div class="post-meta">
+
+                                <span class="post-author">
+                                    {{ post.author.username }}
+                                </span>
+
+                                <span class="post-dot">
+                                    ·
+                                </span>
+
+                                <time
+                                    datetime="{{ post.created|date:'c' }}"
+                                >
+                                    {{ post.created|date:"M d, Y · H:i" }}
+                                </time>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </article>
+
+
+                {% empty %}
+
+
+                    <!-- =========================
+                         EMPTY STATE
+                    ========================== -->
+
+                    <div class="empty-state">
+
+
+                        <div class="empty-icon">
+                            +
+                        </div>
+
+
+                        <h2>
+                            No posts yet.
+                        </h2>
+
+
+                        <p>
+                            Share your first idea with the Nivora community.
+                        </p>
+
+
+                        <a
+                            href="{% url 'create' %}"
+                            class="create-post-button"
+                        >
+
+                            <span>
+                                Create your first post
+                            </span>
+
+                            <span class="create-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         RIGHT SIDEBAR
+    ========================== -->
+
+    <aside class="dashboard-sidebar">
+
+
+        <!-- Logo -->
+
+        <a
+            href="/"
+            class="dashboard-logo"
+        >
+
+            <span class="logo-mark">
+                N
+            </span>
+
+            <span class="logo-name">
+                Nivora
+            </span>
+
+        </a>
+
+
+
+        <!-- User -->
+
+        <div class="sidebar-user">
+
+            <span class="sidebar-label">
+                SIGNED IN AS
+            </span>
+
+
+            <strong class="sidebar-username">
+                {{ user.username }}
+            </strong>
+
+
+            <span class="sidebar-email">
+                {{ user.email }}
+            </span>
+
+        </div>
+
+
+
+        <!-- Divider -->
+
+        <div class="sidebar-divider"></div>
+
+
+
+        <!-- Navigation -->
+
+        <nav class="sidebar-nav">
+
+
+            <a
+                href="#"
+                class="sidebar-link"
+            >
+
+                <span class="sidebar-icon">
+                    ↗
+                </span>
+
+                <span>
+                    Explore
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'account_logout' %}"
+                class="sidebar-link"
+            >
+
+                <span class="sidebar-icon">
+                    ↪
+                </span>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+
+        <!-- Bottom -->
+
+        <div class="sidebar-bottom">
+
+            <span class="sidebar-brand">
+                NIVORA
+            </span>
+
+            <p>
+                Ideas worth discovering.
+            </p>
+
+        </div>
+
+
+    </aside>
+
+
+</div>
+
+{% endblock %}
