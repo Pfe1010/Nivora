@@ -1,52 +1,96 @@
-{% extends "include/_base.html" %}
-
 {% load static %}
 
-{% block title %}
-    Logout — Nivora
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/logout.css' %}">
-{% endblock %}
+<head>
 
-{% block content %}
+    <meta charset="UTF-8">
 
-<main class="logout-page">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <section class="logout-card">
+    <title>
+        Logout — Nivora
+    </title>
 
-        <div class="logout-brand">
-            N
-        </div>
+    <link
+        rel="stylesheet"
+        href="{% static 'css/logout.css' %}"
+    >
 
-        <h1>
-            Leaving Nivora?
-        </h1>
+</head>
 
-        <p>
-            Are you sure you want to log out of your Nivora account?
-        </p>
 
-        <form method="post" action="{% url 'account_logout' %}">
-            {% csrf_token %}
+<body>
 
-            <div class="logout-actions">
+    <main class="logout-page">
 
-                <a href="{% url 'dashboard' %}" class="stay-button">
-                    Stay Logged In
-                </a>
+        <section class="logout-card">
 
-                <button type="submit" class="logout-button">
-                    Log Out
-                </button>
-
+            <div class="logout-logo">
+                N
             </div>
 
-        </form>
 
-    </section>
+            <span class="logout-eyebrow">
+                ACCOUNT
+            </span>
 
-</main>
 
-{% endblock %}
+            <h1>
+                Leaving Nivora?
+            </h1>
+
+
+            <p>
+                Are you sure you want to log out
+                of your Nivora account?
+            </p>
+
+
+            <form
+                method="post"
+                action="{{ action_url }}"
+                class="logout-form"
+            >
+
+                {% csrf_token %}
+
+
+                <div class="logout-actions">
+
+                    <a
+                        href="{% url 'dashboard' %}"
+                        class="stay-button"
+                    >
+                        Stay Logged In
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="logout-button"
+                    >
+                        <span>
+                            Log Out
+                        </span>
+
+                        <span class="logout-arrow">
+                            →
+                        </span>
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

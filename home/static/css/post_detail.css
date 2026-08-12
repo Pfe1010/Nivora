@@ -1,0 +1,566 @@
+/* =========================================================
+   POST DETAIL
+========================================================= */
+
+.post-detail-page {
+    min-height: 100vh;
+    background: #f7f6f3;
+    color: #17233f;
+    padding: 0 5%;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.post-detail-header {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+
+    height: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+}
+
+
+.post-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #17233f;
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.post-back:hover {
+    color: #7754b3;
+    transform: translateX(-2px);
+}
+
+
+.back-icon {
+    font-size: 20px;
+    line-height: 1;
+}
+
+
+/* Logo */
+
+.post-detail-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #17233f;
+    text-decoration: none;
+}
+
+
+.post-logo-mark {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #17233f;
+    color: #ffffff;
+
+    border-radius: 11px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+
+.post-logo-name {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.post-detail-main {
+    width: 100%;
+    max-width: 920px;
+
+    margin: 40px auto 70px;
+}
+
+
+/* =========================================================
+   POST CARD
+========================================================= */
+
+.post-detail-card {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #ddd9e6;
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 18px 45px rgba(23, 35, 63, 0.07);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MEDIA
+========================================================= */
+
+.post-detail-media {
+    width: 100%;
+
+    background: #10131a;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+
+/*
+   مهم:
+   تصویر دیگر کل صفحه را نمی‌گیرد.
+   حداکثر ارتفاع مشخص دارد و نسبت تصویر حفظ می‌شود.
+*/
+
+.post-detail-image {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-height: 620px;
+
+    object-fit: contain;
+
+    margin: 0;
+}
+
+
+.post-detail-video {
+    display: block;
+
+    width: 100%;
+    max-height: 620px;
+
+    object-fit: contain;
+
+    background: #10131a;
+}
+
+
+/* =========================================================
+   POST INFORMATION
+========================================================= */
+
+.post-detail-info {
+    padding: 28px 32px 30px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   META
+========================================================= */
+
+.post-detail-meta {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 22px;
+
+    border-bottom: 1px solid #ebe8ef;
+}
+
+
+.post-author {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
+.meta-label {
+    display: block;
+
+    color: #7651b4;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+
+.post-author strong {
+    color: #17233f;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+.post-created {
+    color: #65738d;
+
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   CAPTION
+========================================================= */
+
+.post-caption {
+    padding-top: 22px;
+}
+
+
+.post-caption p {
+    margin: 9px 0 0;
+
+    color: #34445f;
+
+    font-size: 16px;
+    line-height: 1.7;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.post-detail-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 14px;
+
+    margin-top: 28px;
+}
+
+
+/* Back button */
+
+.back-dashboard-button {
+    min-height: 46px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 0 18px;
+
+    border: 1px solid #ddd9e6;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #17233f;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.back-dashboard-button:hover {
+    background: #f7f3fc;
+    border-color: #cfc3e3;
+
+    transform: translateY(-1px);
+}
+
+
+/* Delete */
+
+.delete-post-button {
+    min-height: 46px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 0 18px;
+
+    border: 1px solid #ead3d3;
+    border-radius: 10px;
+
+    background: #fff7f7;
+
+    color: #a23d3d;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.delete-post-button:hover {
+    background: #fff0f0;
+    border-color: #dcaeae;
+    color: #8e2929;
+
+    transform: translateY(-1px);
+}
+
+
+.delete-icon {
+    font-size: 19px;
+    line-height: 1;
+}
+
+
+/* =========================================================
+   BOTTOM NOTE
+========================================================= */
+
+.post-detail-note {
+    margin: 22px 0 0;
+
+    text-align: center;
+
+    color: #7a8497;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .post-detail-page {
+        padding: 0 4%;
+    }
+
+
+    .post-detail-header {
+        height: 80px;
+    }
+
+
+    .post-detail-main {
+        margin-top: 25px;
+    }
+
+
+    .post-detail-image,
+    .post-detail-video {
+        max-height: 500px;
+    }
+
+
+    .post-detail-info {
+        padding: 24px 26px 26px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .post-detail-page {
+        padding: 0 16px;
+    }
+
+
+    .post-detail-header {
+        height: 72px;
+    }
+
+
+    .post-detail-logo {
+        gap: 7px;
+    }
+
+
+    .post-logo-mark {
+        width: 36px;
+        height: 36px;
+
+        border-radius: 9px;
+
+        font-size: 20px;
+    }
+
+
+    .post-logo-name {
+        font-size: 20px;
+    }
+
+
+    .post-back {
+        font-size: 13px;
+    }
+
+
+    .post-detail-main {
+        margin: 20px auto 45px;
+    }
+
+
+    .post-detail-card {
+        border-radius: 16px;
+    }
+
+
+    /*
+       در موبایل تصویر بیش از حد بلند نمی‌شود.
+    */
+
+    .post-detail-image,
+    .post-detail-video {
+        max-height: 360px;
+    }
+
+
+    .post-detail-info {
+        padding: 20px 18px 22px;
+    }
+
+
+    .post-detail-meta {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 12px;
+
+        padding-bottom: 18px;
+    }
+
+
+    .post-created {
+        font-size: 13px;
+    }
+
+
+    .post-caption {
+        padding-top: 18px;
+    }
+
+
+    .post-caption p {
+        font-size: 15px;
+        line-height: 1.65;
+    }
+
+
+    /*
+       دکمه‌ها در موبایل زیر هم قرار می‌گیرند
+       تا از صفحه بیرون نزنند.
+    */
+
+    .post-detail-actions {
+        flex-direction: column;
+        align-items: stretch;
+
+        margin-top: 22px;
+    }
+
+
+    .back-dashboard-button,
+    .delete-post-button {
+        width: 100%;
+    }
+
+
+    .post-detail-note {
+        font-size: 12px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .post-detail-page {
+        padding: 0 12px;
+    }
+
+
+    .post-back span:last-child {
+        display: none;
+    }
+
+
+    .post-detail-image,
+    .post-detail-video {
+        max-height: 300px;
+    }
+
+
+    .post-detail-info {
+        padding: 18px 15px 20px;
+    }
+
+}

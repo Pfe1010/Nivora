@@ -1,346 +1,123 @@
-/* =========================================
-   DASHBOARD
-========================================= */
+/* =========================================================
+   NIVORA DASHBOARD
+   ========================================================= */
 
-.dashboard-page {
-    min-height: 100vh;
-    background: #f7f6f2;
-    color: #17233d;
-}
-
-
-/* =========================================
-   MAIN
-========================================= */
-
-.dashboard-main {
-    width: calc(100% - 320px);
-    min-height: 100vh;
-    padding: 88px 7.5% 80px;
+* {
     box-sizing: border-box;
 }
 
-
-.activity-section {
-    width: 100%;
-    max-width: 1220px;
-    margin: 0 auto;
-}
-
-
-/* =========================================
-   HEADER
-========================================= */
-
-.activity-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 30px;
-    margin-bottom: 38px;
-}
-
-
-.activity-eyebrow {
-    display: block;
-
-    margin-bottom: 20px;
-
-    color: #7046c8;
-
-    font-size: 13px;
-    font-weight: 700;
-
-    letter-spacing: 5px;
-}
-
-
-.activity-title {
+html,
+body {
     margin: 0;
+    padding: 0;
+}
 
-    color: #17233d;
+body {
+    background: #f5f4f1;
+    color: #17233f;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    color: inherit;
+}
+
+
+/* =========================================================
+   DASHBOARD WRAPPER
+   ========================================================= */
+
+.dashboard {
+    min-height: 100vh;
+    background: #f5f4f1;
+    color: #17233f;
+}
+
+
+/* =========================================================
+   MOBILE HEADER
+   ========================================================= */
+
+.dashboard-mobile-header {
+    display: none;
+
+    height: 66px;
+    padding: 0 18px;
+
+    align-items: center;
+    justify-content: space-between;
+
+    background: #fff;
+    border-bottom: 1px solid #e5e1dc;
+}
+
+.dashboard-logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #17233f;
+    text-decoration: none;
 
     font-family: Georgia, "Times New Roman", serif;
-
-    font-size: clamp(52px, 5vw, 76px);
-    font-weight: 700;
-
-    line-height: 0.98;
-    letter-spacing: -2px;
-}
-
-
-.activity-actions {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-
-    padding-bottom: 8px;
-}
-
-
-.post-count {
-    color: #69809e;
-
-    font-size: 15px;
-    font-weight: 500;
-}
-
-
-.create-post-small {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 22px;
-
-    min-height: 48px;
-    padding: 0 20px;
-
-    border: 1px solid #dcd5ea;
-    border-radius: 12px;
-
-    background: #ffffff;
-
-    color: #17233d;
-
-    text-decoration: none;
-
-    font-size: 14px;
-    font-weight: 700;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-.create-post-small span {
-    color: #7046c8;
     font-size: 20px;
+    font-weight: 700;
+}
+
+.dashboard-logo-mark {
+    width: 36px;
+    height: 36px;
+
+    display: grid;
+    place-items: center;
+
+    background: #17233f;
+    color: #fff;
+
+    border-radius: 10px;
+}
+
+.dashboard-logo-name {
+    line-height: 1;
 }
 
 
-.create-post-small:hover {
-    background: #f3eefb;
-    border-color: #cfc1e8;
-    transform: translateY(-1px);
-}
+/* =========================================================
+   MOBILE MENU BUTTON
+   ========================================================= */
 
+.sidebar-toggle {
+    width: 40px;
+    height: 40px;
 
-/* =========================================
-   POSTS
-========================================= */
+    padding: 9px;
 
-.posts-container {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    justify-content: center;
+    gap: 5px;
+
+    background: transparent;
+    border: 1px solid #ddd9d3;
+    border-radius: 9px;
+
+    cursor: pointer;
 }
 
-
-/* =========================================
-   POST CARD
-========================================= */
-
-.post-card {
-    width: 100%;
-
-    overflow: hidden;
-
-    border: 1px solid #ddd9e5;
-    border-radius: 22px;
-
-    background: #ffffff;
-}
-
-
-.post-media {
-    width: 100%;
-
-    background: #111827;
-
-    overflow: hidden;
-}
-
-
-.post-image,
-.post-video {
+.sidebar-toggle span {
     display: block;
 
     width: 100%;
-    height: auto;
+    height: 2px;
 
-    max-height: 680px;
-
-    object-fit: cover;
+    background: #17233f;
+    border-radius: 5px;
 }
 
 
-.post-video {
-    background: #000;
-}
-
-
-/* =========================================
-   POST INFO
-========================================= */
-
-.post-info {
-    padding: 20px 24px 22px;
-}
-
-
-.post-description {
-    margin: 0 0 10px;
-
-    color: #17233d;
-
-    font-size: 16px;
-    font-weight: 500;
-
-    line-height: 1.6;
-
-    word-break: break-word;
-}
-
-
-.post-meta {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    color: #71829a;
-
-    font-size: 13px;
-}
-
-
-.post-author {
-    color: #17233d;
-    font-weight: 600;
-}
-
-
-.post-dot {
-    color: #a9aebb;
-}
-
-
-/* =========================================
-   EMPTY STATE
-========================================= */
-
-.empty-state {
-    width: 100%;
-    min-height: 520px;
-
-    box-sizing: border-box;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    padding: 60px 30px;
-
-    border: 1px dashed #d9d3e2;
-    border-radius: 22px;
-
-    background: #fbfaff;
-
-    text-align: center;
-}
-
-
-.empty-icon {
-    width: 66px;
-    height: 66px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-bottom: 28px;
-
-    border-radius: 50%;
-
-    background: #eee8f8;
-
-    color: #7046c8;
-
-    font-size: 32px;
-    font-weight: 300;
-}
-
-
-.empty-state h2 {
-    margin: 0 0 12px;
-
-    color: #17233d;
-
-    font-size: 23px;
-    font-weight: 700;
-}
-
-
-.empty-state p {
-    margin: 0 0 30px;
-
-    color: #6b7e9b;
-
-    font-size: 17px;
-
-    line-height: 1.6;
-}
-
-
-.create-post-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 34px;
-
-    min-width: 300px;
-    min-height: 60px;
-
-    padding: 0 28px;
-
-    border-radius: 12px;
-
-    background: #17233d;
-
-    color: #ffffff;
-
-    text-decoration: none;
-
-    font-size: 16px;
-    font-weight: 700;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-.create-post-button:hover {
-    background: #243354;
-    transform: translateY(-2px);
-}
-
-
-.create-arrow {
-    color: #c18aff;
-
-    font-size: 23px;
-}
-
-
-/* =========================================
+/* =========================================================
    SIDEBAR
-========================================= */
+   ========================================================= */
 
 .dashboard-sidebar {
     position: fixed;
@@ -349,402 +126,1197 @@
     right: 0;
     bottom: 0;
 
-    width: 320px;
+    width: 300px;
 
-    box-sizing: border-box;
+    z-index: 100;
 
-    padding: 50px 48px 42px;
+    background: #17233f;
+    color: #fff;
+
+    transition: transform .25s ease;
+}
+
+.sidebar-inner {
+    height: 100%;
+
+    padding: 28px 24px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   SIDEBAR LOGO
+   ========================================================= */
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 0 10px;
+
+    color: #fff;
+    text-decoration: none;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.sidebar-logo-mark {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    background: #fff;
+    color: #17233f;
+
+    border-radius: 12px;
+
+    font-size: 25px;
+}
+
+
+/* =========================================================
+   SIDEBAR USER
+   ========================================================= */
+
+.sidebar-user {
+    margin-top: 38px;
+
+    padding: 14px;
+
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    background: rgba(255, 255, 255, .06);
+
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 14px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+
+    flex: 0 0 40px;
+
+    display: grid;
+    place-items: center;
+
+    background: #9a78d0;
+    color: #fff;
+
+    border-radius: 50%;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.user-info {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.user-name {
+    overflow: hidden;
+
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.user-label {
+    color: rgba(255, 255, 255, .45);
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   SIDEBAR NAV
+   ========================================================= */
+
+.sidebar-nav {
+    margin-top: 35px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nav-section-title {
+    margin: 0 11px 8px;
+
+    color: rgba(255, 255, 255, .4);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.sidebar-link {
+    width: 100%;
+    min-height: 45px;
+
+    padding: 0 12px;
+
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    background: transparent;
+
+    border: 0;
+    border-radius: 10px;
+
+    color: rgba(255, 255, 255, .58);
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active,
+.logout-link:hover {
+    background: rgba(255, 255, 255, .09);
+    color: #fff;
+}
+
+.sidebar-icon {
+    width: 19px;
+    height: 19px;
+
+    display: grid;
+    place-items: center;
+
+    flex: 0 0 19px;
+}
+
+.sidebar-icon svg {
+    width: 18px;
+    height: 18px;
+
+    fill: none;
+    stroke: currentColor;
+
+    stroke-width: 1.5;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* =========================================================
+   SIDEBAR BOTTOM
+   ========================================================= */
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.sidebar-divider {
+    height: 1px;
+
+    margin: 0 10px 14px;
+
+    background: rgba(255, 255, 255, .08);
+}
+
+.sidebar-bottom form {
+    margin: 0;
+}
+
+
+/* =========================================================
+   OVERLAY
+   ========================================================= */
+
+.sidebar-overlay {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 90;
+
+    background: rgba(0, 0, 0, .45);
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.dashboard-main {
+    width: calc(100% - 300px);
+
+    min-height: 100vh;
+
+    margin-right: 300px;
+
+    padding: 46px 52px 70px;
+}
+
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.dashboard-topbar {
+    margin-bottom: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.dashboard-label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #8065b4;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 2.5px;
+}
+
+.dashboard-topbar h1 {
+    margin: 0;
+
+    color: #17233f;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 42px;
+    line-height: 1;
+}
+
+.topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #607089;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.topbar-avatar {
+    width: 34px;
+    height: 34px;
+
+    display: grid;
+    place-items: center;
+
+    background: #9a78d0;
+    color: #fff;
+
+    border-radius: 50%;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   WELCOME
+   ========================================================= */
+
+.dashboard-welcome {
+    position: relative;
+
+    min-height: 210px;
+
+    padding: 36px 40px;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+
+    background: #fff;
+
+    border: 1px solid #e3ded7;
+    border-radius: 19px;
+}
+
+.welcome-copy {
+    position: relative;
+    z-index: 2;
+
+    max-width: 650px;
+}
+
+.welcome-small {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #8b6db9;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.welcome-copy h2 {
+    margin: 0 0 12px;
+
+    color: #17233f;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: clamp(34px, 4vw, 50px);
+    line-height: 1;
+}
+
+.welcome-copy p {
+    max-width: 590px;
+
+    margin: 0;
+
+    color: #68778d;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.welcome-decoration {
+    position: absolute;
+
+    right: 45px;
+    top: 50%;
+
+    width: 165px;
+    height: 165px;
+
+    transform: translateY(-50%);
+
+    display: grid;
+    place-items: center;
+
+    background: #faf8fd;
+
+    border: 1px solid #e6dff0;
+    border-radius: 50%;
+
+    color: #e3dcec;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 120px;
+    font-weight: 700;
+}
+
+.decoration-letter {
+    line-height: 1;
+}
+
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+.dashboard-stats {
+    margin-top: 16px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 13px;
+}
+
+.stat-card {
+    min-height: 115px;
+
+    padding: 19px 21px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: #fff;
+
+    border: 1px solid #e3ded7;
+    border-radius: 14px;
+}
+
+.stat-label {
+    margin-bottom: 7px;
+
+    color: #8a8790;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 1.8px;
+}
+
+.stat-card strong {
+    color: #17233f;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 29px;
+    line-height: 1.1;
+}
+
+.stat-description {
+    margin-top: 5px;
+
+    color: #8a94a3;
+
+    font-size: 11px;
+}
+
+.stat-date {
+    font-size: 23px !important;
+}
+
+
+/* =========================================================
+   CONTENT GRID
+   ========================================================= */
+
+.dashboard-content-grid {
+    margin-top: 16px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.6fr)
+        minmax(260px, .8fr);
+
+    gap: 16px;
+
+    align-items: start;
+}
+
+.dashboard-panel {
+    min-width: 0;
+
+    padding: 23px;
+
+    background: #fff;
+
+    border: 1px solid #e3ded7;
+    border-radius: 16px;
+}
+
+
+/* =========================================================
+   PANEL HEADER
+   ========================================================= */
+
+.panel-header {
+    margin-bottom: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+.panel-eyebrow {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #8b6db9;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 1.8px;
+}
+
+.panel-header h3 {
+    margin: 0;
+
+    color: #17233f;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 23px;
+    line-height: 1.15;
+}
+
+
+/* =========================================================
+   CREATE POST
+   ========================================================= */
+
+.activity-create-post {
+    width: 100%;
+    min-height: 68px;
+
+    margin-bottom: 16px;
+    padding: 11px 13px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    background: #faf8fd;
+
+    border: 1px solid #e1d8ed;
+    border-radius: 12px;
+
+    color: #17233f;
+
+    text-decoration: none;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        background .2s ease;
+}
+
+.activity-create-post:hover {
+    transform: translateY(-2px);
+
+    background: #f6f2fb;
+
+    border-color: #cfc0df;
+}
+
+.activity-create-icon {
+    width: 39px;
+    height: 39px;
+
+    flex: 0 0 39px;
+
+    display: grid;
+    place-items: center;
+
+    background: #17233f;
+    color: #fff;
+
+    border-radius: 10px;
+
+    font-size: 21px;
+}
+
+.activity-create-content {
+    min-width: 0;
+    flex: 1;
 
     display: flex;
     flex-direction: column;
 
-    background: #17233d;
-
-    color: #ffffff;
-
-    z-index: 100;
+    gap: 3px;
 }
 
-
-/* =========================================
-   LOGO
-========================================= */
-
-.dashboard-logo {
-    display: flex;
-    align-items: center;
-
-    gap: 14px;
-
-    color: #ffffff;
-
-    text-decoration: none;
-}
-
-
-.logo-mark {
-    width: 60px;
-    height: 60px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 15px;
-
-    background: #ffffff;
-
-    color: #17233d;
-
-    font-family: Georgia, "Times New Roman", serif;
-
-    font-size: 38px;
-    font-weight: 700;
-}
-
-
-.logo-name {
-    color: #ffffff;
-
-    font-family: Georgia, "Times New Roman", serif;
-
-    font-size: 34px;
-    font-weight: 700;
-
-    letter-spacing: -1px;
-}
-
-
-/* =========================================
-   USER
-========================================= */
-
-.sidebar-user {
-    margin-top: 110px;
-}
-
-
-.sidebar-label {
-    display: block;
-
-    margin-bottom: 26px;
-
-    color: #bf80ff;
-
+.activity-create-content strong {
     font-size: 12px;
-    font-weight: 700;
-
-    letter-spacing: 5px;
 }
 
+.activity-create-content small {
+    overflow: hidden;
 
-.sidebar-username {
-    display: block;
+    color: #8993a1;
 
-    margin-bottom: 12px;
+    font-size: 10px;
 
-    color: #ffffff;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
+.activity-create-arrow {
+    color: #8061ae;
     font-size: 18px;
 }
 
 
-.sidebar-email {
-    display: block;
+/* =========================================================
+   POSTS LIST
+   ========================================================= */
 
-    color: #aab9d3;
-
-    font-size: 15px;
-
-    line-height: 1.5;
-
-    overflow-wrap: anywhere;
-}
-
-
-/* =========================================
-   DIVIDER
-========================================= */
-
-.sidebar-divider {
-    width: 100%;
-    height: 1px;
-
-    margin-top: 44px;
-
-    background: rgba(255, 255, 255, 0.18);
-}
-
-
-/* =========================================
-   NAVIGATION
-========================================= */
-
-.sidebar-nav {
+.posts-list {
     display: flex;
     flex-direction: column;
 
-    gap: 30px;
-
-    margin-top: 70px;
+    gap: 10px;
 }
 
 
-.sidebar-link {
+/* =========================================================
+   POST CARD
+   ========================================================= */
+
+.dashboard-post {
+    width: 100%;
+    min-width: 0;
+
+    display: grid;
+
+    grid-template-columns: 100px minmax(0, 1fr);
+
+    overflow: hidden;
+
+    background: #fff;
+
+    border: 1px solid #e8e3de;
+    border-radius: 12px;
+
+    color: inherit;
+    text-decoration: none;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+.dashboard-post:hover {
+    transform: translateY(-2px);
+
+    border-color: #d8cbe6;
+
+    box-shadow:
+        0 8px 20px rgba(23, 35, 63, .06);
+}
+
+
+/* =========================================================
+   POST MEDIA
+   ========================================================= */
+
+.dashboard-post-media {
+    position: relative;
+
+    width: 100px;
+    height: 100px;
+
+    overflow: hidden;
+
+    background: #e9e7e4;
+}
+
+.dashboard-post-media img,
+.dashboard-post-media video {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.dashboard-media-type {
+    position: absolute;
+
+    left: 6px;
+    bottom: 6px;
+
+    padding: 3px 5px;
+
+    background: rgba(23, 35, 63, .82);
+
+    color: #fff;
+
+    border-radius: 4px;
+
+    font-size: 6px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   POST CONTENT
+   ========================================================= */
+
+.dashboard-post-content {
+    min-width: 0;
+
+    padding: 12px 14px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    gap: 8px;
+}
+
+.dashboard-post-description {
+    overflow: hidden;
+
+    color: #4c5c73;
+
+    font-size: 12px;
+    line-height: 1.6;
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.dashboard-post-description span {
+    color: #9aa1aa;
+
+    font-style: italic;
+}
+
+.dashboard-post-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #949ca7;
+
+    font-size: 9px;
+}
+
+.dashboard-post-meta span:last-child {
+    color: #8061ae;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-state {
+    min-height: 210px;
+
+    padding: 30px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background: #fcfbfd;
+
+    border: 1px dashed #ddd6e4;
+    border-radius: 12px;
+}
+
+.empty-icon {
+    width: 45px;
+    height: 45px;
+
+    margin-bottom: 11px;
+
+    display: grid;
+    place-items: center;
+
+    background: #f0ecf5;
+
+    border-radius: 12px;
+
+    color: #a08abc;
+}
+
+.empty-icon svg {
+    width: 23px;
+    height: 23px;
+
+    fill: none;
+    stroke: currentColor;
+
+    stroke-width: 1.5;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.empty-state h4 {
+    margin: 0 0 6px;
+
+    color: #17233f;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 19px;
+}
+
+.empty-state p {
+    margin: 0;
+
+    color: #8b94a2;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+   ========================================================= */
+
+.quick-panel {
+    min-width: 0;
+}
+
+.quick-actions {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.quick-action {
+    min-height: 67px;
+
+    padding: 10px 11px;
+
     display: flex;
     align-items: center;
 
-    gap: 24px;
+    gap: 11px;
 
-    color: #ffffff;
+    color: #17233f;
 
     text-decoration: none;
 
-    font-size: 19px;
-    font-weight: 700;
+    border: 1px solid #ebe7e2;
+    border-radius: 11px;
 
-    transition: color 0.2s ease;
+    transition: .2s ease;
+}
+
+.quick-action:hover {
+    background: #faf8fd;
+
+    border-color: #d9cde7;
+
+    transform: translateY(-2px);
+}
+
+.quick-action-icon {
+    width: 37px;
+    height: 37px;
+
+    flex: 0 0 37px;
+
+    display: grid;
+    place-items: center;
+
+    background: #f0ebf6;
+    color: #7655a8;
+
+    border-radius: 10px;
+
+    font-size: 17px;
+}
+
+.quick-action > span:nth-child(2) {
+    min-width: 0;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.quick-action strong {
+    font-size: 11px;
+}
+
+.quick-action small {
+    color: #8b94a2;
+
+    font-size: 9px;
+}
+
+.action-arrow {
+    color: #8664b7;
+
+    font-size: 17px;
 }
 
 
-.sidebar-icon {
-    width: 34px;
+/* =========================================================
+   TABLET
+   ========================================================= */
 
-    color: #c080ff;
-
-    font-size: 31px;
-
-    line-height: 1;
-
-    text-align: center;
-}
-
-
-.sidebar-link:hover {
-    color: #c080ff;
-}
-
-
-/* =========================================
-   SIDEBAR BOTTOM
-========================================= */
-
-.sidebar-bottom {
-    margin-top: auto;
-
-    padding-top: 30px;
-
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-
-.sidebar-brand {
-    display: block;
-
-    margin-bottom: 12px;
-
-    color: #bf80ff;
-
-    font-size: 12px;
-    font-weight: 700;
-
-    letter-spacing: 5px;
-}
-
-
-.sidebar-bottom p {
-    margin: 0;
-
-    color: #aab9d3;
-
-    font-size: 14px;
-
-    line-height: 1.6;
-}
-
-
-/* =========================================
-   RESPONSIVE
-========================================= */
-
-@media (max-width: 1100px) {
+@media (max-width: 1050px) {
 
     .dashboard-sidebar {
-        width: 290px;
-        padding-left: 36px;
-        padding-right: 36px;
+        width: 270px;
     }
-
 
     .dashboard-main {
-        width: calc(100% - 290px);
-        padding-left: 6%;
-        padding-right: 6%;
+        width: calc(100% - 270px);
+
+        margin-right: 270px;
+
+        padding: 36px 28px 55px;
     }
 
-
-    .activity-title {
-        font-size: 58px;
+    .dashboard-stats {
+        grid-template-columns: repeat(3, 1fr);
     }
 
+    .dashboard-content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-panel {
+        order: 2;
+    }
+
+    .dashboard-panel:first-child {
+        order: 1;
+    }
+
+    .welcome-decoration {
+        right: 25px;
+
+        width: 140px;
+        height: 140px;
+
+        font-size: 100px;
+    }
 }
 
+
+/* =========================================================
+   MOBILE SIDEBAR
+   ========================================================= */
 
 @media (max-width: 800px) {
 
-    .dashboard-page {
+    .dashboard-mobile-header {
         display: flex;
-        flex-direction: column;
     }
 
+    .dashboard-sidebar {
+        width: min(310px, 88vw);
+
+        transform: translateX(100%);
+    }
+
+    .dashboard-sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay {
+        display: block;
+
+        opacity: 0;
+
+        pointer-events: none;
+
+        transition: opacity .25s ease;
+    }
+
+    .sidebar-overlay.open {
+        opacity: 1;
+
+        pointer-events: auto;
+    }
 
     .dashboard-main {
         width: 100%;
 
-        order: 1;
+        margin-right: 0;
 
-        padding: 55px 24px 45px;
+        padding: 28px 22px 45px;
     }
 
-
-    .dashboard-sidebar {
-        position: relative;
-
-        top: auto;
-        right: auto;
-        bottom: auto;
-
-        order: 2;
-
-        width: 100%;
-        min-height: auto;
-
-        padding: 35px 24px;
+    .dashboard-topbar {
+        display: none;
     }
 
+    .dashboard-welcome {
+        min-height: 210px;
 
-    .sidebar-user {
-        margin-top: 45px;
+        padding: 30px 26px;
     }
 
-
-    .sidebar-nav {
-        margin-top: 45px;
+    .welcome-copy {
+        max-width: 100%;
     }
 
+    .welcome-decoration {
+        right: -25px;
 
-    .sidebar-bottom {
-        margin-top: 45px;
+        width: 125px;
+        height: 125px;
+
+        opacity: .4;
+
+        font-size: 90px;
     }
 
+    .dashboard-stats {
+        grid-template-columns: 1fr;
 
-    .activity-header {
-        align-items: flex-start;
-        flex-direction: column;
-
-        margin-bottom: 28px;
+        gap: 9px;
     }
 
+    .stat-card {
+        min-height: 95px;
 
-    .activity-title {
-        font-size: 48px;
-        letter-spacing: -1.5px;
+        padding: 17px 19px;
     }
 
-
-    .activity-actions {
-        width: 100%;
-        justify-content: space-between;
+    .dashboard-panel {
+        padding: 18px;
     }
 
-
-    .post-image,
-    .post-video {
-        max-height: 500px;
+    .panel-header h3 {
+        font-size: 21px;
     }
-
 }
 
 
-@media (max-width: 520px) {
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .dashboard-mobile-header {
+        height: 64px;
+
+        padding: 0 15px;
+    }
 
     .dashboard-main {
-        padding: 40px 16px 35px;
+        padding: 20px 14px 40px;
     }
 
+    .dashboard-welcome {
+        min-height: 205px;
 
-    .activity-eyebrow {
-        margin-bottom: 15px;
+        padding: 27px 22px;
+    }
 
+    .welcome-copy h2 {
+        font-size: 34px;
+    }
+
+    .welcome-copy p {
+        font-size: 12px;
+    }
+
+    .welcome-decoration {
+        width: 105px;
+        height: 105px;
+
+        right: -20px;
+
+        opacity: .3;
+
+        font-size: 75px;
+    }
+
+    .dashboard-panel {
+        padding: 15px;
+    }
+
+    .activity-create-post {
+        min-height: 62px;
+
+        padding: 9px 10px;
+    }
+
+    .activity-create-content small {
+        display: none;
+    }
+
+    .dashboard-post {
+        grid-template-columns: 82px minmax(0, 1fr);
+    }
+
+    .dashboard-post-media {
+        width: 82px;
+        height: 100px;
+    }
+
+    .dashboard-post-content {
+        padding: 11px 12px;
+    }
+
+    .dashboard-post-description {
         font-size: 11px;
-
-        letter-spacing: 4px;
     }
 
-
-    .activity-title {
-        font-size: 39px;
+    .dashboard-post-meta {
+        font-size: 8px;
     }
 
-
-    .activity-actions {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 14px;
-    }
-
-
-    .create-post-small {
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-
-    .post-card {
-        border-radius: 16px;
-    }
-
-
-    .post-info {
-        padding: 16px 18px 18px;
-    }
-
-
-    .empty-state {
-        min-height: 430px;
-
-        padding: 40px 20px;
-    }
-
-
-    .empty-state p {
+    .dashboard-post-meta span:last-child {
         font-size: 15px;
     }
+}
 
 
-    .create-post-button {
-        width: 100%;
-        min-width: 0;
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
 
-        box-sizing: border-box;
+@media (max-width: 380px) {
+
+    .dashboard-main {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
-
-    .dashboard-sidebar {
-        padding: 30px 22px;
+    .dashboard-welcome {
+        padding: 24px 18px;
     }
 
-
-    .logo-mark {
-        width: 52px;
-        height: 52px;
-
-        font-size: 32px;
+    .welcome-copy h2 {
+        font-size: 31px;
     }
 
-
-    .logo-name {
-        font-size: 30px;
+    .dashboard-panel {
+        padding: 14px;
     }
 
+    .dashboard-post {
+        grid-template-columns: 75px minmax(0, 1fr);
+    }
+
+    .dashboard-post-media {
+        width: 75px;
+        height: 95px;
+    }
+
+    .dashboard-post-content {
+        padding: 10px;
+    }
 }

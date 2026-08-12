@@ -1,0 +1,183 @@
+{% extends "include/_base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+    Delete Post — Nivora
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/post_delete.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="delete-page">
+
+    <main class="delete-container">
+
+        <!-- Logo -->
+
+        <a href="{% url 'dashboard' %}" class="delete-logo">
+
+            <span class="delete-logo-mark">
+                N
+            </span>
+
+            <span class="delete-logo-name">
+                Nivora
+            </span>
+
+        </a>
+
+
+        <!-- Delete Card -->
+
+        <section class="delete-card">
+
+
+            <!-- Warning Icon -->
+
+            <div class="delete-icon">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+                    <path d="M12 3L2.8 20h18.4L12 3z"/>
+                    <path d="M12 9v5"/>
+                    <path d="M12 17h.01"/>
+                </svg>
+
+            </div>
+
+
+            <!-- Text -->
+
+            <div class="delete-content">
+
+                <span class="delete-eyebrow">
+                    DELETE POST
+                </span>
+
+                <h1>
+                    Delete this post?
+                </h1>
+
+                <p>
+                    This action cannot be undone.
+                    Once you delete this post, it will be permanently
+                    removed from your account.
+                </p>
+
+            </div>
+
+
+            <!-- Post Preview -->
+
+            <div class="delete-preview">
+
+                {% if post.media %}
+
+                    {% with filename=post.media.name|lower %}
+
+                        {% if ".mp4" in filename or ".webm" in filename or ".mov" in filename %}
+
+                            <video
+                                class="delete-preview-media"
+                                preload="metadata"
+                            >
+                                <source src="{{ post.media.url }}">
+                            </video>
+
+                        {% else %}
+
+                            <img
+                                src="{{ post.media.url }}"
+                                alt="Post preview"
+                                class="delete-preview-media"
+                            >
+
+                        {% endif %}
+
+                    {% endwith %}
+
+                {% endif %}
+
+
+                {% if post.description %}
+
+                    <div class="delete-preview-info">
+
+                        <p>
+                            {{ post.description }}
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Actions -->
+
+            <div class="delete-actions">
+
+
+                <a
+                    href="{% url 'post_detail' post.pk %}"
+                    class="cancel-delete"
+                >
+                    Cancel
+                </a>
+
+
+                <form
+                    method="post"
+                    class="delete-form"
+                >
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="confirm-delete"
+                    >
+                        <span>
+                            Delete Post
+                        </span>
+
+                        <span class="delete-arrow">
+                            →
+                        </span>
+                    </button>
+
+                </form>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- Bottom Note -->
+
+        <p class="delete-note">
+            You can always create a new post from your dashboard.
+        </p>
+
+    </main>
+
+</div>
+
+{% endblock %}

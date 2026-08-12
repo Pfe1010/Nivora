@@ -1,257 +1,304 @@
-/* =========================
-   Logout Page
-========================= */
+* {
+    box-sizing: border-box;
+}
 
-.logout-page {
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
     min-height: 100vh;
-    width: 100%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 32px;
-    box-sizing: border-box;
-
-    background: #f8f7f4;
-}
-
-
-/* =========================
-   Logout Card
-========================= */
-
-.logout-card {
-    width: 100%;
-    max-width: 520px;
-
-    box-sizing: border-box;
-
-    padding: 42px;
-
-    background: #ffffff;
-
-    border: 1px solid #e5e0ea;
-    border-radius: 24px;
-
-    box-shadow:
-        0 25px 60px rgba(25, 37, 65, 0.08);
-
-    text-align: left;
-}
-
-
-/* =========================
-   Brand
-========================= */
-
-.logout-brand {
-    width: 52px;
-    height: 52px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-bottom: 24px;
-
-    border-radius: 15px;
-
-    background: #17233f;
-    color: #ffffff;
-
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 28px;
-    font-weight: 700;
-}
-
-
-/* =========================
-   Heading
-========================= */
-
-.logout-card h1 {
-    margin: 0 0 12px;
+    background: #f5f4f1;
 
     color: #17233f;
 
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(32px, 5vw, 46px);
-    line-height: 1.05;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+
+.logout-page {
+    min-height: 100vh;
+
+    padding: 24px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.logout-card {
+    width: 100%;
+    max-width: 460px;
+
+    padding: 48px 42px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid #e3ded7;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 55px rgba(23, 35, 63, 0.08);
+}
+
+
+.logout-logo {
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 22px;
+
+    display: grid;
+    place-items: center;
+
+    background: #17233f;
+
+    color: #ffffff;
+
+    border-radius: 15px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 32px;
     font-weight: 700;
 }
 
 
-/* =========================
-   Description
-========================= */
+.logout-eyebrow {
+    display: block;
 
-.logout-card p {
-    margin: 0 0 28px;
+    margin-bottom: 10px;
 
-    color: #65738c;
+    color: #8065b4;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 2.5px;
+}
+
+
+.logout-card h1 {
+    margin: 0 0 13px;
+
+    color: #17233f;
 
     font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+        Georgia,
+        "Times New Roman",
+        serif;
 
-    font-size: 16px;
+    font-size: 38px;
+
+    line-height: 1.05;
+}
+
+
+.logout-card p {
+    max-width: 340px;
+
+    margin: 0 auto 30px;
+
+    color: #68778d;
+
+    font-size: 13px;
+
     line-height: 1.7;
 }
 
 
-/* =========================
-   Actions
-========================= */
-
-.logout-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.logout-form {
+    width: 100%;
 }
 
 
-/* Stay logged in */
+.logout-actions {
+    display: grid;
 
-.stay-button {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+
+.stay-button,
+.logout-button {
+    min-height: 48px;
+
+    padding: 0 15px;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    width: 100%;
-    min-height: 52px;
+    gap: 8px;
 
-    box-sizing: border-box;
+    border-radius: 10px;
 
-    border-radius: 12px;
+    font-family: inherit;
 
-    color: #17233f;
-    background: transparent;
-
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 700;
 
     text-decoration: none;
-
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
-}
-
-.stay-button:hover {
-    background: #f2eff8;
-}
-
-
-/* Logout button */
-
-.logout-button {
-    width: 100%;
-    min-height: 54px;
-
-    border: 0;
-    border-radius: 12px;
-
-    background: #7957b2;
-    color: #ffffff;
-
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-    font-size: 16px;
-    font-weight: 700;
 
     cursor: pointer;
 
     transition:
-        background-color 0.2s ease,
-        transform 0.2s ease;
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease;
 }
+
+
+.stay-button {
+    background: #ffffff;
+
+    border: 1px solid #ddd8d1;
+
+    color: #17233f;
+}
+
+
+.stay-button:hover {
+    background: #f8f7f5;
+
+    transform: translateY(-1px);
+}
+
+
+.logout-button {
+    border: 1px solid #17233f;
+
+    background: #17233f;
+
+    color: #ffffff;
+}
+
 
 .logout-button:hover {
-    background: #68489e;
+    background: #263453;
+
+    transform: translateY(-1px);
 }
 
-.logout-button:active {
-    transform: translateY(1px);
+
+.logout-arrow {
+    font-size: 16px;
 }
 
 
-/* =========================
-   Tablet
-========================= */
+/* =========================================================
+   TABLET
+   ========================================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
 
     .logout-page {
-        padding: 24px;
+        padding: 22px;
     }
 
     .logout-card {
-        max-width: 480px;
-        padding: 36px;
-        border-radius: 22px;
+        max-width: 440px;
+
+        padding: 42px 34px;
     }
 
 }
 
 
-/* =========================
-   Mobile
-========================= */
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
-@media (max-width: 480px) {
+@media (max-width: 520px) {
 
     .logout-page {
-        min-height: 100svh;
-        padding: 18px;
+        padding: 16px;
     }
+
 
     .logout-card {
-        padding: 28px 22px;
-        border-radius: 20px;
+        padding: 36px 22px;
+
+        border-radius: 17px;
     }
 
-    .logout-brand {
-        width: 48px;
-        height: 48px;
 
-        margin-bottom: 20px;
+    .logout-logo {
+        width: 52px;
+        height: 52px;
 
-        border-radius: 13px;
+        margin-bottom: 19px;
 
-        font-size: 25px;
+        font-size: 28px;
     }
+
 
     .logout-card h1 {
-        font-size: 34px;
-        line-height: 1.1;
+        font-size: 31px;
     }
+
 
     .logout-card p {
-        margin-bottom: 24px;
+        margin-bottom: 25px;
 
-        font-size: 15px;
-        line-height: 1.6;
+        font-size: 12px;
     }
+
+
+    .logout-actions {
+        grid-template-columns: 1fr;
+
+        gap: 9px;
+    }
+
 
     .stay-button,
     .logout-button {
-        min-height: 52px;
+        width: 100%;
+
+        min-height: 47px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .logout-page {
+        padding: 12px;
+    }
+
+
+    .logout-card {
+        padding: 32px 18px;
+    }
+
+
+    .logout-card h1 {
+        font-size: 28px;
     }
 
 }

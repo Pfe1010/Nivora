@@ -27,3 +27,15 @@ class CreateView(LoginRequiredMixin, View):
     def get(self, request):
         form = FormCreatePost()
         return render(request, 'create.html', {'form':form})
+
+def post_detail(request, pk):
+    post = get_object_or_404(CreatePost, pk=pk, author=request.user)
+    return render(request, 'post_detail.html', {'post':post})
+
+def delete_post(request, pk):
+    post = get_object_or_404(CreatePost, pk=pk, author=request.user)
+    if request.method == 'POST':
+        post.delete()
+        return redirect('dashboard')
+        
+    return render(request, 'post_delete.html', {'post':post})

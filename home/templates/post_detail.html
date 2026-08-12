@@ -1,0 +1,176 @@
+{% extends "include/_base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+    Post — Nivora
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/post_detail.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="post-detail-page">
+
+    <!-- Header -->
+    <header class="post-detail-header">
+
+        <a
+            href="{% url 'dashboard' %}"
+            class="post-back"
+        >
+            <span class="back-icon">←</span>
+            <span>Dashboard</span>
+        </a>
+
+
+        <a
+            href="/"
+            class="post-detail-logo"
+        >
+            <span class="post-logo-mark">N</span>
+            <span class="post-logo-name">Nivora</span>
+        </a>
+
+    </header>
+
+
+    <!-- Main -->
+    <main class="post-detail-main">
+
+        <article class="post-detail-card">
+
+
+            <!-- Media -->
+            {% if post.media %}
+
+                {% with filename=post.media.name|lower %}
+
+                    <div class="post-detail-media">
+
+                        {% if ".mp4" in filename or ".webm" in filename or ".mov" in filename %}
+
+                            <video
+                                class="post-detail-video"
+                                controls
+                                preload="metadata"
+                            >
+                                <source src="{{ post.media.url }}">
+                                Your browser does not support video.
+                            </video>
+
+                        {% else %}
+
+                            <img
+                                src="{{ post.media.url }}"
+                                alt="Post media"
+                                class="post-detail-image"
+                            >
+
+                        {% endif %}
+
+                    </div>
+
+                {% endwith %}
+
+            {% endif %}
+
+
+            <!-- Information -->
+            <div class="post-detail-info">
+
+
+                <!-- Meta -->
+                <div class="post-detail-meta">
+
+                    <div class="post-author">
+
+                        <span class="meta-label">
+                            POSTED BY
+                        </span>
+
+                        <strong>
+                            {{ post.author.username }}
+                        </strong>
+
+                    </div>
+
+
+                    <time
+                        class="post-created"
+                        datetime="{{ post.created|date:'c' }}"
+                    >
+                        {{ post.created|date:"M d, Y · H:i" }}
+                    </time>
+
+                </div>
+
+
+                <!-- Caption -->
+                {% if post.description %}
+
+                    <div class="post-caption">
+
+                        <span class="meta-label">
+                            CAPTION
+                        </span>
+
+                        <p>
+                            {{ post.description }}
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- Actions -->
+                <div class="post-detail-actions">
+
+                    <a
+                        href="{% url 'dashboard' %}"
+                        class="back-dashboard-button"
+                    >
+                        <span>←</span>
+                        <span>Back to Dashboard</span>
+                    </a>
+
+
+                    {% if post.author == user %}
+
+                        <a
+                            href="{% url 'delete_post' post.pk %}"
+                            class="delete-post-button"
+                        >
+                            <span>Delete Post</span>
+                            <span class="delete-icon">×</span>
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <p class="post-detail-note">
+            Ideas worth discovering.
+        </p>
+
+    </main>
+
+</div>
+
+{% endblock %}

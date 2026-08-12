@@ -143,6 +143,7 @@ ACCOUNT_LOGIN_METHODS = {"username", "email"}
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 LOGIN_REDIRECT_URL = "dashboard"
 LOGOUT_REDIRECT_URL = "/"
+ACCOUNT_LOGOUT_ON_GET = False
 
 # Development email backend
 MAILERS = {

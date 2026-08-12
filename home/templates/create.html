@@ -1,10 +1,8 @@
 {% extends "include/_base.html" %}
-
 {% load static %}
 
-
 {% block title %}
-    Create Post — Nivora
+Create Post — Nivora
 {% endblock %}
 
 
@@ -22,13 +20,18 @@
 
 <div class="create-page">
 
-    <!-- Top Header -->
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
     <header class="create-header">
 
         <a
             href="{% url 'dashboard' %}"
             class="create-back"
         >
+
             <span class="back-icon">
                 ←
             </span>
@@ -36,6 +39,7 @@
             <span>
                 Dashboard
             </span>
+
         </a>
 
 
@@ -43,6 +47,7 @@
             href="/"
             class="create-logo"
         >
+
             <span class="create-logo-mark">
                 N
             </span>
@@ -50,13 +55,21 @@
             <span class="create-logo-name">
                 Nivora
             </span>
+
         </a>
 
     </header>
 
 
-    <!-- Main -->
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
     <main class="create-main">
+
+
+        <!-- Heading -->
 
         <div class="create-heading">
 
@@ -76,11 +89,15 @@
         </div>
 
 
-        <!-- Form Card -->
+
+        <!-- =================================================
+             FORM CARD
+        ================================================== -->
+
         <div class="create-card">
 
             <form
-                method="POST"
+                method="post"
                 enctype="multipart/form-data"
                 class="create-form"
             >
@@ -88,22 +105,32 @@
                 {% csrf_token %}
 
 
+                <!-- Non-field errors -->
+
                 {% if form.non_field_errors %}
 
                     <div class="form-errors">
+
                         {{ form.non_field_errors }}
+
                     </div>
 
                 {% endif %}
 
 
-                <!-- Media Upload -->
+
+                <!-- =========================================
+                     MEDIA
+                ========================================== -->
+
                 <div class="form-section">
 
                     <label class="form-label">
                         Media
                     </label>
 
+
+                    <!-- Upload Area -->
 
                     <label
                         for="{{ form.media.id_for_label }}"
@@ -117,9 +144,13 @@
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"
                             >
-                                <path d="M12 16V4"/>
-                                <path d="m7 9 5-5 5 5"/>
-                                <path d="M5 20h14"/>
+
+                                <path d="M12 16V4"></path>
+
+                                <path d="m7 9 5-5 5 5"></path>
+
+                                <path d="M5 20h14"></path>
+
                             </svg>
 
                         </div>
@@ -127,11 +158,11 @@
 
                         <div class="upload-content">
 
-                            <strong>
+                            <strong id="uploadTitle">
                                 Choose an image or video
                             </strong>
 
-                            <span>
+                            <span id="uploadText">
                                 Click here to browse files
                             </span>
 
@@ -148,25 +179,88 @@
                     </label>
 
 
+
+                    <!-- Django validation errors -->
+
                     {% if form.media.errors %}
 
                         <div class="field-error">
+
                             {{ form.media.errors }}
+
                         </div>
 
                     {% endif %}
 
 
-                    <!-- File Preview -->
+
+                    <!-- JavaScript validation error -->
+
                     <div
-                        class="file-preview"
+                        id="uploadError"
+                        class="upload-error"
+                        role="alert"
+                    >
+
+                        <span class="error-icon">
+                            !
+                        </span>
+
+                        <div class="error-content">
+
+                            <strong>
+                                Unsupported file
+                            </strong>
+
+                            <span id="uploadErrorText">
+                                Please select a JPG, PNG, WEBP, MP4 or WEBM file.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Success -->
+
+                    <div
+                        id="uploadSuccess"
+                        class="upload-success"
+                        aria-live="polite"
+                    >
+
+                        <span class="success-icon">
+                            ✓
+                        </span>
+
+                        <div class="success-content">
+
+                            <strong>
+                                File selected successfully
+                            </strong>
+
+                            <span id="selectedFileName">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Preview -->
+
+                    <div
                         id="filePreview"
+                        class="file-preview"
                     >
 
                         <div
-                            class="preview-media"
                             id="previewMedia"
-                        ></div>
+                            class="preview-media"
+                        >
+                        </div>
 
 
                         <div class="preview-info">
@@ -184,8 +278,8 @@
 
                         <button
                             type="button"
-                            class="remove-file"
                             id="removeFile"
+                            class="remove-file"
                             aria-label="Remove selected file"
                         >
                             ×
@@ -196,7 +290,11 @@
                 </div>
 
 
-                <!-- Description -->
+
+                <!-- =========================================
+                     DESCRIPTION
+                ========================================== -->
+
                 <div class="form-section">
 
                     <div class="description-header">
@@ -207,6 +305,7 @@
                         >
                             Caption
                         </label>
+
 
                         <span id="characterCount">
                             0
@@ -221,7 +320,9 @@
                     {% if form.description.errors %}
 
                         <div class="field-error">
+
                             {{ form.description.errors }}
+
                         </div>
 
                     {% endif %}
@@ -229,7 +330,11 @@
                 </div>
 
 
-                <!-- Actions -->
+
+                <!-- =========================================
+                     ACTIONS
+                ========================================== -->
+
                 <div class="form-actions">
 
                     <a
@@ -262,11 +367,16 @@
         </div>
 
 
-        <!-- Bottom Note -->
+
+        <!-- Note -->
+
         <p class="create-note">
 
             Your post will be published under
-            <strong>{{ user.username }}</strong>.
+
+            <strong>
+                {{ user.username }}
+            </strong>.
 
         </p>
 
@@ -275,6 +385,7 @@
 </div>
 
 {% endblock %}
+
 
 
 {% block extra_js %}

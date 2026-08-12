@@ -1,69 +1,511 @@
 {% extends "include/_base.html" %}
-
 {% load static %}
-
 
 {% block title %}
     Dashboard — Nivora
 {% endblock %}
 
-
 {% block extra_css %}
-
-<link
-    rel="stylesheet"
-    href="{% static 'css/dashboard.css' %}"
->
-
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 {% endblock %}
-
 
 {% block content %}
 
-<div class="dashboard-page">
+<div class="dashboard">
+
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header">
+
+        <a href="/" class="dashboard-logo">
+
+            <span class="dashboard-logo-mark">
+                N
+            </span>
+
+            <span class="dashboard-logo-name">
+                Nivora
+            </span>
+
+        </a>
+
+        <button
+            type="button"
+            class="sidebar-toggle"
+            id="sidebarToggle"
+            aria-label="Open menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </header>
 
 
-    <!-- =========================
-         MAIN CONTENT
-    ========================== -->
+    <!-- Sidebar -->
+    <aside
+        class="dashboard-sidebar"
+        id="dashboardSidebar"
+    >
 
-    <main class="dashboard-main">
+        <div class="sidebar-inner">
 
-        <section class="activity-section">
+            <!-- Logo -->
+            <a href="/" class="sidebar-logo">
+
+                <span class="sidebar-logo-mark">
+                    N
+                </span>
+
+                <span class="sidebar-logo-name">
+                    Nivora
+                </span>
+
+            </a>
 
 
-            <!-- Section Header -->
+            <!-- User -->
+            <div class="sidebar-user">
 
-            <div class="activity-header">
+                <div class="user-avatar">
+                    {{ user.username|first|upper }}
+                </div>
 
-                <div>
+                <div class="user-info">
 
-                    <span class="activity-eyebrow">
-                        ACTIVITY
+                    <span class="user-name">
+                        {{ user.username }}
                     </span>
 
-                    <h1 class="activity-title">
-                        Recent activity
-                    </h1>
+                    <span class="user-label">
+                        Member
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Navigation -->
+            <nav class="sidebar-nav">
+
+                <span class="nav-section-title">
+                    MENU
+                </span>
+
+
+                <a
+                    href="{% url 'dashboard' %}"
+                    class="sidebar-link active"
+                >
+
+                    <span class="sidebar-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6v-9h-6v9Zm0-16v5h6V4h-6Z"/>
+                        </svg>
+                    </span>
+
+                    <span>
+                        Dashboard
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="#"
+                    class="sidebar-link"
+                >
+
+                    <span class="sidebar-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="11" cy="11" r="6"/>
+                            <path d="m16 16 4 4"/>
+                        </svg>
+                    </span>
+
+                    <span>
+                        Explore
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="{% url 'create' %}"
+                    class="sidebar-link"
+                >
+
+                    <span class="sidebar-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                    </span>
+
+                    <span>
+                        Create Post
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="#"
+                    class="sidebar-link"
+                >
+
+                    <span class="sidebar-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="8" r="4"/>
+                            <path d="M4 20c.8-4 3.5-6 8-6s7.2 2 8 6"/>
+                        </svg>
+                    </span>
+
+                    <span>
+                        Profile
+                    </span>
+
+                </a>
+
+            </nav>
+
+
+            <!-- Sidebar Bottom -->
+            <div class="sidebar-bottom">
+
+                <div class="sidebar-divider"></div>
+
+                <a
+                    href="{% url 'account_logout' %}"
+                    class="sidebar-link logout-link"
+                >
+
+                    <span class="sidebar-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path d="M10 4H5v16h5"/>
+                            <path d="M14 8l4 4-4 4"/>
+                            <path d="M18 12H9"/>
+                        </svg>
+
+                    </span>
+
+                    <span>
+                        Logout
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+        <!-- END sidebar-inner -->
+
+    </aside>
+    <!-- END sidebar -->
+
+
+    <!-- Overlay -->
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+
+
+        <!-- Top Bar -->
+        <div class="dashboard-topbar">
+
+            <div>
+
+                <span class="dashboard-label">
+                    YOUR SPACE
+                </span>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+            </div>
+
+
+            <div class="topbar-user">
+
+                <div class="topbar-avatar">
+                    {{ user.username|first|upper }}
+                </div>
+
+                <span>
+                    {{ user.username }}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Welcome -->
+        <section class="dashboard-welcome">
+
+            <div class="welcome-copy">
+
+                <span class="welcome-small">
+                    WELCOME BACK
+                </span>
+
+                <h2>
+                    Hello, {{ user.username }}.
+                </h2>
+
+                <p>
+                    This is your personal space on Nivora.
+                    Explore ideas, create posts and share
+                    something worth reading.
+                </p>
+
+            </div>
+
+
+            <div class="welcome-decoration">
+
+                <span class="decoration-letter">
+                    N
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- Stats -->
+        <section class="dashboard-stats">
+
+            <div class="stat-card">
+
+                <span class="stat-label">
+                    YOUR POSTS
+                </span>
+
+                <strong>
+                    {{ posts|length }}
+                </strong>
+
+                <span class="stat-description">
+                    Published posts
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span class="stat-label">
+                    SAVED
+                </span>
+
+                <strong>
+                    0
+                </strong>
+
+                <span class="stat-description">
+                    Saved articles
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span class="stat-label">
+                    MEMBER SINCE
+                </span>
+
+                <strong class="stat-date">
+                    {{ user.date_joined|date:"M Y" }}
+                </strong>
+
+                <span class="stat-description">
+                    Your Nivora journey
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- Content Grid -->
+        <section class="dashboard-content-grid">
+
+
+            <!-- Recent Activity -->
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="panel-eyebrow">
+                            ACTIVITY
+                        </span>
+
+                        <h3>
+                            Recent activity
+                        </h3>
+
+                    </div>
 
                 </div>
 
 
+                <!-- Create Post -->
+                <a
+                    href="{% url 'create' %}"
+                    class="activity-create-post"
+                >
+
+                    <span class="activity-create-icon">
+                        +
+                    </span>
+
+                    <span class="activity-create-content">
+
+                        <strong>
+                            Create a post
+                        </strong>
+
+                        <small>
+                            Share something with the Nivora community
+                        </small>
+
+                    </span>
+
+                    <span class="activity-create-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
                 {% if posts %}
 
-                    <div class="activity-actions">
+                    <div class="posts-list">
 
-                        <span class="post-count">
-                            {{ posts|length }} post{% if posts|length != 1 %}s{% endif %}
-                        </span>
+                        {% for item in posts %}
 
-                        <a
-                            href="{% url 'create' %}"
-                            class="create-post-small"
-                        >
-                            Create post
-                            <span>→</span>
-                        </a>
+                            <a
+                                href="{% url 'post_detail' item.pk %}"
+                                class="dashboard-post"
+                            >
+
+                                <div class="dashboard-post-media">
+
+                                    {% if item.media %}
+
+                                        {% with media_url=item.media.url %}
+
+                                            {% if ".mp4" in media_url|lower or ".webm" in media_url|lower %}
+
+                                                <video
+                                                    src="{{ item.media.url }}"
+                                                    muted
+                                                    playsinline
+                                                    preload="metadata"
+                                                ></video>
+
+                                                <span class="dashboard-media-type">
+                                                    VIDEO
+                                                </span>
+
+                                            {% else %}
+
+                                                <img
+                                                    src="{{ item.media.url }}"
+                                                    alt="{{ item.description|default:'Post image' }}"
+                                                    loading="lazy"
+                                                >
+
+                                                <span class="dashboard-media-type">
+                                                    IMAGE
+                                                </span>
+
+                                            {% endif %}
+
+                                        {% endwith %}
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <div class="dashboard-post-content">
+
+                                    <div class="dashboard-post-description">
+
+                                        {% if item.description %}
+
+                                            {{ item.description|truncatechars:150 }}
+
+                                        {% else %}
+
+                                            <span>
+                                                No caption added.
+                                            </span>
+
+                                        {% endif %}
+
+                                    </div>
+
+
+                                    <div class="dashboard-post-meta">
+
+                                        <span>
+                                            {{ item.created|date:"M d, Y" }}
+                                        </span>
+
+                                        <span>
+                                            →
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </a>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-state">
+
+                        <div class="empty-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path d="M5 5h14v14H5z"/>
+                                <path d="M8 9h8M8 13h5"/>
+                            </svg>
+
+                        </div>
+
+                        <h4>
+                            Nothing here yet
+                        </h4>
+
+                        <p>
+                            Create your first post and it will appear here.
+                        </p>
 
                     </div>
 
@@ -72,263 +514,70 @@
             </div>
 
 
-            <!-- =========================
-                 POSTS
-            ========================== -->
+            <!-- Quick Actions -->
+            <div class="dashboard-panel quick-panel">
 
-            <div class="posts-container">
+                <div class="panel-header">
 
+                    <div>
 
-                {% for post in posts %}
+                        <span class="panel-eyebrow">
+                            GET STARTED
+                        </span>
 
-
-                    <article class="post-card">
-
-
-                        <!-- Media -->
-
-                        <div class="post-media">
-
-
-                            {% if ".mp4" in post.media.name|lower or ".webm" in post.media.name|lower or ".mov" in post.media.name|lower %}
-
-                                <video
-                                    class="post-video"
-                                    controls
-                                    preload="metadata"
-                                >
-                                    <source
-                                        src="{{ post.media.url }}"
-                                    >
-
-                                    Your browser does not support video playback.
-
-                                </video>
-
-
-                            {% else %}
-
-                                <img
-                                    src="{{ post.media.url }}"
-                                    alt="Post media"
-                                    class="post-image"
-                                >
-
-                            {% endif %}
-
-
-                        </div>
-
-
-                        <!-- Post Information -->
-
-                        <div class="post-info">
-
-
-                            {% if post.description %}
-
-                                <p class="post-description">
-                                    {{ post.description }}
-                                </p>
-
-                            {% endif %}
-
-
-                            <div class="post-meta">
-
-                                <span class="post-author">
-                                    {{ post.author.username }}
-                                </span>
-
-                                <span class="post-dot">
-                                    ·
-                                </span>
-
-                                <time
-                                    datetime="{{ post.created|date:'c' }}"
-                                >
-                                    {{ post.created|date:"M d, Y · H:i" }}
-                                </time>
-
-                            </div>
-
-
-                        </div>
-
-
-                    </article>
-
-
-                {% empty %}
-
-
-                    <!-- =========================
-                         EMPTY STATE
-                    ========================== -->
-
-                    <div class="empty-state">
-
-
-                        <div class="empty-icon">
-                            +
-                        </div>
-
-
-                        <h2>
-                            No posts yet.
-                        </h2>
-
-
-                        <p>
-                            Share your first idea with the Nivora community.
-                        </p>
-
-
-                        <a
-                            href="{% url 'create' %}"
-                            class="create-post-button"
-                        >
-
-                            <span>
-                                Create your first post
-                            </span>
-
-                            <span class="create-arrow">
-                                →
-                            </span>
-
-                        </a>
-
+                        <h3>
+                            Quick actions
+                        </h3>
 
                     </div>
 
+                </div>
 
-                {% endfor %}
 
+                <div class="quick-actions">
+
+                    <a
+                        href="#"
+                        class="quick-action"
+                    >
+
+                        <span class="quick-action-icon explore-icon">
+                            ↗
+                        </span>
+
+                        <span>
+
+                            <strong>
+                                Explore Nivora
+                            </strong>
+
+                            <small>
+                                Discover new stories
+                            </small>
+
+                        </span>
+
+                        <span class="action-arrow">
+                            →
+                        </span>
+
+                    </a>
+
+                </div>
 
             </div>
 
-
         </section>
-
 
     </main>
 
-
-
-    <!-- =========================
-         RIGHT SIDEBAR
-    ========================== -->
-
-    <aside class="dashboard-sidebar">
-
-
-        <!-- Logo -->
-
-        <a
-            href="/"
-            class="dashboard-logo"
-        >
-
-            <span class="logo-mark">
-                N
-            </span>
-
-            <span class="logo-name">
-                Nivora
-            </span>
-
-        </a>
-
-
-
-        <!-- User -->
-
-        <div class="sidebar-user">
-
-            <span class="sidebar-label">
-                SIGNED IN AS
-            </span>
-
-
-            <strong class="sidebar-username">
-                {{ user.username }}
-            </strong>
-
-
-            <span class="sidebar-email">
-                {{ user.email }}
-            </span>
-
-        </div>
-
-
-
-        <!-- Divider -->
-
-        <div class="sidebar-divider"></div>
-
-
-
-        <!-- Navigation -->
-
-        <nav class="sidebar-nav">
-
-
-            <a
-                href="#"
-                class="sidebar-link"
-            >
-
-                <span class="sidebar-icon">
-                    ↗
-                </span>
-
-                <span>
-                    Explore
-                </span>
-
-            </a>
-
-
-            <a
-                href="{% url 'account_logout' %}"
-                class="sidebar-link"
-            >
-
-                <span class="sidebar-icon">
-                    ↪
-                </span>
-
-                <span>
-                    Logout
-                </span>
-
-            </a>
-
-
-        </nav>
-
-
-
-        <!-- Bottom -->
-
-        <div class="sidebar-bottom">
-
-            <span class="sidebar-brand">
-                NIVORA
-            </span>
-
-            <p>
-                Ideas worth discovering.
-            </p>
-
-        </div>
-
-
-    </aside>
-
-
 </div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script src="{% static 'js/dashboard.js' %}"></script>
 
 {% endblock %}
