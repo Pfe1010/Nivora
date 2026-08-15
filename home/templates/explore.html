@@ -1,0 +1,433 @@
+{% extends "include/_base.html" %}
+{% load static %}
+
+{% block title %}
+    Explore — Nivora
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/explore.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="explore-page">
+
+    <!-- Mobile Header -->
+    <header class="explore-mobile-header">
+
+        <a href="/" class="explore-mobile-logo">
+            <span class="explore-logo-mark">N</span>
+            <span class="explore-logo-name">Nivora</span>
+        </a>
+
+        <button
+            type="button"
+            class="explore-sidebar-toggle"
+            id="exploreSidebarToggle"
+            aria-label="Open menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </header>
+
+
+    <!-- Sidebar -->
+    <aside
+        class="explore-sidebar"
+        id="exploreSidebar"
+    >
+
+        <div class="explore-sidebar-inner">
+
+            <!-- Logo -->
+            <a href="/" class="explore-sidebar-logo">
+
+                <span class="explore-sidebar-logo-mark">
+                    N
+                </span>
+
+                <span class="explore-sidebar-logo-name">
+                    Nivora
+                </span>
+
+            </a>
+
+
+            <!-- User -->
+            <div class="explore-sidebar-user">
+
+                <div class="explore-user-avatar">
+                    {{ user.username|first|upper }}
+                </div>
+
+                <div class="explore-user-info">
+
+                    <span class="explore-user-name">
+                        {{ user.username }}
+                    </span>
+
+                    <span class="explore-user-label">
+                        Member
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Navigation -->
+            <nav class="explore-sidebar-nav">
+
+                <span class="explore-nav-title">
+                    MENU
+                </span>
+
+
+                <a
+                    href="{% url 'dashboard' %}"
+                    class="explore-sidebar-link"
+                >
+
+                    <span class="explore-sidebar-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6v-9h-6v9Zm0-16v5h6V4h-6Z"/>
+                        </svg>
+                    </span>
+
+                    <span>
+                        Dashboard
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="{% url 'explore' %}"
+                    class="explore-sidebar-link active"
+                >
+
+                    <span class="explore-sidebar-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="11" cy="11" r="6"/>
+                            <path d="m16 16 4 4"/>
+                        </svg>
+                    </span>
+
+                    <span>
+                        Explore
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="{% url 'create' %}"
+                    class="explore-sidebar-link"
+                >
+
+                    <span class="explore-sidebar-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                    </span>
+
+                    <span>
+                        Create Post
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="#"
+                    class="explore-sidebar-link"
+                >
+
+                    <span class="explore-sidebar-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="8" r="4"/>
+                            <path d="M4 20c.8-4 3.5-6 8-6s7.2 2 8 6"/>
+                        </svg>
+                    </span>
+
+                    <span>
+                        Profile
+                    </span>
+
+                </a>
+
+            </nav>
+
+
+            <!-- Sidebar Bottom -->
+            <div class="explore-sidebar-bottom">
+
+                <div class="explore-sidebar-divider"></div>
+
+                <a
+                    href="{% url 'account_logout' %}"
+                    class="explore-sidebar-link explore-logout-link"
+                >
+
+                    <span class="explore-sidebar-icon">
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path d="M10 4H5v16h5"/>
+                            <path d="M14 8l4 4-4 4"/>
+                            <path d="M18 12H9"/>
+                        </svg>
+                    </span>
+
+                    <span>
+                        Logout
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Overlay -->
+    <div
+        class="explore-sidebar-overlay"
+        id="exploreSidebarOverlay"
+    ></div>
+
+
+    <!-- Main -->
+    <main class="explore-main">
+
+        <!-- Top Bar -->
+        <div class="explore-topbar">
+
+            <div class="explore-heading">
+
+                <span class="explore-eyebrow">
+                    DISCOVER
+                </span>
+
+                <h1>
+                    Explore
+                </h1>
+
+                <p>
+                    Discover ideas and stories shared by the Nivora community.
+                </p>
+
+            </div>
+
+
+            <div class="explore-topbar-user">
+
+                <div class="explore-topbar-avatar">
+                    {{ user.username|first|upper }}
+                </div>
+
+                <span>
+                    {{ user.username }}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Posts -->
+        <section class="explore-content">
+
+            <div class="explore-section-header">
+
+                <div>
+                    <span class="explore-section-label">
+                        COMMUNITY
+                    </span>
+
+                    <h2>
+                        Latest posts
+                    </h2>
+                </div>
+
+                <span class="explore-post-count">
+                    {{ posts|length }} posts
+                </span>
+
+            </div>
+
+
+            {% if posts %}
+
+                <div class="explore-posts-grid">
+
+                    {% for item in posts %}
+
+                        <a
+                            href="{% url 'post_detail_explore' item.pk %}"
+                            class="explore-post-card"
+                        >
+
+                            <!-- Media -->
+                            <div class="explore-post-media">
+
+                                {% if item.media %}
+
+                                    {% with media_url=item.media.url %}
+
+                                        {% if ".mp4" in media_url|lower or ".webm" in media_url|lower or ".ogg" in media_url|lower %}
+
+                                            <video
+                                                src="{{ item.media.url }}"
+                                                muted
+                                                playsinline
+                                                preload="metadata"
+                                            ></video>
+
+                                            <span class="explore-media-badge">
+                                                VIDEO
+                                            </span>
+
+                                        {% else %}
+
+                                            <img
+                                                src="{{ item.media.url }}"
+                                                alt="{{ item.description|default:'Nivora post' }}"
+                                                loading="lazy"
+                                            >
+
+                                            <span class="explore-media-badge">
+                                                IMAGE
+                                            </span>
+
+                                        {% endif %}
+
+                                    {% endwith %}
+
+                                {% else %}
+
+                                    <div class="explore-no-media">
+                                        <span>N</span>
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- Content -->
+                            <div class="explore-post-content">
+
+                                <!-- Author -->
+                                <div class="explore-post-author">
+
+                                    <div class="explore-author-avatar">
+                                        {{ item.author.username|first|upper }}
+                                    </div>
+
+                                    <div class="explore-author-info">
+
+                                        <strong>
+                                            {{ item.author.username }}
+                                        </strong>
+
+                                        <span>
+                                            {{ item.created|date:"M d, Y" }}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Description -->
+                                <div class="explore-post-description">
+
+                                    {% if item.description %}
+
+                                        {{ item.description|truncatechars:180 }}
+
+                                    {% else %}
+
+                                        <span class="explore-no-description">
+                                            No caption added.
+                                        </span>
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <!-- Footer -->
+                                <div class="explore-post-footer">
+
+                                    <span>
+                                        Read post
+                                    </span>
+
+                                    <span class="explore-post-arrow">
+                                        →
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <!-- Empty State -->
+                <div class="explore-empty-state">
+
+                    <div class="explore-empty-icon">
+                        <span>
+                            +
+                        </span>
+                    </div>
+
+                    <h3>
+                        Nothing to explore yet.
+                    </h3>
+
+                    <p>
+                        There are no posts from other members yet.
+                        Be the first to share something worth discovering.
+                    </p>
+
+                    <a
+                        href="{% url 'create' %}"
+                        class="explore-empty-button"
+                    >
+                        Create a post
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{% static 'js/explore.js' %}"></script>
+{% endblock %}

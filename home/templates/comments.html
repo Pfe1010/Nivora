@@ -1,0 +1,506 @@
+{% extends "include/_base.html" %}
+{% load static %}
+
+{% block title %}
+    Comments — Nivora
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/comments.css' %}"
+>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="comments-page">
+
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="comments-header">
+
+        <a
+            href="{% url 'post_detail_explore' post.pk %}"
+            class="back-link"
+        >
+
+            <span class="back-icon">
+                ←
+            </span>
+
+            <span>
+                Back
+            </span>
+
+        </a>
+
+
+        <a
+            href="/"
+            class="comments-logo"
+        >
+
+            <span class="comments-logo-mark">
+                N
+            </span>
+
+            <span class="comments-logo-name">
+                Nivora
+            </span>
+
+        </a>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="comments-main">
+
+
+        <!-- =================================================
+             POST PREVIEW
+             ================================================= -->
+
+        <section class="comment-post-preview">
+
+            <div class="post-preview-author">
+
+                <div class="post-preview-avatar">
+                    {{ post.author.username|first|upper }}
+                </div>
+
+                <div class="post-preview-info">
+
+                    <strong>
+                        {{ post.author.username }}
+                    </strong>
+
+                    <span>
+                        {{ post.created|date:"M d, Y" }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            {% if post.description %}
+
+                <p class="post-preview-description">
+                    {{ post.description }}
+                </p>
+
+            {% endif %}
+
+        </section>
+
+
+
+        <!-- =================================================
+             COMMENTS HEADING
+             ================================================= -->
+
+        <section class="comments-heading">
+
+            <div>
+
+                <span class="comments-eyebrow">
+                    DISCUSSION
+                </span>
+
+                <h1>
+                    Comments
+                </h1>
+
+            </div>
+
+
+            <div class="comments-count">
+                {{ post_comments|length }}
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             COMMENT COMPOSER
+             ================================================= -->
+
+        <section class="comment-composer">
+
+            <div class="composer-user">
+
+                <div class="composer-avatar">
+                    {{ user.username|first|upper }}
+                </div>
+
+                <div class="composer-user-info">
+
+                    <strong>
+                        {{ user.username }}
+                    </strong>
+
+                    <span id="composerSubtitle">
+                        Join the discussion
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- REPLY INDICATOR -->
+
+            <div
+                class="reply-indicator"
+                id="replyIndicator"
+            >
+
+                <span>
+                    Replying to
+                </span>
+
+                <strong id="replyToUser">
+                    user
+                </strong>
+
+                <button
+                    type="button"
+                    id="cancelReply"
+                    aria-label="Cancel reply"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <form
+                method="POST"
+                action="{% url 'post_comments' post.pk %}"
+                class="comment-form"
+                id="commentForm"
+            >
+
+                {% csrf_token %}
+
+
+                <input
+                    type="hidden"
+                    name="parent_id"
+                    id="parentId"
+                    value=""
+                >
+
+
+                <div class="comment-input-wrapper">
+
+                    <textarea
+                        name="content"
+                        id="commentContent"
+                        class="comment-textarea"
+                        maxlength="255"
+                        placeholder="Write a comment..."
+                        required
+                    ></textarea>
+
+
+                    <div class="comment-form-footer">
+
+                        <span
+                            class="comment-counter"
+                            id="commentCounter"
+                        >
+                            0 / 255
+                        </span>
+
+
+                        <button
+                            type="submit"
+                            class="comment-submit"
+                            id="commentSubmit"
+                        >
+
+                            <span>
+                                Comment
+                            </span>
+
+                            <span class="comment-submit-arrow">
+                                →
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- =================================================
+             COMMENTS LIST
+             ================================================= -->
+
+        <section class="comments-list-section">
+
+
+            {% if post_comments %}
+
+
+                <div class="comments-list">
+
+
+                    {% for comment in post_comments %}
+
+
+                        <!-- =================================================
+                             MAIN COMMENT
+                             ================================================= -->
+
+                        <article
+                            class="comment-item"
+                            data-comment-id="{{ comment.pk }}"
+                            data-comment-user="{{ comment.user.username }}"
+                        >
+
+                            <div class="comment-avatar">
+
+                                {{ comment.user.username|first|upper }}
+
+                            </div>
+
+
+                            <div class="comment-content">
+
+                                <div class="comment-meta">
+
+                                    <strong>
+                                        {{ comment.user.username }}
+                                    </strong>
+
+                                    <time>
+                                        {{ comment.created|date:"M d, Y" }}
+                                    </time>
+
+                                </div>
+
+
+                                <p class="comment-text">
+                                    {{ comment.content }}
+                                </p>
+
+
+                                <!-- COMMENT ACTIONS -->
+
+                                <div class="comment-actions">
+
+                                    <button
+                                        type="button"
+                                        class="reply-button"
+                                        data-comment-id="{{ comment.pk }}"
+                                        data-comment-user="{{ comment.user.username }}"
+                                    >
+
+                                        Reply
+
+                                    </button>
+
+
+                                    {% if comment.replies.all %}
+
+                                        {% with replies=comment.replies.all %}
+
+                                            {% if replies|length > 0 %}
+
+                                                <button
+                                                    type="button"
+                                                    class="view-replies-button"
+                                                    data-target="replies-{{ comment.pk }}"
+                                                    aria-expanded="false"
+                                                >
+
+                                                    <span>
+                                                        View
+                                                    </span>
+
+                                                    <span>
+                                                        {{ replies|length }}
+                                                    </span>
+
+                                                    <span>
+                                                        replies
+                                                    </span>
+
+                                                </button>
+
+                                            {% endif %}
+
+                                        {% endwith %}
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <!-- =================================================
+                                     REPLIES
+                                     ================================================= -->
+
+                                {% with replies=comment.replies.all %}
+
+                                    {% if replies|length > 0 %}
+
+                                        <div
+                                            class="replies-list"
+                                            id="replies-{{ comment.pk }}"
+                                            hidden
+                                        >
+
+
+                                            {% for reply in replies %}
+
+
+                                                <article
+                                                    class="reply-item"
+                                                    data-comment-id="{{ reply.pk }}"
+                                                >
+
+                                                    <div class="reply-avatar">
+
+                                                        {{ reply.user.username|first|upper }}
+
+                                                    </div>
+
+
+                                                    <div class="reply-content">
+
+                                                        <div class="reply-meta">
+
+                                                            <strong>
+                                                                {{ reply.user.username }}
+                                                            </strong>
+
+                                                            <time>
+                                                                {{ reply.created|date:"M d, Y" }}
+                                                            </time>
+
+                                                        </div>
+
+
+                                                        <p>
+                                                            {{ reply.content }}
+                                                        </p>
+
+
+                                                        <button
+                                                            type="button"
+                                                            class="reply-button reply-to-reply"
+                                                            data-comment-id="{{ comment.pk }}"
+                                                            data-comment-user="{{ reply.user.username }}"
+                                                        >
+
+                                                            Reply
+
+                                                        </button>
+
+                                                    </div>
+
+                                                </article>
+
+
+                                            {% endfor %}
+
+
+                                        </div>
+
+                                    {% endif %}
+
+                                {% endwith %}
+
+                            </div>
+
+                        </article>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <!-- =================================================
+                     EMPTY STATE
+                     ================================================= -->
+
+                <div class="comments-empty">
+
+                    <div class="comments-empty-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+
+                            <path
+                                d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H8l-4 3v-5.2A7.5 7.5 0 1 1 20 11.5Z"
+                            />
+
+                        </svg>
+
+                    </div>
+
+
+                    <h3>
+                        No comments yet
+                    </h3>
+
+
+                    <p>
+                        Be the first person to join the discussion.
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+
+
+{% block extra_js %}
+
+<script src="{% static 'js/comments.js' %}"></script>
+
+{% endblock %}
