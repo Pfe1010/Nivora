@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const likeButton =
         document.getElementById("exploreLikeButton");
 
-    const commentButton =
-        document.getElementById("exploreCommentButton");
+    const likeCount =
+        document.getElementById("exploreLikeCount");
 
     const saveButton =
         document.getElementById("exploreSaveButton");
@@ -14,84 +14,129 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       LIKE
+       INITIAL LIKE STATE
+       (color is based on the like COUNT, not on whether
+        the current user liked it)
        ===================================================== */
 
-    if (likeButton) {
+    if (likeButton && likeCount) {
 
-        likeButton.addEventListener("click", function () {
+        const initialCount =
+            parseInt(likeCount.textContent.trim(), 10) || 0;
 
-            const isLiked =
-                likeButton.getAttribute("aria-pressed") === "true";
-
-
-            likeButton.setAttribute(
-                "aria-pressed",
-                String(!isLiked)
-            );
-
-
-            likeButton.classList.toggle(
-                "liked",
-                !isLiked
-            );
-
-        });
+        likeButton.classList.toggle(
+            "is-liked",
+            initialCount > 0
+        );
 
     }
 
 
     /* =====================================================
-       COMMENT
+       LIKE
        ===================================================== */
 
-    if (commentButton) {
+    if (likeButton && likeCount) {
 
-        commentButton.addEventListener("click", function () {
+        likeButton.addEventListener(
+            "click",
+            async function () {
 
-            const commentSection =
-                document.getElementById(
-                    "exploreCommentSection"
-                );
+                const postId =
+                    likeButton.dataset.postId;
+
+                if (!postId) {
+                    return;
+                }
+
+                if (
+                    likeButton.dataset.loading === "true"
+                ) {
+                    return;
+                }
+
+                likeButton.dataset.loading = "true";
+                likeButton.disabled = true;
 
 
-            if (commentSection) {
+                try {
 
-                commentSection.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center"
-                });
+                    const response = await fetch(
+                        `/post/${postId}/like/`,
+                        {
+                            method: "POST",
 
+                            headers: {
+                                "X-CSRFToken":
+                                    getCSRFToken(),
 
-                const commentInput =
-                    document.getElementById(
-                        "exploreCommentInput"
+                                "X-Requested-With":
+                                    "XMLHttpRequest"
+                            },
+
+                            credentials: "same-origin"
+                        }
                     );
 
 
-                if (commentInput) {
+                    if (!response.ok) {
 
-                    commentInput.focus();
+                        throw new Error(
+                            "Like request failed."
+                        );
+
+                    }
+
+
+                    const data =
+                        await response.json();
+
+
+                    /*
+                     * aria-pressed still reflects whether
+                     * THIS user liked the post (accessibility).
+                     */
+
+                    likeButton.setAttribute(
+                        "aria-pressed",
+                        String(data.liked)
+                    );
+
+
+                    /*
+                     * Visual color reflects the total like
+                     * COUNT, not the current user's state.
+                     */
+
+                    likeButton.classList.toggle(
+                        "is-liked",
+                        data.count > 0
+                    );
+
+
+                    likeCount.textContent =
+                        data.count;
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Unable to update like:",
+                        error
+                    );
+
+                } finally {
+
+                    likeButton.dataset.loading =
+                        "false";
+
+                    likeButton.disabled =
+                        false;
 
                 }
 
             }
-
-
-            commentButton.classList.add(
-                "comment-active"
-            );
-
-
-            setTimeout(function () {
-
-                commentButton.classList.remove(
-                    "comment-active"
-                );
-
-            }, 1200);
-
-        });
+        );
 
     }
 
@@ -102,24 +147,100 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (saveButton) {
 
-        saveButton.addEventListener("click", function () {
+        const initiallySaved =
+            saveButton.getAttribute("aria-pressed") === "true";
 
-            const isSaved =
-                saveButton.getAttribute("aria-pressed") === "true";
-
-
-            saveButton.setAttribute(
-                "aria-pressed",
-                String(!isSaved)
-            );
+        saveButton.classList.toggle(
+            "is-saved",
+            initiallySaved
+        );
 
 
-            saveButton.classList.toggle(
-                "saved",
-                !isSaved
-            );
+        saveButton.addEventListener(
+            "click",
+            async function () {
 
-        });
+                const postId =
+                    saveButton.dataset.postId;
+
+                if (!postId) {
+                    return;
+                }
+
+                if (
+                    saveButton.dataset.loading === "true"
+                ) {
+                    return;
+                }
+
+                saveButton.dataset.loading = "true";
+                saveButton.disabled = true;
+
+
+                try {
+
+                    const response = await fetch(
+                        `/post/${postId}/save/`,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "X-CSRFToken":
+                                    getCSRFToken(),
+
+                                "X-Requested-With":
+                                    "XMLHttpRequest"
+                            },
+
+                            credentials: "same-origin"
+                        }
+                    );
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Save request failed."
+                        );
+
+                    }
+
+
+                    const data =
+                        await response.json();
+
+
+                    saveButton.setAttribute(
+                        "aria-pressed",
+                        String(data.saved)
+                    );
+
+
+                    saveButton.classList.toggle(
+                        "is-saved",
+                        data.saved
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Unable to update save:",
+                        error
+                    );
+
+                } finally {
+
+                    saveButton.dataset.loading =
+                        "false";
+
+                    saveButton.disabled =
+                        false;
+
+                }
+
+            }
+        );
 
     }
 
@@ -134,22 +255,13 @@ document.addEventListener("DOMContentLoaded", function () {
             "click",
             async function () {
 
-                const shareData = {
-
-                    title: document.title,
-
-                    text:
-                        "Check out this post on Nivora.",
-
-                    url:
-                        window.location.href
-
-                };
+                const url =
+                    window.location.href;
 
 
-                /* -----------------------------------------
-                   Native share
-                   ----------------------------------------- */
+                /* ---------------------------------------------
+                   Native Share
+                   --------------------------------------------- */
 
                 if (
                     navigator.share &&
@@ -158,52 +270,68 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     try {
 
-                        await navigator.share(
-                            shareData
-                        );
+                        await navigator.share({
+                            title: document.title,
+                            text: "Check out this post on Nivora.",
+                            url: url
+                        });
+
+                        return;
 
                     } catch (error) {
 
                         /*
-                         * User cancelled sharing.
-                         * Nothing to do.
+                         * User cancelled native sharing.
                          */
+
+                        if (
+                            error &&
+                            error.name === "AbortError"
+                        ) {
+                            return;
+                        }
 
                     }
 
-                    return;
                 }
 
 
-                /* -----------------------------------------
-                   Clipboard
-                   ----------------------------------------- */
+                /* ---------------------------------------------
+                   Clipboard API
+                   --------------------------------------------- */
 
                 if (
                     navigator.clipboard &&
-                    navigator.clipboard.writeText
+                    typeof navigator.clipboard.writeText === "function"
                 ) {
 
                     try {
 
                         await navigator.clipboard.writeText(
-                            window.location.href
+                            url
                         );
-
 
                         showShareFeedback();
 
+                        return;
+
                     } catch (error) {
 
-                        fallbackCopy();
+                        console.warn(
+                            "Clipboard API failed.",
+                            error
+                        );
 
                     }
 
-                } else {
-
-                    fallbackCopy();
-
                 }
+
+
+                /* ---------------------------------------------
+                   Fallback
+                   --------------------------------------------- */
+
+                fallbackCopy(url);
 
             }
         );
@@ -227,48 +355,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         shareButton.innerHTML = `
-
             <span class="explore-action-icon">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                >
-                    <path d="m5 12 4 4L19 6"/>
-                </svg>
-
+                ✓
             </span>
 
             <span>
                 Copied
             </span>
-
         `;
 
 
-        setTimeout(function () {
+        setTimeout(
+            function () {
 
-            shareButton.innerHTML =
-                originalHTML;
+                shareButton.innerHTML =
+                    originalHTML;
 
-        }, 1800);
+            },
+            1800
+        );
 
     }
 
 
     /* =====================================================
-       OLD BROWSER COPY FALLBACK
+       COPY FALLBACK
        ===================================================== */
 
-    function fallbackCopy() {
+    function fallbackCopy(url) {
 
         const textarea =
             document.createElement("textarea");
 
 
-        textarea.value =
-            window.location.href;
+        textarea.value = url;
 
+        textarea.setAttribute(
+            "readonly",
+            ""
+        );
 
         textarea.style.position =
             "fixed";
@@ -276,7 +401,7 @@ document.addEventListener("DOMContentLoaded", function () {
         textarea.style.left =
             "-9999px";
 
-        textarea.style.opacity =
+        textarea.style.top =
             "0";
 
 
@@ -286,27 +411,66 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         textarea.focus();
-
         textarea.select();
+
+
+        let copied = false;
 
 
         try {
 
-            document.execCommand("copy");
-
-            showShareFeedback();
+            copied =
+                document.execCommand("copy");
 
         } catch (error) {
 
-            console.error(
-                "Unable to copy URL."
-            );
+            copied = false;
 
         }
 
 
         document.body.removeChild(
             textarea
+        );
+
+
+        if (copied) {
+
+            showShareFeedback();
+
+        } else {
+
+            console.error(
+                "Unable to copy the post URL."
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       CSRF
+       ===================================================== */
+
+    function getCSRFToken() {
+
+        const cookieValue =
+            document.cookie
+                .split("; ")
+                .find(
+                    row =>
+                        row.startsWith("csrftoken=")
+                );
+
+
+        if (!cookieValue) {
+            return "";
+        }
+
+
+        return decodeURIComponent(
+            cookieValue.split("=")[1]
         );
 
     }

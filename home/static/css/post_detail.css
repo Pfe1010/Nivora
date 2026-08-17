@@ -4,9 +4,12 @@
 
 .post-detail-page {
     min-height: 100vh;
+
     background: #f7f6f3;
     color: #17233f;
+
     padding: 0 5%;
+
     box-sizing: border-box;
 }
 
@@ -18,9 +21,10 @@
 .post-detail-header {
     width: 100%;
     max-width: 1180px;
-    margin: 0 auto;
 
     height: 90px;
+
+    margin: 0 auto;
 
     display: flex;
     align-items: center;
@@ -33,9 +37,11 @@
 .post-back {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+
+    gap: 9px;
 
     color: #17233f;
+
     text-decoration: none;
 
     font-size: 15px;
@@ -59,14 +65,18 @@
 }
 
 
-/* Logo */
+/* =========================================================
+   LOGO
+========================================================= */
 
 .post-detail-logo {
     display: inline-flex;
     align-items: center;
+
     gap: 10px;
 
     color: #17233f;
+
     text-decoration: none;
 }
 
@@ -84,14 +94,22 @@
 
     border-radius: 11px;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
     font-size: 23px;
     font-weight: 700;
 }
 
 
 .post-logo-name {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
     font-size: 24px;
     font-weight: 700;
 }
@@ -110,7 +128,7 @@
 
 
 /* =========================================================
-   POST CARD
+   CARD
 ========================================================= */
 
 .post-detail-card {
@@ -119,6 +137,7 @@
     background: #ffffff;
 
     border: 1px solid #ddd9e6;
+
     border-radius: 22px;
 
     overflow: hidden;
@@ -147,12 +166,6 @@
 }
 
 
-/*
-   مهم:
-   تصویر دیگر کل صفحه را نمی‌گیرد.
-   حداکثر ارتفاع مشخص دارد و نسبت تصویر حفظ می‌شود.
-*/
-
 .post-detail-image {
     display: block;
 
@@ -171,6 +184,7 @@
     display: block;
 
     width: 100%;
+
     max-height: 620px;
 
     object-fit: contain;
@@ -180,11 +194,12 @@
 
 
 /* =========================================================
-   POST INFORMATION
+   INFO
 ========================================================= */
 
 .post-detail-info {
     padding: 28px 32px 30px;
+
     box-sizing: border-box;
 }
 
@@ -209,6 +224,7 @@
 .post-author {
     display: flex;
     flex-direction: column;
+
     gap: 6px;
 }
 
@@ -222,6 +238,7 @@
     font-weight: 700;
 
     letter-spacing: 0.22em;
+
     text-transform: uppercase;
 }
 
@@ -238,6 +255,7 @@
     color: #65738d;
 
     font-size: 14px;
+
     white-space: nowrap;
 }
 
@@ -268,17 +286,221 @@
 ========================================================= */
 
 .post-detail-actions {
+    margin-top: 28px;
+}
+
+
+/* =========================================================
+   PRIMARY ACTIONS
+========================================================= */
+
+.post-primary-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+/* =========================================================
+   LIKE
+========================================================= */
+
+.like-wrapper {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+.like-post-button {
+    min-height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 0 16px;
+
+    border: 1px solid #dededb;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.like-post-button:hover {
+    background: #fff6f7;
+    border-color: #f1b9bd;
+
+    color: #d84b55;
+
+    transform: translateY(-1px);
+}
+
+
+.like-post-button.is-liked {
+    background: #fff3f4;
+    border-color: #f0aeb4;
+
+    color: #d9434e;
+}
+
+
+.like-icon {
+    width: 18px;
+    height: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+
+.like-icon svg {
+    width: 18px;
+    height: 18px;
+
+    display: block;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+.like-post-button.is-liked .like-icon svg {
+    fill: currentColor;
+}
+
+
+.like-count {
+    min-width: 24px;
+
+    color: #52627d;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   COMMENTS
+========================================================= */
+
+.comment-post-button {
+    min-height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 0 16px;
+
+    border: 1px solid #dededb;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.comment-post-button:hover {
+    background: #f5f5f3;
+    border-color: #cfcfcb;
+
+    transform: translateY(-1px);
+}
+
+
+.comment-post-icon {
+    width: 18px;
+    height: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+
+.comment-post-icon svg {
+    width: 18px;
+    height: 18px;
+
+    display: block;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* =========================================================
+   SECONDARY ACTIONS
+========================================================= */
+
+.post-secondary-actions {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     gap: 14px;
 
-    margin-top: 28px;
+    margin-top: 22px;
 }
 
 
-/* Back button */
+/* =========================================================
+   BACK BUTTON
+========================================================= */
 
 .back-dashboard-button {
     min-height: 46px;
@@ -320,7 +542,9 @@
 }
 
 
-/* Delete */
+/* =========================================================
+   DELETE
+========================================================= */
 
 .delete-post-button {
     min-height: 46px;
@@ -357,7 +581,9 @@
 
 .delete-post-button:hover {
     background: #fff0f0;
+
     border-color: #dcaeae;
+
     color: #8e2929;
 
     transform: translateY(-1px);
@@ -371,7 +597,7 @@
 
 
 /* =========================================================
-   BOTTOM NOTE
+   NOTE
 ========================================================= */
 
 .post-detail-note {
@@ -470,10 +696,6 @@
     }
 
 
-    /*
-       در موبایل تصویر بیش از حد بلند نمی‌شود.
-    */
-
     .post-detail-image,
     .post-detail-video {
         max-height: 360px;
@@ -487,6 +709,7 @@
 
     .post-detail-meta {
         align-items: flex-start;
+
         flex-direction: column;
 
         gap: 12px;
@@ -511,16 +734,38 @@
     }
 
 
-    /*
-       دکمه‌ها در موبایل زیر هم قرار می‌گیرند
-       تا از صفحه بیرون نزنند.
-    */
+    .post-primary-actions {
+        width: 100%;
 
-    .post-detail-actions {
+        display: flex;
+
+        flex-wrap: wrap;
+    }
+
+
+    .like-wrapper {
+        flex: 1;
+    }
+
+
+    .like-post-button {
+        flex: 1;
+    }
+
+
+    .comment-post-button {
+        flex: 1;
+    }
+
+
+    .post-secondary-actions {
         flex-direction: column;
+
         align-items: stretch;
 
-        margin-top: 22px;
+        gap: 10px;
+
+        margin-top: 18px;
     }
 
 
@@ -563,80 +808,20 @@
         padding: 18px 15px 20px;
     }
 
-}
 
-/* =========================================================
-   COMMENTS BUTTON
-   ========================================================= */
+    .post-primary-actions {
+        flex-direction: column;
 
-.comment-post-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-
-    min-height: 44px;
-    padding: 0 18px;
-
-    border: 1px solid #dededb;
-    border-radius: 10px;
-
-    background: #ffffff;
-    color: #172033;
-
-    text-decoration: none;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-}
+        align-items: stretch;
+    }
 
 
-.comment-post-button:hover {
-    background: #f5f5f3;
-    border-color: #cfcfcb;
-
-    transform: translateY(-1px);
-}
+    .like-wrapper {
+        width: 100%;
+    }
 
 
-.comment-post-icon {
-    width: 18px;
-    height: 18px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-}
-
-
-.comment-post-icon svg {
-    width: 18px;
-    height: 18px;
-
-    display: block;
-
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.7;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 640px) {
-
+    .like-post-button,
     .comment-post-button {
         width: 100%;
     }

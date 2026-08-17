@@ -1,460 +1,342 @@
-{% extends "include/_base.html" %}
 {% load static %}
 
-{% block title %}
-    {{ post.author.username }} — Nivora
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
+    <title>Explore Post | Nivora</title>
 
-{% block extra_css %}
+    <link
+        rel="stylesheet"
+        href="{% static 'css/post_detail_explore.css' %}"
+    >
+</head>
 
-<link
-    rel="stylesheet"
-    href="{% static 'css/post_detail_explore.css' %}"
->
-
-{% endblock %}
-
-
-
-{% block content %}
+<body>
 
 <div class="explore-detail-page">
 
 
     <!-- =====================================================
-         BACK TO PREVIOUS PAGE
-         ===================================================== -->
+         HEADER
+    ====================================================== -->
 
-    <div class="explore-detail-top">
+    <header class="explore-detail-header">
 
         <a
             href="{% url 'explore' %}"
-            class="explore-back-link"
+            class="explore-back"
+        >
+            <span class="explore-back-icon">←</span>
+            <span>Back to Explore</span>
+        </a>
+
+
+        <a
+            href="{% url 'dashboard' %}"
+            class="explore-detail-logo"
         >
 
-            <span class="explore-back-arrow">
-                ←
+            <span class="explore-logo-mark">
+                N
             </span>
 
-            <span>
-                Back
+            <span class="explore-logo-name">
+                Nivora
             </span>
 
         </a>
 
-    </div>
-
+    </header>
 
 
     <!-- =====================================================
-         POST CONTAINER
-         ===================================================== -->
+         MAIN
+    ====================================================== -->
 
-    <main class="explore-post-container">
+    <main class="explore-detail-main">
 
 
-        <!-- =================================================
-             MEDIA
-             ================================================= -->
-
-        <div class="explore-post-media">
-
-            {% if post.media.url|lower|slice:"-4:" == ".mp4" or post.media.url|lower|slice:"-5:" == ".webm" or post.media.url|lower|slice:"-4:" == ".mov" %}
-
-                <video
-                    class="explore-post-video"
-                    controls
-                    playsinline
-                >
-
-                    <source
-                        src="{{ post.media.url }}"
-                    >
-
-                    Your browser does not support video playback.
-
-                </video>
-
-            {% else %}
-
-                <img
-                    src="{{ post.media.url }}"
-                    alt="Post by {{ post.author.username }}"
-                    class="explore-post-image"
-                >
-
-            {% endif %}
-
-        </div>
-
-
-
-        <!-- =================================================
-             POST INFORMATION
-             ================================================= -->
-
-        <div class="explore-post-info">
-
-
-            <!-- =============================================
-                 AUTHOR
-                 ============================================= -->
-
-            <div class="explore-post-author">
-
-                <div class="explore-author-avatar">
-
-                    {{ post.author.username|first|upper }}
-
-                </div>
-
-
-                <div class="explore-author-info">
-
-                    <strong>
-                        {{ post.author.username }}
-                    </strong>
-
-                    <span>
-                        {{ post.created|date:"M d, Y" }}
-                    </span>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =============================================
-                 DESCRIPTION
-                 ============================================= -->
-
-            <div class="explore-post-description">
-
-                {% if post.description %}
-
-                    <p>
-                        {{ post.description }}
-                    </p>
-
-                {% endif %}
-
-            </div>
-
-
-
-            <!-- =============================================
-                 ACTIONS
-                 ============================================= -->
-
-            <div class="explore-post-actions">
-
-
-                <!-- LIKE -->
-
-                <button
-                    type="button"
-                    class="explore-action"
-                    id="exploreLikeButton"
-                    aria-label="Like this post"
-                    aria-pressed="false"
-                >
-
-                    <span class="explore-action-icon">
-
-                        <svg
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                        >
-
-                            <path
-                                d="M20.8 8.6c0-3-2.3-5.3-5.2-5.3-1.7 0-3.2.8-4.1 2.1C10.6 4.1 9.1 3.3 7.4 3.3c-2.9 0-5.2 2.3-5.2 5.3 0 5.5 9.3 11.2 9.3 11.2s9.3-5.7 9.3-11.2Z"
-                            />
-
-                        </svg>
-
-                    </span>
-
-                    <span>
-                        Like
-                    </span>
-
-                </button>
-
-
-
-                <!-- COMMENT -->
-
-                <a
-                    href="{% url 'post_comments' post.pk %}"
-                    class="explore-action"
-                    id="exploreCommentButton"
-                    aria-label="View comments"
-                >
-
-                    <span class="explore-action-icon">
-
-                        <svg
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                        >
-
-                            <path
-                                d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H8l-4 3v-5.2A7.5 7.5 0 1 1 20 11.5Z"
-                            />
-
-                        </svg>
-
-                    </span>
-
-                    <span>
-                        Comment
-                    </span>
-
-                </a>
-
-
-
-                <!-- SAVE -->
-
-                <button
-                    type="button"
-                    class="explore-action"
-                    id="exploreSaveButton"
-                    aria-label="Save this post"
-                    aria-pressed="false"
-                >
-
-                    <span class="explore-action-icon">
-
-                        <svg
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                        >
-
-                            <path
-                                d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5Z"
-                            />
-
-                        </svg>
-
-                    </span>
-
-                    <span>
-                        Save
-                    </span>
-
-                </button>
-
-
-
-                <!-- SHARE -->
-
-                <button
-                    type="button"
-                    class="explore-action"
-                    id="exploreShareButton"
-                    aria-label="Share this post"
-                >
-
-                    <span class="explore-action-icon">
-
-                        <svg
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                        >
-
-                            <path
-                                d="M12 16V3"
-                            />
-
-                            <path
-                                d="M7 8l5-5 5 5"
-                            />
-
-                            <path
-                                d="M5 12v7h14v-7"
-                            />
-
-                        </svg>
-
-                    </span>
-
-                    <span>
-                        Share
-                    </span>
-
-                </button>
-
-            </div>
-
+        <article class="explore-detail-card">
 
 
             <!-- =================================================
-                 COMMENTS
-                 ================================================= -->
+                 MEDIA
+            ================================================== -->
 
-            <section class="explore-comments">
+            <div class="explore-detail-media">
+
+                {% with media_url=post.media.url %}
+
+                    {% if ".mp4" in media_url|lower or ".webm" in media_url|lower or ".ogg" in media_url|lower %}
+
+                        <video
+                            class="explore-detail-video"
+                            controls
+                            preload="metadata"
+                        >
+                            <source src="{{ media_url }}">
+                            Your browser does not support the video tag.
+                        </video>
+
+                    {% else %}
+
+                        <img
+                            src="{{ media_url }}"
+                            alt="Post by {{ post.author.username }}"
+                            class="explore-detail-image"
+                        >
+
+                    {% endif %}
+
+                {% endwith %}
+
+            </div>
 
 
-                <!-- COMMENTS HEADER -->
+            <!-- =================================================
+                 POST CONTENT
+            ================================================== -->
 
-                <div class="explore-comments-header">
+            <div class="explore-detail-content">
 
-                    <div>
 
-                        <span class="explore-comments-label">
-                            COMMENTS
+                <!-- =================================================
+                     AUTHOR
+                ================================================== -->
+
+                <div class="explore-author-row">
+
+                    <div class="explore-author-left">
+
+                        <div class="explore-avatar">
+
+                            {{ post.author.username|first|upper }}
+
+                        </div>
+
+
+                        <div class="explore-author-info">
+
+                            <strong>
+                                {{ post.author.username }}
+                            </strong>
+
+                            <time
+                                datetime="{{ post.created|date:'c' }}"
+                            >
+                                {{ post.created|date:"M d, Y · H:i" }}
+                            </time>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     DESCRIPTION
+                ================================================== -->
+
+                {% if post.description %}
+
+                    <div class="explore-description">
+
+                        {{ post.description|linebreaksbr }}
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- =================================================
+                     ACTIONS
+                ================================================== -->
+
+                <div class="explore-actions">
+
+
+                    <!-- LIKE -->
+
+                    <div class="explore-like-wrapper">
+
+                        <button
+                            type="button"
+                            id="exploreLikeButton"
+                            class="explore-like-button {% if like_count > 0 %}is-liked{% endif %}"
+                            data-post-id="{{ post.id }}"
+                            aria-label="{% if liked_by_user %}Unlike post{% else %}Like post{% endif %}"
+                            aria-pressed="{% if liked_by_user %}true{% else %}false{% endif %}"
+                        >
+
+                            <span
+                                class="explore-like-icon"
+                                aria-hidden="true"
+                            >
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+
+                            </span>
+
+
+                            <span class="explore-like-label">
+                                {% if liked_by_user %}
+                                    Liked
+                                {% else %}
+                                    Like
+                                {% endif %}
+                            </span>
+
+                        </button>
+
+
+                        <span
+                            id="exploreLikeCount"
+                            class="explore-like-count"
+                            data-like-count="{{ post.id }}"
+                        >
+                            {{ like_count }}
                         </span>
 
                     </div>
 
 
-                    <span class="explore-comments-count">
+                    <!-- COMMENT -->
 
-                        {{ post_comments|length }}
+                    <a
+                        href="{% url 'post_comments' post.id %}?from=explore"
+                        class="explore-action-button"
+                    >
 
-                    </span>
+                        <span class="explore-action-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                            </svg>
+
+                        </span>
+
+                        <span>
+                            Comment
+                        </span>
+
+                    </a>
+
+
+                    <!-- SHARE -->
+
+                    <button
+                        type="button"
+                        id="exploreShareButton"
+                        class="explore-action-button"
+                    >
+
+                        <span class="explore-action-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path d="M12 3v12"/>
+                                <path d="m7 8 5-5 5 5"/>
+                                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/>
+                            </svg>
+
+                        </span>
+
+                        <span>
+                            Share
+                        </span>
+
+                    </button>
+
+
+                    <!-- SAVE -->
+
+                    <button
+                        type="button"
+                        id="exploreSaveButton"
+                        class="explore-action-button {% if saved_by_user %}is-saved{% endif %}"
+                        data-post-id="{{ post.id }}"
+                        aria-pressed="{% if saved_by_user %}true{% else %}false{% endif %}"
+                    >
+
+                        <span class="explore-action-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path d="M6 3h12v18l-6-4-6 4z"/>
+                            </svg>
+
+                        </span>
+
+                        <span>
+                            {% if saved_by_user %}
+                                Saved
+                            {% else %}
+                                Save
+                            {% endif %}
+                        </span>
+
+                    </button>
 
                 </div>
 
 
-
                 <!-- =================================================
-                     COMMENTS LIST
-                     ================================================= -->
-
-                {% if post_comments %}
-
-                    <div class="explore-comments-list">
-
-
-                        {% for comment in post_comments %}
-
-                            <article class="explore-comment">
-
-
-                                <!-- AVATAR -->
-
-                                <div class="explore-comment-avatar">
-
-                                    {{ comment.user.username|first|upper }}
-
-                                </div>
-
-
-
-                                <!-- COMMENT BODY -->
-
-                                <div class="explore-comment-body">
-
-
-                                    <div class="explore-comment-meta">
-
-                                        <strong>
-                                            {{ comment.user.username }}
-                                        </strong>
-
-                                        <time>
-                                            {{ comment.created|date:"M d, Y" }}
-                                        </time>
-
-                                    </div>
-
-
-                                    <p>
-                                        {{ comment.content }}
-                                    </p>
-
-
-                                </div>
-
-                            </article>
-
-                        {% endfor %}
-
-
-                    </div>
-
-
-                {% else %}
-
-
-                    <!-- =================================================
-                         EMPTY COMMENTS
-                         ================================================= -->
-
-                    <div class="explore-comments-empty">
-
-                        <h3>
-                            No comments yet
-                        </h3>
-
-                        <p>
-                            Be the first person to join the discussion.
-                        </p>
-
-                    </div>
-
-
-                {% endif %}
-
-
-
-                <!-- =================================================
-                     VIEW ALL / ADD COMMENT
-                     ================================================= -->
+                     VIEW COMMENTS
+                ================================================== -->
 
                 <a
-                    href="{% url 'post_comments' post.pk %}"
+                    href="{% url 'post_comments' post.id %}?from=explore"
                     class="explore-view-comments"
                 >
 
-                    {% if post_comments %}
+                    <span>
+                        View comments
+                    </span>
 
-                        View all comments →
-
-                    {% else %}
-
-                        Add a comment →
-
-                    {% endif %}
+                    <span>
+                        →
+                    </span>
 
                 </a>
 
-
-            </section>
-
-
-
-            <!-- =================================================
-                 FOOTER
-                 ================================================= -->
-
-            <div class="explore-post-footer">
-
-                <span>
-                    Shared on {{ post.created|date:"M d, Y" }}
-                </span>
-
             </div>
 
+        </article>
 
-        </div>
+
+        <!-- =====================================================
+             FOOTER NOTE
+        ====================================================== -->
+
+        <p class="explore-detail-note">
+            Ideas worth discovering.
+        </p>
 
     </main>
 
 </div>
 
-{% endblock %}
 
+<script src="{% static 'js/post_detail_explore.js' %}"></script>
 
-
-{% block extra_js %}
-
-<script
-    src="{% static 'js/post_detail_explore.js' %}"
-></script>
-
-{% endblock %}
+</body>
+</html>

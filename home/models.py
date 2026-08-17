@@ -21,3 +21,33 @@ class Comments(models.Model):
 
     def __str__(self):
         return f'{self.user} - {self.post}'
+
+class Likes(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(CreatePost, on_delete=models.CASCADE, related_name='likes')
+    created = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'post'],
+                name='unique_user_post_like'
+            )
+        ]
+
+    def __str__(self):
+        return f'{self.user} - {self.post}'
+
+class Saves(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(CreatePost, on_delete=models.CASCADE, related_name='saves')
+    created = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'post'],
+                name='unique_user_post_save'
+            )
+        ]
+
+    def __str__(self):
+        return f'{self.user} - {self.post}'

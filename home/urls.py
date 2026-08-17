@@ -8,6 +8,8 @@ from .views import(
     explore,
     post_detail_explore,
     post_comments,
+    like_post,
+    save_post,
 )
 
 urlpatterns = [
@@ -25,4 +27,10 @@ urlpatterns = [
 
     #Comment
     path('post/<int:pk>/comments/', post_comments, name='post_comments'),
+
+    #Like
+    path('post/<int:pk>/like/', like_post, name='like_post'),
+
+    #Save
+    path('post/<int:pk>/save/', save_post, name='save_post'),
 ]

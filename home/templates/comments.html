@@ -1,51 +1,62 @@
-{% extends "include/_base.html" %}
 {% load static %}
 
-{% block title %}
-    Comments — Nivora
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Comments · Nivora</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/comments.css' %}"
+    >
+
+</head>
 
 
-{% block extra_css %}
-
-<link
-    rel="stylesheet"
-    href="{% static 'css/comments.css' %}"
->
-
-{% endblock %}
-
-
-
-{% block content %}
+<body>
 
 <div class="comments-page">
 
-
     <!-- =====================================================
          HEADER
-         ===================================================== -->
+    ====================================================== -->
 
     <header class="comments-header">
 
+        {% if source == "explore" %}
+
+            <a
+                href="{% url 'post_detail_explore' post.pk %}"
+                class="comments-back"
+            >
+                <span class="comments-back-icon">←</span>
+                <span>Back to Post</span>
+            </a>
+
+        {% else %}
+
+            <a
+                href="{% url 'post_detail' post.pk %}"
+                class="comments-back"
+            >
+                <span class="comments-back-icon">←</span>
+                <span>Back to Post</span>
+            </a>
+
+        {% endif %}
+
+
         <a
-            href="{% url 'post_detail_explore' post.pk %}"
-            class="back-link"
-        >
-
-            <span class="back-icon">
-                ←
-            </span>
-
-            <span>
-                Back
-            </span>
-
-        </a>
-
-
-        <a
-            href="/"
+            href="{% url 'dashboard' %}"
             class="comments-logo"
         >
 
@@ -62,226 +73,195 @@
     </header>
 
 
-
     <!-- =====================================================
          MAIN
-         ===================================================== -->
+    ====================================================== -->
 
     <main class="comments-main">
 
 
         <!-- =================================================
-             POST PREVIEW
-             ================================================= -->
+             POST CONTEXT
+        ================================================== -->
 
-        <section class="comment-post-preview">
+        <section class="comments-post-card">
 
-            <div class="post-preview-author">
+            <div class="comments-post-media">
 
-                <div class="post-preview-avatar">
-                    {{ post.author.username|first|upper }}
-                </div>
+                {% if post.media.url|lower|slice:"-4:" == ".mp4" or post.media.url|lower|slice:"-5:" == ".webm" or post.media.url|lower|slice:"-4:" == ".mov" %}
 
-                <div class="post-preview-info">
+                    <video
+                        class="comments-post-video"
+                        controls
+                        preload="metadata"
+                    >
+                        <source
+                            src="{{ post.media.url }}"
+                        >
+                    </video>
 
-                    <strong>
-                        {{ post.author.username }}
-                    </strong>
+                {% else %}
 
-                    <span>
-                        {{ post.created|date:"M d, Y" }}
-                    </span>
+                    <img
+                        src="{{ post.media.url }}"
+                        alt="Post"
+                        class="comments-post-image"
+                    >
 
-                </div>
+                {% endif %}
 
             </div>
 
 
-            {% if post.description %}
+            <div class="comments-post-info">
 
-                <p class="post-preview-description">
-                    {{ post.description }}
-                </p>
+                <div class="comments-post-meta">
 
-            {% endif %}
+                    <div class="comments-author">
+
+                        <span class="comments-meta-label">
+                            POSTED BY
+                        </span>
+
+                        <strong>
+                            {{ post.author.username }}
+                        </strong>
+
+                    </div>
+
+
+                    <time class="comments-created">
+
+                        {{ post.created|date:"M d, Y · H:i" }}
+
+                    </time>
+
+                </div>
+
+
+                {% if post.description %}
+
+                    <div class="comments-post-caption">
+
+                        <span class="comments-meta-label">
+                            CAPTION
+                        </span>
+
+                        <p>
+                            {{ post.description }}
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
 
         </section>
 
 
-
         <!-- =================================================
-             COMMENTS HEADING
-             ================================================= -->
+             DISCUSSION HEADER
+        ================================================== -->
 
-        <section class="comments-heading">
+        <section class="discussion-section">
 
-            <div>
+            <div class="discussion-heading">
 
-                <span class="comments-eyebrow">
-                    DISCUSSION
-                </span>
+                <div>
 
-                <h1>
-                    Comments
-                </h1>
-
-            </div>
-
-
-            <div class="comments-count">
-                {{ post_comments|length }}
-            </div>
-
-        </section>
-
-
-
-        <!-- =================================================
-             COMMENT COMPOSER
-             ================================================= -->
-
-        <section class="comment-composer">
-
-            <div class="composer-user">
-
-                <div class="composer-avatar">
-                    {{ user.username|first|upper }}
-                </div>
-
-                <div class="composer-user-info">
-
-                    <strong>
-                        {{ user.username }}
-                    </strong>
-
-                    <span id="composerSubtitle">
-                        Join the discussion
+                    <span class="discussion-label">
+                        DISCUSSION
                     </span>
 
+                    <h1>
+                        Comments
+                    </h1>
+
                 </div>
 
-            </div>
 
-
-            <!-- REPLY INDICATOR -->
-
-            <div
-                class="reply-indicator"
-                id="replyIndicator"
-            >
-
-                <span>
-                    Replying to
+                <span class="comment-count">
+                    {{ comment_count }}
                 </span>
 
-                <strong id="replyToUser">
-                    user
-                </strong>
-
-                <button
-                    type="button"
-                    id="cancelReply"
-                    aria-label="Cancel reply"
-                >
-                    ×
-                </button>
-
             </div>
 
 
-            <!-- FORM -->
+            <!-- =============================================
+                 NEW COMMENT FORM
+            ============================================== -->
 
-            <form
-                method="POST"
-                action="{% url 'post_comments' post.pk %}"
-                class="comment-form"
-                id="commentForm"
-            >
+            <div class="new-comment-card">
 
-                {% csrf_token %}
+                <div class="current-user-avatar">
+
+                    {{ request.user.username|first|upper }}
+
+                </div>
 
 
-                <input
-                    type="hidden"
-                    name="parent_id"
-                    id="parentId"
-                    value=""
+                <form
+                    method="POST"
+                    action="{% url 'post_comments' post.pk %}?from={{ source }}"
+                    class="comment-form"
                 >
 
+                    {% csrf_token %}
 
-                <div class="comment-input-wrapper">
+                    <input
+                        type="hidden"
+                        name="from"
+                        value="{{ source }}"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="parent_id"
+                        value=""
+                    >
 
                     <textarea
                         name="content"
-                        id="commentContent"
                         class="comment-textarea"
-                        maxlength="255"
                         placeholder="Write a comment..."
+                        maxlength="255"
                         required
                     ></textarea>
 
 
                     <div class="comment-form-footer">
 
-                        <span
-                            class="comment-counter"
-                            id="commentCounter"
-                        >
-                            0 / 255
+                        <span class="comment-helper">
+                            Share your thoughts.
                         </span>
 
 
                         <button
                             type="submit"
-                            class="comment-submit"
-                            id="commentSubmit"
+                            class="comment-submit-button"
                         >
-
-                            <span>
-                                Comment
-                            </span>
-
-                            <span class="comment-submit-arrow">
-                                →
-                            </span>
-
+                            Comment
                         </button>
 
                     </div>
 
-                </div>
+                </form>
 
-            </form>
-
-        </section>
+            </div>
 
 
+            <!-- =============================================
+                 COMMENTS
+            ============================================== -->
 
-        <!-- =================================================
-             COMMENTS LIST
-             ================================================= -->
-
-        <section class="comments-list-section">
-
-
-            {% if post_comments %}
-
+            {% if comments %}
 
                 <div class="comments-list">
 
+                    {% for comment in comments %}
 
-                    {% for comment in post_comments %}
-
-
-                        <!-- =================================================
-                             MAIN COMMENT
-                             ================================================= -->
-
-                        <article
-                            class="comment-item"
-                            data-comment-id="{{ comment.pk }}"
-                            data-comment-user="{{ comment.user.username }}"
-                        >
+                        <article class="comment-item">
 
                             <div class="comment-avatar">
 
@@ -292,14 +272,14 @@
 
                             <div class="comment-content">
 
-                                <div class="comment-meta">
+                                <div class="comment-top">
 
-                                    <strong>
+                                    <strong class="comment-author">
                                         {{ comment.user.username }}
                                     </strong>
 
-                                    <time>
-                                        {{ comment.created|date:"M d, Y" }}
+                                    <time class="comment-date">
+                                        {{ comment.created|date:"M d, Y · H:i" }}
                                     </time>
 
                                 </div>
@@ -310,197 +290,183 @@
                                 </p>
 
 
-                                <!-- COMMENT ACTIONS -->
-
                                 <div class="comment-actions">
 
                                     <button
                                         type="button"
-                                        class="reply-button"
-                                        data-comment-id="{{ comment.pk }}"
-                                        data-comment-user="{{ comment.user.username }}"
+                                        class="comment-reply-button"
+                                        data-comment-id="{{ comment.id }}"
                                     >
-
                                         Reply
-
                                     </button>
-
-
-                                    {% if comment.replies.all %}
-
-                                        {% with replies=comment.replies.all %}
-
-                                            {% if replies|length > 0 %}
-
-                                                <button
-                                                    type="button"
-                                                    class="view-replies-button"
-                                                    data-target="replies-{{ comment.pk }}"
-                                                    aria-expanded="false"
-                                                >
-
-                                                    <span>
-                                                        View
-                                                    </span>
-
-                                                    <span>
-                                                        {{ replies|length }}
-                                                    </span>
-
-                                                    <span>
-                                                        replies
-                                                    </span>
-
-                                                </button>
-
-                                            {% endif %}
-
-                                        {% endwith %}
-
-                                    {% endif %}
 
                                 </div>
 
 
-                                <!-- =================================================
-                                     REPLIES
-                                     ================================================= -->
+                                <!-- =================================
+                                     REPLY FORM
+                                ================================== -->
 
-                                {% with replies=comment.replies.all %}
+                                <form
+                                    method="POST"
+                                    action="{% url 'post_comments' post.pk %}?from={{ source }}"
+                                    id="reply-form-{{ comment.id }}"
+                                    class="reply-form"
+                                >
 
-                                    {% if replies|length > 0 %}
+                                    {% csrf_token %}
 
-                                        <div
-                                            class="replies-list"
-                                            id="replies-{{ comment.pk }}"
-                                            hidden
+                                    <input
+                                        type="hidden"
+                                        name="from"
+                                        value="{{ source }}"
+                                    >
+
+                                    <input
+                                        type="hidden"
+                                        name="parent_id"
+                                        value="{{ comment.id }}"
+                                    >
+
+                                    <textarea
+                                        name="content"
+                                        class="reply-textarea"
+                                        placeholder="Write a reply..."
+                                        maxlength="255"
+                                        required
+                                    ></textarea>
+
+
+                                    <div class="reply-form-actions">
+
+                                        <button
+                                            type="button"
+                                            class="reply-cancel-button"
+                                            data-comment-id="{{ comment.id }}"
                                         >
+                                            Cancel
+                                        </button>
 
 
-                                            {% for reply in replies %}
+                                        <button
+                                            type="submit"
+                                            class="reply-submit-button"
+                                        >
+                                            Reply
+                                        </button>
+
+                                    </div>
+
+                                </form>
 
 
-                                                <article
-                                                    class="reply-item"
-                                                    data-comment-id="{{ reply.pk }}"
-                                                >
+                                <!-- =================================
+                                     REPLIES
+                                ================================== -->
 
-                                                    <div class="reply-avatar">
+                                {% if comment.replies.all %}
 
-                                                        {{ reply.user.username|first|upper }}
+                                    <div class="replies-list">
+
+                                        {% for reply in comment.replies.all %}
+
+                                            <article class="reply-item">
+
+                                                <div class="comment-avatar reply-avatar">
+
+                                                    {{ reply.user.username|first|upper }}
+
+                                                </div>
+
+
+                                                <div class="comment-content">
+
+                                                    <div class="comment-top">
+
+                                                        <strong class="comment-author">
+                                                            {{ reply.user.username }}
+                                                        </strong>
+
+                                                        <time class="comment-date">
+                                                            {{ reply.created|date:"M d, Y · H:i" }}
+                                                        </time>
 
                                                     </div>
 
 
-                                                    <div class="reply-content">
+                                                    <p class="comment-text">
+                                                        {{ reply.content }}
+                                                    </p>
 
-                                                        <div class="reply-meta">
+                                                </div>
 
-                                                            <strong>
-                                                                {{ reply.user.username }}
-                                                            </strong>
+                                            </article>
 
-                                                            <time>
-                                                                {{ reply.created|date:"M d, Y" }}
-                                                            </time>
+                                        {% endfor %}
 
-                                                        </div>
+                                    </div>
 
-
-                                                        <p>
-                                                            {{ reply.content }}
-                                                        </p>
-
-
-                                                        <button
-                                                            type="button"
-                                                            class="reply-button reply-to-reply"
-                                                            data-comment-id="{{ comment.pk }}"
-                                                            data-comment-user="{{ reply.user.username }}"
-                                                        >
-
-                                                            Reply
-
-                                                        </button>
-
-                                                    </div>
-
-                                                </article>
-
-
-                                            {% endfor %}
-
-
-                                        </div>
-
-                                    {% endif %}
-
-                                {% endwith %}
+                                {% endif %}
 
                             </div>
 
                         </article>
 
-
                     {% endfor %}
-
 
                 </div>
 
-
             {% else %}
 
+                <div class="empty-comments-card">
 
-                <!-- =================================================
-                     EMPTY STATE
-                     ================================================= -->
-
-                <div class="comments-empty">
-
-                    <div class="comments-empty-icon">
+                    <div class="empty-comments-icon">
 
                         <svg
                             viewBox="0 0 24 24"
                             aria-hidden="true"
                         >
-
                             <path
-                                d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H8l-4 3v-5.2A7.5 7.5 0 1 1 20 11.5Z"
+                                d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H8l-4 2v-4.5A7.5 7.5 0 1 1 20 11.5Z"
                             />
-
                         </svg>
 
                     </div>
 
 
-                    <h3>
+                    <h2>
                         No comments yet
-                    </h3>
+                    </h2>
 
 
                     <p>
-                        Be the first person to join the discussion.
+                        Be the first person to share a thought.
                     </p>
 
                 </div>
 
-
             {% endif %}
-
 
         </section>
 
-
     </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="comments-footer">
+
+        Ideas worth discovering.
+
+    </footer>
 
 </div>
 
-{% endblock %}
-
-
-
-{% block extra_js %}
 
 <script src="{% static 'js/comments.js' %}"></script>
 
-{% endblock %}
+</body>
+
+</html>
