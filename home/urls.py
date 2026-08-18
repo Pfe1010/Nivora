@@ -9,7 +9,8 @@ from .views import(
     post_detail_explore,
     post_comments,
     like_post,
-    save_post,
+    saved_posts,
+    toggle_save,
 )
 
 urlpatterns = [
@@ -31,6 +32,7 @@ urlpatterns = [
     #Like
     path('post/<int:pk>/like/', like_post, name='like_post'),
 
-    #Save
-    path('post/<int:pk>/save/', save_post, name='save_post'),
+    #Saved posts
+    path('saved_posts/', saved_posts, name='saved_posts'),
+    path("post/<int:post_id>/save/", toggle_save, name="toggle_save"),
 ]

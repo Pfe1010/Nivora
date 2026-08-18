@@ -1,0 +1,581 @@
+/* =========================================================
+   SAVED POSTS PAGE
+   (extends dashboard.css — sidebar, topbar, layout shell
+   already come from there)
+========================================================= */
+
+
+/* =========================================================
+   SAVED HEADER
+========================================================= */
+
+.saved-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    padding: 30px 34px;
+
+    margin-top: 16px;
+
+    background: #fff;
+
+    border: 1px solid #e3ded7;
+    border-radius: 19px;
+}
+
+.saved-header-copy {
+    max-width: 620px;
+}
+
+.saved-header-small {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #8b6db9;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.saved-header-copy h2 {
+    margin: 0 0 10px;
+
+    color: #17233f;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: clamp(26px, 3vw, 34px);
+    line-height: 1.1;
+}
+
+.saved-header-copy p {
+    margin: 0;
+
+    color: #68778d;
+
+    font-size: 13.5px;
+    line-height: 1.7;
+}
+
+.saved-header-count {
+    flex: 0 0 auto;
+
+    min-width: 88px;
+
+    padding: 16px 22px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 3px;
+
+    background: #faf8fd;
+
+    border: 1px solid #e6dff0;
+    border-radius: 14px;
+
+    text-align: center;
+}
+
+.saved-header-count strong {
+    color: #17233f;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 28px;
+    line-height: 1;
+}
+
+.saved-header-count span {
+    color: #8a94a3;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.saved-grid {
+    margin-top: 20px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.saved-card {
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: #fff;
+
+    border: 1px solid #e8e3de;
+    border-radius: 16px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.saved-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #d8cbe6;
+
+    box-shadow:
+        0 12px 28px rgba(23, 35, 63, 0.08);
+}
+
+.saved-card.is-removing {
+    opacity: 0;
+
+    transform: scale(0.96) translateY(6px);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+/* =========================================================
+   CARD MEDIA
+========================================================= */
+
+.saved-card-media {
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+    aspect-ratio: 4 / 3;
+
+    overflow: hidden;
+
+    background: #10131a;
+}
+
+.saved-card-media img,
+.saved-card-media video {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.saved-media-type {
+    position: absolute;
+
+    left: 10px;
+    bottom: 10px;
+
+    padding: 4px 7px;
+
+    background: rgba(23, 35, 63, 0.82);
+
+    color: #fff;
+
+    border-radius: 5px;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   CARD BODY
+========================================================= */
+
+.saved-card-body {
+    display: flex;
+    flex-direction: column;
+
+    gap: 13px;
+
+    padding: 16px 17px 18px;
+}
+
+
+/* =========================================================
+   CARD AUTHOR
+========================================================= */
+
+.saved-card-author {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.saved-card-avatar {
+    width: 34px;
+    height: 34px;
+
+    flex: 0 0 34px;
+
+    display: grid;
+    place-items: center;
+
+    background: #17233f;
+    color: #fff;
+
+    border-radius: 50%;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.saved-card-author-info {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+.saved-card-author-info strong {
+    overflow: hidden;
+
+    color: #17233f;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.saved-card-author-info span {
+    color: #8a94a3;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   CARD DESCRIPTION
+========================================================= */
+
+.saved-card-description {
+    color: #4c5c73;
+
+    font-size: 12.5px;
+    line-height: 1.6;
+
+    overflow: hidden;
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.saved-no-caption {
+    color: #9aa1aa;
+
+    font-style: italic;
+}
+
+
+/* =========================================================
+   CARD ACTIONS
+========================================================= */
+
+.saved-card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding-top: 12px;
+
+    border-top: 1px solid #ebe8ef;
+}
+
+.saved-view-link {
+    color: #7754b3;
+
+    text-decoration: none;
+
+    font-size: 12.5px;
+    font-weight: 700;
+
+    transition: color 0.2s ease;
+}
+
+.saved-view-link:hover {
+    color: #5b3f8c;
+}
+
+
+/* =========================================================
+   UNSAVE BUTTON
+========================================================= */
+
+.saved-unsave-button {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 8px 12px;
+
+    background: #faf8fd;
+
+    border: 1px solid #cfc3e3;
+
+    border-radius: 9px;
+
+    color: #7754b3;
+
+    font-family: inherit;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.saved-unsave-button:hover {
+    background: #fdf2f3;
+
+    border-color: #f0aeb4;
+
+    color: #d9434e;
+
+    transform: translateY(-1px);
+}
+
+.saved-unsave-button:disabled {
+    opacity: 0.6;
+
+    cursor: default;
+
+    transform: none;
+}
+
+.saved-unsave-icon {
+    width: 15px;
+    height: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+.saved-unsave-icon svg {
+    width: 15px;
+    height: 15px;
+
+    display: block;
+
+    fill: currentColor;
+
+    stroke: none;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.saved-empty-state {
+    margin-top: 20px;
+
+    min-height: 320px;
+
+    padding: 50px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    text-align: center;
+
+    background: #fcfbfd;
+
+    border: 1px dashed #ddd6e4;
+    border-radius: 16px;
+}
+
+.saved-empty-icon {
+    width: 58px;
+    height: 58px;
+
+    margin-bottom: 8px;
+
+    display: grid;
+    place-items: center;
+
+    background: #f0ecf5;
+
+    border-radius: 15px;
+
+    color: #a08abc;
+}
+
+.saved-empty-icon svg {
+    width: 27px;
+    height: 27px;
+
+    fill: none;
+    stroke: currentColor;
+
+    stroke-width: 1.5;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.saved-empty-state h4 {
+    margin: 6px 0 0;
+
+    color: #17233f;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 21px;
+}
+
+.saved-empty-state p {
+    margin: 0;
+
+    color: #8b94a2;
+
+    font-size: 12px;
+}
+
+.saved-empty-cta {
+    margin-top: 14px;
+
+    padding: 11px 20px;
+
+    background: #17233f;
+    color: #fff;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.saved-empty-cta:hover {
+    background: #263457;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .saved-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .saved-header {
+        padding: 26px 26px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .saved-header {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 16px;
+
+        padding: 24px 22px;
+    }
+
+    .saved-header-count {
+        align-self: stretch;
+
+        flex-direction: row;
+
+        justify-content: center;
+
+        gap: 8px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .saved-grid {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .saved-header-copy p {
+        font-size: 12px;
+    }
+
+    .saved-card-actions {
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 10px;
+    }
+
+    .saved-unsave-button {
+        justify-content: center;
+    }
+}

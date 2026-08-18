@@ -3,8 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.http import JsonResponse
-from .models import CreatePost, Comments, Likes, Saves
+from .models import CreatePost, Comments, Likes, SavedPost
 from .form import FormCreatePost
+from django.views.decorators.http import require_POST
 
 def welcome(request):
     return render(request, "welcome.html")
@@ -55,7 +56,7 @@ def explore(request):
 def post_detail_explore(request, pk):
     post = get_object_or_404(CreatePost, pk=pk)
     liked_by_user = Likes.objects.filter(user=request.user, post=post).exists()
-    saved_by_user = Saves.objects.filter(user=request.user, post=post).exists()
+    saved_by_user = SavedPost.objects.filter(user=request.user, post=post).exists()
     like_count = Likes.objects.filter(post=post).count()
     comment_count = Comments.objects.filter(post=post).count()
     return render(request, "post_detail_explore.html", {"post": post, "liked_by_user": liked_by_user, "saved_by_user": saved_by_user, "like_count": like_count, "comment_count": comment_count, "source": "explore"})
@@ -100,17 +101,20 @@ def like_post(request, pk):
     return JsonResponse({"liked": liked, "count": like_count})
 
 @login_required
-def save_post(request, pk):
-    post = get_object_or_404(CreatePost, pk=pk)
-    if request.method != "POST":
-        return JsonResponse({"error": "Invalid request method."}, status=405)
-    
-    save = Saves.objects.filter(user=request.user, post=post).first()
-    if save:
-        save.delete()
+def saved_posts(request):
+    saved = (SavedPost.objects.filter(user=request.user).select_related("post", "post__author").order_by("-created"))
+    return render(request, "saved_posts.html", {"saved_items": saved})
+
+@login_required
+@require_POST
+def toggle_save(request, post_id):
+    post = get_object_or_404(CreatePost, pk=post_id)
+    saved_post = SavedPost.objects.filter(user=request.user, post=post).first()
+    if saved_post:
+        saved_post.delete()
         saved = False
     else:
-        Saves.objects.create(user=request.user, post=post)
+        SavedPost.objects.create(user=request.user, post=post)
         saved = True
-
+        
     return JsonResponse({"saved": saved})
