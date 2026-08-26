@@ -7,6 +7,9 @@ from .models import CreatePost, Comments, Likes, SavedPost, Profile
 from .form import FormCreatePost
 from django.views.decorators.http import require_POST
 from django.contrib import messages
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 def welcome(request):
     return render(request, "welcome.html")
@@ -129,28 +132,34 @@ def profile_view(request):
         if new_username and new_username != request.user.username:
             is_taken = (User.objects.filter(username__iexact=new_username).exclude(pk=request.user.pk).exists())
             if is_taken:
-                messages.error(request, "This username is already taken.")
+                messages.error(request, "This username is already taken.", extra_tags="profile-update")
                 return redirect("profile")
-
+ 
             request.user.username = new_username
             request.user.save(update_fields=["username"])
 
         if avatar:
             profile.avatar = avatar
             profile.save(update_fields=["avatar"])
-
-        messages.success(request, "Your profile updated successfully.")
+ 
+        messages.success(request, "Your profile updated successfully", extra_tags="profile-update")
         return redirect("profile")
-
+ 
     return render(request, "profile.html", {"profile": profile})
-
-
+ 
+ 
 @login_required
 def check_username(request):
+    """
+    AJAX endpoint: /profile/check-username/?username=xyz
+    برای بررسی realtime یونیک بودن یوزرنیم قبل از ثبت فرم
+    """
+ 
     username = request.GET.get("username", "").strip()
     if not username:
         return JsonResponse({"available": False, "reason": "empty"})
     if username == request.user.username:
         return JsonResponse({"available": True, "reason": "current"})
+ 
     is_taken = (User.objects.filter(username__iexact=username).exclude(pk=request.user.pk).exists())
     return JsonResponse({"available": not is_taken})
