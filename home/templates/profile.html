@@ -1,0 +1,287 @@
+{% extends "include/_base.html" %}
+{% load static %}
+
+{% block title %}
+    Profile — Nivora
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header">
+
+        <a href="/" class="dashboard-logo">
+            <span class="dashboard-logo-mark">N</span>
+            <span class="dashboard-logo-name">Nivora</span>
+        </a>
+
+        <button
+            type="button"
+            class="sidebar-toggle"
+            id="sidebarToggle"
+            aria-label="Open menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </header>
+
+
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar" id="dashboardSidebar">
+
+        <div class="sidebar-inner">
+
+            <a href="/" class="sidebar-logo">
+                <span class="sidebar-logo-mark">N</span>
+                <span class="sidebar-logo-name">Nivora</span>
+            </a>
+
+
+            <div class="sidebar-user">
+
+                <div class="user-avatar">
+                    {% if profile.avatar %}
+                        <img src="{{ profile.avatar.url }}" alt="{{ user.username }}">
+                    {% else %}
+                        {{ user.username|first|upper }}
+                    {% endif %}
+                </div>
+
+                <div class="user-info">
+                    <span class="user-name">{{ user.username }}</span>
+                    <span class="user-label">Member</span>
+                </div>
+
+            </div>
+
+
+            <nav class="sidebar-nav">
+
+                <span class="nav-section-title">MENU</span>
+
+                <a href="{% url 'dashboard' %}" class="sidebar-link">
+                    <span class="sidebar-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6v-9h-6v9Zm0-16v5h6V4h-6Z"/>
+                        </svg>
+                    </span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="{% url 'explore' %}" class="sidebar-link">
+                    <span class="sidebar-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="11" cy="11" r="6"/>
+                            <path d="m16 16 4 4"/>
+                        </svg>
+                    </span>
+                    <span>Explore</span>
+                </a>
+
+                <a href="{% url 'create' %}" class="sidebar-link">
+                    <span class="sidebar-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                    </span>
+                    <span>Create Post</span>
+                </a>
+
+                <a href="{% url 'saved_posts' %}" class="sidebar-link">
+                    <span class="sidebar-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 3h12v18l-6-4-6 4z"/>
+                        </svg>
+                    </span>
+                    <span>Saved Posts</span>
+                </a>
+
+                <a href="{% url 'profile' %}" class="sidebar-link active">
+                    <span class="sidebar-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="8" r="4"/>
+                            <path d="M4 20c.8-4 3.5-6 8-6s7.2 2 8 6"/>
+                        </svg>
+                    </span>
+                    <span>Profile</span>
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+                <div class="sidebar-divider"></div>
+
+                <a href="{% url 'account_logout' %}" class="sidebar-link logout-link">
+                    <span class="sidebar-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M10 4H5v16h5"/>
+                            <path d="M14 8l4 4-4 4"/>
+                            <path d="M18 12H9"/>
+                        </svg>
+                    </span>
+                    <span>Logout</span>
+                </a>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+
+        <div class="dashboard-topbar">
+
+            <div>
+                <span class="dashboard-label">YOUR SPACE</span>
+                <h1>Profile</h1>
+            </div>
+
+            <div class="topbar-user">
+                <div class="topbar-avatar">
+                    {% if profile.avatar %}
+                        <img src="{{ profile.avatar.url }}" alt="{{ user.username }}">
+                    {% else %}
+                        {{ user.username|first|upper }}
+                    {% endif %}
+                </div>
+                <span>{{ user.username }}</span>
+            </div>
+
+        </div>
+
+
+        {% if messages %}
+            <div class="profile-messages">
+                {% for message in messages %}
+                    <div class="profile-message {% if message.tags %}profile-message-{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+
+        <!-- Profile Card -->
+        <section class="profile-card">
+
+            <form
+                method="post"
+                enctype="multipart/form-data"
+                class="profile-form"
+                id="profileForm"
+            >
+
+                {% csrf_token %}
+
+                <!-- Avatar -->
+                <div class="profile-avatar-section">
+
+                    <div class="profile-avatar-preview" id="avatarPreview">
+
+                        {% if profile.avatar %}
+                            <img src="{{ profile.avatar.url }}" alt="{{ user.username }}" id="avatarImage">
+                        {% else %}
+                            <span id="avatarInitial">{{ user.username|first|upper }}</span>
+                        {% endif %}
+
+                    </div>
+
+                    <label for="avatarInput" class="profile-avatar-change">
+                        <span>Change photo</span>
+                        <input
+                            type="file"
+                            id="avatarInput"
+                            name="avatar"
+                            accept="image/*"
+                            hidden
+                        >
+                    </label>
+
+                </div>
+
+
+                <!-- Username -->
+                <div class="profile-field">
+
+                    <label for="usernameInput" class="profile-field-label">
+                        Username
+                    </label>
+
+                    <div class="profile-username-wrapper">
+
+                        <input
+                            type="text"
+                            id="usernameInput"
+                            name="username"
+                            value="{{ user.username }}"
+                            maxlength="150"
+                            autocomplete="off"
+                        >
+
+                        <span class="profile-username-status" id="usernameStatus"></span>
+
+                    </div>
+
+                    <span class="profile-field-hint" id="usernameHint">
+                        Letters, numbers and underscores only.
+                    </span>
+
+                </div>
+
+
+                <!-- Read-only info -->
+                <div class="profile-field">
+                    <span class="profile-field-label">Email</span>
+                    <div class="profile-readonly-value">
+                        {{ user.email|default:"—" }}
+                    </div>
+                </div>
+
+                <div class="profile-field">
+                    <span class="profile-field-label">Member since</span>
+                    <div class="profile-readonly-value">
+                        {{ user.date_joined|date:"M d, Y" }}
+                    </div>
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="profile-save-button"
+                    id="profileSaveButton"
+                >
+                    Save changes
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{% static 'js/dashboard.js' %}"></script>
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}

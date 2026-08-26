@@ -3,9 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.http import JsonResponse
-from .models import CreatePost, Comments, Likes, SavedPost
+from .models import CreatePost, Comments, Likes, SavedPost, Profile
 from .form import FormCreatePost
 from django.views.decorators.http import require_POST
+from django.contrib import messages
 
 def welcome(request):
     return render(request, "welcome.html")
@@ -118,3 +119,38 @@ def toggle_save(request, post_id):
         saved = True
         
     return JsonResponse({"saved": saved})
+
+@login_required
+def profile_view(request):
+    profile, _ = Profile.objects.get_or_create(user=request.user)
+    if request.method == "POST":
+        new_username = request.POST.get("username", "").strip()
+        avatar = request.FILES.get("avatar")
+        if new_username and new_username != request.user.username:
+            is_taken = (User.objects.filter(username__iexact=new_username).exclude(pk=request.user.pk).exists())
+            if is_taken:
+                messages.error(request, "This username is already taken.")
+                return redirect("profile")
+
+            request.user.username = new_username
+            request.user.save(update_fields=["username"])
+
+        if avatar:
+            profile.avatar = avatar
+            profile.save(update_fields=["avatar"])
+
+        messages.success(request, "Your profile updated successfully.")
+        return redirect("profile")
+
+    return render(request, "profile.html", {"profile": profile})
+
+
+@login_required
+def check_username(request):
+    username = request.GET.get("username", "").strip()
+    if not username:
+        return JsonResponse({"available": False, "reason": "empty"})
+    if username == request.user.username:
+        return JsonResponse({"available": True, "reason": "current"})
+    is_taken = (User.objects.filter(username__iexact=username).exclude(pk=request.user.pk).exists())
+    return JsonResponse({"available": not is_taken})

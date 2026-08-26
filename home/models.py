@@ -49,3 +49,11 @@ class SavedPost(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.post_id}"
+
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="profile")
+    avatar = models.ImageField(upload_to="home/static/media/avatars", blank=True, null=True)
+    bio = models.TextField(max_length=160, blank=True)
+ 
+    def __str__(self):
+        return f"{self.user.username}"

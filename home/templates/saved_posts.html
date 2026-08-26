@@ -70,7 +70,11 @@
             <div class="sidebar-user">
 
                 <div class="user-avatar">
-                    {{ user.username|first|upper }}
+                    {% if user.profile.avatar %}
+                        <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}">
+                    {% else %}
+                        {{ user.username|first|upper }}
+                    {% endif %}
                 </div>
 
                 <div class="user-info">
@@ -170,7 +174,7 @@
 
 
                 <a
-                    href="#"
+                    href="{% url 'profile' %}"
                     class="sidebar-link"
                 >
 

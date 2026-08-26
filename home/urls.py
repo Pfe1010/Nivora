@@ -11,6 +11,8 @@ from .views import(
     like_post,
     saved_posts,
     toggle_save,
+    profile_view,
+    check_username,
 )
 
 urlpatterns = [
@@ -35,4 +37,8 @@ urlpatterns = [
     #Saved posts
     path('saved_posts/', saved_posts, name='saved_posts'),
     path("post/<int:post_id>/save/", toggle_save, name="toggle_save"),
+
+    #Profile
+    path('profile/', profile_view, name='profile'),
+    path('profile/check_username/', check_username, name='check_username'),
 ]

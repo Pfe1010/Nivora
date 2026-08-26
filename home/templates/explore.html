@@ -62,7 +62,13 @@
             <div class="explore-sidebar-user">
 
                 <div class="explore-user-avatar">
-                    {{ user.username|first|upper }}
+
+                    {% if user.profile.avatar %}
+                        <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}">
+                    {% else %}
+                        {{ user.username|first|upper }}
+                    {% endif %}
+
                 </div>
 
                 <div class="explore-user-info">
@@ -144,7 +150,25 @@
 
 
                 <a
-                    href="#"
+                    href="{% url 'saved_posts' %}"
+                    class="explore-sidebar-link"
+                >
+
+                    <span class="explore-sidebar-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 3h12v18l-6-4-6 4z"/>
+                        </svg>
+                    </span>
+
+                    <span>
+                        Saved Posts
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="{% url 'profile' %}"
                     class="explore-sidebar-link"
                 >
 
@@ -231,7 +255,13 @@
             <div class="explore-topbar-user">
 
                 <div class="explore-topbar-avatar">
-                    {{ user.username|first|upper }}
+
+                    {% if user.profile.avatar %}
+                        <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}">
+                    {% else %}
+                        {{ user.username|first|upper }}
+                    {% endif %}
+
                 </div>
 
                 <span>
@@ -275,6 +305,37 @@
                             href="{% url 'post_detail_explore' item.pk %}"
                             class="explore-post-card"
                         >
+
+                            <!-- Author (shown above the post) -->
+                            <div class="explore-post-author">
+
+                                <div class="explore-author-avatar">
+
+                                    {% if item.author.profile.avatar %}
+                                        <img
+                                            src="{{ item.author.profile.avatar.url }}"
+                                            alt="{{ item.author.username }}"
+                                        >
+                                    {% else %}
+                                        {{ item.author.username|first|upper }}
+                                    {% endif %}
+
+                                </div>
+
+                                <div class="explore-author-info">
+
+                                    <strong>
+                                        {{ item.author.username }}
+                                    </strong>
+
+                                    <span>
+                                        {{ item.created|date:"M d, Y" }}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
 
                             <!-- Media -->
                             <div class="explore-post-media">
@@ -325,28 +386,6 @@
 
                             <!-- Content -->
                             <div class="explore-post-content">
-
-                                <!-- Author -->
-                                <div class="explore-post-author">
-
-                                    <div class="explore-author-avatar">
-                                        {{ item.author.username|first|upper }}
-                                    </div>
-
-                                    <div class="explore-author-info">
-
-                                        <strong>
-                                            {{ item.author.username }}
-                                        </strong>
-
-                                        <span>
-                                            {{ item.created|date:"M d, Y" }}
-                                        </span>
-
-                                    </div>
-
-                                </div>
-
 
                                 <!-- Description -->
                                 <div class="explore-post-description">
