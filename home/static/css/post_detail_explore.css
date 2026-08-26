@@ -238,6 +238,8 @@
     align-items: center;
     justify-content: center;
 
+    overflow: hidden;
+
     background: #17233f;
 
     color: #ffffff;
@@ -246,6 +248,16 @@
 
     font-size: 18px;
     font-weight: 700;
+}
+
+
+.explore-avatar img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
 }
 
 

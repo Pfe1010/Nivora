@@ -40,5 +40,5 @@ urlpatterns = [
 
     #Profile
     path('profile/', profile_view, name='profile'),
-    path('profile/check_username/', check_username, name='check_username'),
+    path('profile/check-username/', check_username, name='check_username'),
 ]

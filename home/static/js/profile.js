@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            if (data.available) {
+            if (data.available === true) {
 
                 usernameStatus.textContent = "Available";
                 usernameStatus.className =
@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 usernameIsValidForSubmit = true;
 
-            } else {
+            } else if (data.available === false) {
 
                 usernameStatus.textContent = "Taken";
                 usernameStatus.className =
@@ -182,6 +182,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 usernameWrapper.classList.add("is-taken");
 
                 usernameIsValidForSubmit = false;
+
+            } else {
+
+                /*
+                 * The response didn't contain a proper
+                 * "available" boolean — something is wrong
+                 * with the endpoint. Don't guess; show nothing
+                 * and log it so it's easy to spot in dev tools.
+                 */
+
+                console.warn(
+                    "Unexpected response from check-username:",
+                    data
+                );
+
+                usernameStatus.textContent = "";
+                usernameStatus.className =
+                    "profile-username-status";
+
+                usernameIsValidForSubmit = true;
 
             }
 

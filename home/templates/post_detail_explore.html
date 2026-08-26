@@ -116,7 +116,14 @@
 
                         <div class="explore-avatar">
 
-                            {{ post.author.username|first|upper }}
+                            {% if post.author.profile.avatar %}
+                                <img
+                                    src="{{ post.author.profile.avatar.url }}"
+                                    alt="{{ post.author.username }}"
+                                >
+                            {% else %}
+                                {{ post.author.username|first|upper }}
+                            {% endif %}
 
                         </div>
 

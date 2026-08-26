@@ -371,7 +371,14 @@
                             <div class="saved-card-author">
 
                                 <div class="saved-card-avatar">
-                                    {{ item.post.author.username|first|upper }}
+                                    {% if item.post.author.profile.avatar %}
+                                        <img
+                                            src="{{ item.post.author.profile.avatar.url }}"
+                                            alt="{{ item.post.author.username }}"
+                                        >
+                                    {% else %}
+                                        {{ item.post.author.username|first|upper }}
+                                    {% endif %}
                                 </div>
 
                                 <div class="saved-card-author-info">

@@ -105,13 +105,30 @@
 
                     <div class="post-author">
 
-                        <span class="meta-label">
-                            Posted by
-                        </span>
+                        <div class="post-author-avatar">
 
-                        <strong>
-                            {{ post.author.username }}
-                        </strong>
+                            {% if post.author.profile.avatar %}
+                                <img
+                                    src="{{ post.author.profile.avatar.url }}"
+                                    alt="{{ post.author.username }}"
+                                >
+                            {% else %}
+                                {{ post.author.username|first|upper }}
+                            {% endif %}
+
+                        </div>
+
+                        <div class="post-author-info">
+
+                            <span class="meta-label">
+                                Posted by
+                            </span>
+
+                            <strong>
+                                {{ post.author.username }}
+                            </strong>
+
+                        </div>
 
                     </div>
 
