@@ -7,7 +7,7 @@ from .models import CreatePost, Comments, Likes, SavedPost, Profile
 from .form import FormCreatePost
 from django.views.decorators.http import require_POST
 from django.contrib import messages
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, logout
 from django.db import IntegrityError, transaction
 
 User = get_user_model()
@@ -144,11 +144,7 @@ def profile_view(request):
             profile.avatar = avatar
             profile.save(update_fields=["avatar"])
  
-        messages.success(
-            request,
-            "پروفایل با موفقیت بروزرسانی شد.",
-            extra_tags="profile-update",
-        )
+        messages.success(request, "Your profile updated successfully.", extra_tags="profile-update")
         return redirect("profile")
  
     return render(request, "profile.html", {"profile": profile})
@@ -171,3 +167,19 @@ def check_username(request):
  
     is_taken = (User.objects.filter(username__iexact=username).exclude(pk=request.user.pk).exists())
     return JsonResponse({"available": not is_taken})
+
+@login_required
+def delete_account(request):
+    """
+    GET  -> نمایش صفحه‌ی تأیید حذف اکانت
+    POST -> کاربر رو logout می‌کنه و کل اکانتش (و به‌واسطه‌ی
+            CASCADE، پروفایل/پست‌ها/لایک‌ها/کامنت‌ها/سیوها) رو
+            برای همیشه حذف می‌کنه
+    """
+    if request.method == "POST":
+        user = request.user
+        logout(request)
+        user.delete()
+        return redirect("welcome")
+ 
+    return render(request, "delete_account.html")

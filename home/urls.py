@@ -13,6 +13,7 @@ from .views import(
     toggle_save,
     profile_view,
     check_username,
+    delete_account,
 )
 
 urlpatterns = [
@@ -41,4 +42,5 @@ urlpatterns = [
     #Profile
     path('profile/', profile_view, name='profile'),
     path('profile/check-username/', check_username, name='check_username'),
+    path('profile/delete/', delete_account, name='delete_account'),
 ]

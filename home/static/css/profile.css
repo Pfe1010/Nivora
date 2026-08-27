@@ -297,6 +297,84 @@
 
 
 /* =========================================================
+   DANGER ZONE
+========================================================= */
+
+.danger-zone {
+    margin-top: 16px;
+
+    padding: 22px 26px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background: #fff7f7;
+
+    border: 1px solid #ead3d3;
+    border-radius: 16px;
+}
+
+.danger-zone-text {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+
+    max-width: 420px;
+}
+
+.danger-zone-text strong {
+    color: #a23d3d;
+    font-size: 14px;
+}
+
+.danger-zone-text span {
+    color: #8a6a6a;
+    font-size: 12.5px;
+    line-height: 1.6;
+}
+
+.danger-zone-button {
+    flex-shrink: 0;
+
+    min-height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #ead3d3;
+    border-radius: 10px;
+
+    color: #a23d3d;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.danger-zone-button:hover {
+    background: #fff0f0;
+    border-color: #dcaeae;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
    MOBILE
 ========================================================= */
 
@@ -324,6 +402,19 @@
     }
 
     .profile-save-button {
+        width: 100%;
+    }
+
+    .danger-zone {
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 14px;
+
+        padding: 18px;
+    }
+
+    .danger-zone-button {
         width: 100%;
     }
 

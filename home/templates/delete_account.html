@@ -1,0 +1,152 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Delete Account | Nivora</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/post_delete.css' %}"
+    >
+</head>
+
+<body>
+
+<div class="delete-page">
+
+    <main class="delete-container">
+
+        <!-- Logo -->
+
+        <a href="{% url 'profile' %}" class="delete-logo">
+
+            <span class="delete-logo-mark">
+                N
+            </span>
+
+            <span class="delete-logo-name">
+                Nivora
+            </span>
+
+        </a>
+
+
+        <!-- Delete Card -->
+
+        <section class="delete-card">
+
+
+            <!-- Warning Icon -->
+
+            <div class="delete-icon">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+                    <path d="M12 3L2.8 20h18.4L12 3z"/>
+                    <path d="M12 9v5"/>
+                    <path d="M12 17h.01"/>
+                </svg>
+
+            </div>
+
+
+            <!-- Text -->
+
+            <div class="delete-content">
+
+                <span class="delete-eyebrow">
+                    DELETE ACCOUNT
+                </span>
+
+                <h1>
+                    Delete your account?
+                </h1>
+
+                <p>
+                    This action cannot be undone. Your profile, all your
+                    posts, likes, comments and saved posts will be
+                    permanently removed from Nivora.
+                </p>
+
+            </div>
+
+
+            <!-- Account Preview -->
+
+            <div class="delete-preview">
+
+                <div class="delete-preview-info">
+
+                    <p>
+                        <strong>{{ user.username }}</strong><br>
+                        {{ user.email|default:"—" }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Actions -->
+
+            <div class="delete-actions">
+
+
+                <a
+                    href="{% url 'profile' %}"
+                    class="cancel-delete"
+                >
+                    Cancel
+                </a>
+
+
+                <form
+                    method="post"
+                    class="delete-form"
+                >
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="confirm-delete"
+                    >
+                        <span>
+                            Delete my account
+                        </span>
+
+                        <span class="delete-arrow">
+                            →
+                        </span>
+                    </button>
+
+                </form>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- Bottom Note -->
+
+        <p class="delete-note">
+            You'll be signed out immediately after this.
+        </p>
+
+    </main>
+
+</div>
+
+</body>
+</html>
