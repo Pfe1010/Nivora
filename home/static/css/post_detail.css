@@ -224,9 +224,49 @@
 
 .post-author {
     display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.post-author-avatar {
+    width: 44px;
+    height: 44px;
+
+    flex: 0 0 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #17233f;
+    color: #ffffff;
+
+    border-radius: 50%;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+.post-author-avatar img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+.post-author-info {
+    display: flex;
     flex-direction: column;
 
-    gap: 6px;
+    gap: 4px;
 }
 
 
@@ -292,6 +332,14 @@
     padding-top: 24px;
 
     border-top: 1px solid #ebe8ef;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+
+    flex-wrap: wrap;
 }
 
 
@@ -499,11 +547,8 @@
 .post-secondary-actions {
     display: flex;
     align-items: center;
-    justify-content: space-between;
 
-    gap: 14px;
-
-    margin-top: 18px;
+    gap: 10px;
 }
 
 
@@ -749,6 +794,9 @@
         margin-top: 22px;
 
         padding-top: 20px;
+
+        flex-direction: column;
+        align-items: stretch;
     }
 
 
