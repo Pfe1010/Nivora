@@ -196,7 +196,14 @@
 
                 <div class="current-user-avatar">
 
-                    {{ request.user.username|first|upper }}
+                    {% if request.user.profile.avatar %}
+                        <img
+                            src="{{ request.user.profile.avatar.url }}"
+                            alt="{{ request.user.username }}"
+                        >
+                    {% else %}
+                        {{ request.user.username|first|upper }}
+                    {% endif %}
 
                 </div>
 
@@ -265,7 +272,14 @@
 
                             <div class="comment-avatar">
 
-                                {{ comment.user.username|first|upper }}
+                                {% if comment.user.profile.avatar %}
+                                    <img
+                                        src="{{ comment.user.profile.avatar.url }}"
+                                        alt="{{ comment.user.username }}"
+                                    >
+                                {% else %}
+                                    {{ comment.user.username|first|upper }}
+                                {% endif %}
 
                             </div>
 
@@ -374,7 +388,14 @@
 
                                                 <div class="comment-avatar reply-avatar">
 
-                                                    {{ reply.user.username|first|upper }}
+                                                    {% if reply.user.profile.avatar %}
+                                                        <img
+                                                            src="{{ reply.user.profile.avatar.url }}"
+                                                            alt="{{ reply.user.username }}"
+                                                        >
+                                                    {% else %}
+                                                        {{ reply.user.username|first|upper }}
+                                                    {% endif %}
 
                                                 </div>
 
