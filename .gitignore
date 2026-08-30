@@ -39,3 +39,6 @@ htmlcov/
 dist/
 build/
 .eggs/
+
+/media
+/staticfiles
