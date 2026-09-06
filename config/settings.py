@@ -13,19 +13,34 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv(BASE_DIR / ".env")
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
+SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 
+# =========================================================
+# ALLOWED HOSTS / CSRF
+# =========================================================
+# توی .env این‌طوری بنویسید (بدون فاصله، با کاما جدا):
+# ALLOWED_HOSTS=nivora.ir,www.nivora.ir,127.0.0.1
+ALLOWED_HOSTS = [
+    h.strip()
+    for h in os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+    if h.strip()
+]
+
+# توی .env این‌طوری بنویسید:
+# CSRF_TRUSTED_ORIGINS=https://nivora.ir,https://www.nivora.ir
+CSRF_TRUSTED_ORIGINS = [
+    o.strip()
+    for o in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
+    if o.strip()
+]
 
 
 # Application definition
@@ -40,13 +55,15 @@ INSTALLED_APPS = [
     'home',
     'django.contrib.sites',
     'allauth',
-    'allauth.account'
+    'allauth.account',
+    'storages',
 ]
 
 SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'allauth.account.middleware.AccountMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -76,15 +93,30 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/6.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# =========================================================
+# DATABASE
+# =========================================================
+# اگه DB_NAME توی .env تنظیم شده باشه، از PostgreSQL استفاده می‌کنه.
+# اگه نه (مثلاً روی سیستم شخصی خودتون)، خودکار میره سراغ sqlite
+# محلی، بدون اینکه چیزی خراب بشه.
+if os.getenv("DB_NAME"):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT', '5432'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
@@ -118,19 +150,72 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.1/howto/static-files/
+# =========================================================
+# STATIC FILES (CSS, JS) — سروش می‌شن با whitenoise
+# =========================================================
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
+# =========================================================
+# MEDIA FILES (عکس‌ها/ویدیوها) — روی Arvan Object Storage
+# =========================================================
+# اگه ARVAN_BUCKET_NAME توی .env تنظیم شده باشه از آروان استفاده
+# می‌کنه، وگرنه (مثلاً موقع توسعه‌ی محلی) فایل‌ها همینجا روی
+# دیسک خودتون (پوشه‌ی media/) ذخیره می‌شن.
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(BASE_DIR / ".env")
-SECRET_KEY = os.getenv("SECRET_KEY")
-DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+if os.getenv("ARVAN_BUCKET_NAME"):
+    AWS_ACCESS_KEY_ID = os.getenv("ARVAN_ACCESS_KEY")
+    AWS_SECRET_ACCESS_KEY = os.getenv("ARVAN_SECRET_KEY")
+    AWS_STORAGE_BUCKET_NAME = os.getenv("ARVAN_BUCKET_NAME")
+    AWS_S3_ENDPOINT_URL = os.getenv("ARVAN_ENDPOINT_URL")
+    AWS_S3_CUSTOM_DOMAIN = (
+        f"{AWS_STORAGE_BUCKET_NAME}."
+        f"{AWS_S3_ENDPOINT_URL.replace('https://', '').replace('http://', '')}"
+    )
+    AWS_DEFAULT_ACL = None
+    AWS_QUERYSTRING_AUTH = False
 
-# Allauth
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
+
+    MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
+
+else:
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
+
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
+
+
+# =========================================================
+# SECURITY (فقط وقتی DEBUG خاموشه، یعنی روی سرور واقعی)
+# =========================================================
+
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
+
+# =========================================================
+# ALLAUTH
+# =========================================================
+
 ACCOUNT_SIGNUP_FIELDS = [
     "username*",
     "email*",
@@ -144,20 +229,18 @@ LOGIN_REDIRECT_URL = "dashboard"
 LOGOUT_REDIRECT_URL = "/"
 ACCOUNT_LOGOUT_ON_GET = False
 
-# Development email backend
-MAILERS = {
-    "default": {
-        "BACKEND": "django.core.mail.backends.smtp.EmailBackend",
-        "OPTIONS": {
-            "host": os.getenv("EMAIL_HOST"),
-            "port": int(os.getenv("EMAIL_PORT", 587)),
-            "username": os.getenv("EMAIL_HOST_USER"),
-            "password": os.getenv("EMAIL_HOST_PASSWORD"),
-            "use_tls": True,
-        },
-    },
-}
+
+# =========================================================
+# EMAIL
+# =========================================================
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

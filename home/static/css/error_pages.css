@@ -1,0 +1,258 @@
+/* =========================================================
+   ERROR PAGES (404, 500, etc.)
+========================================================= */
+
+.error-page {
+    min-height: 100vh;
+
+    background: #f7f6f3;
+    color: #17233f;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 5%;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.error-container {
+    width: 100%;
+    max-width: 480px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.error-logo {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 32px;
+
+    color: #17233f;
+
+    text-decoration: none;
+}
+
+.error-logo-mark {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #17233f;
+    color: #ffffff;
+
+    border-radius: 11px;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.error-logo-name {
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.error-card {
+    width: 100%;
+
+    padding: 48px 36px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid #ddd9e6;
+    border-radius: 22px;
+
+    box-shadow:
+        0 18px 45px rgba(23, 35, 63, 0.07);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CODE
+========================================================= */
+
+.error-code {
+    display: block;
+
+    margin-bottom: 14px;
+
+    color: #ede8f5;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 96px;
+    font-weight: 700;
+    line-height: 1;
+
+    -webkit-text-stroke: 2px #7754b3;
+}
+
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.error-card h1 {
+    margin: 0 0 10px;
+
+    color: #17233f;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.error-card p {
+    margin: 0 0 28px;
+
+    max-width: 340px;
+
+    color: #65738d;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.error-actions {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+}
+
+.error-primary-button,
+.error-secondary-button {
+    min-height: 46px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 20px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    box-sizing: border-box;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.error-primary-button {
+    background: #17233f;
+    color: #ffffff;
+
+    border: 1px solid #17233f;
+}
+
+.error-primary-button:hover {
+    background: #263457;
+
+    transform: translateY(-1px);
+}
+
+.error-secondary-button {
+    background: #ffffff;
+    color: #17233f;
+
+    border: 1px solid #ddd9e6;
+}
+
+.error-secondary-button:hover {
+    background: #f7f3fc;
+    border-color: #cfc3e3;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.error-note {
+    margin: 24px 0 0;
+
+    color: #7a8497;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .error-card {
+        padding: 36px 22px;
+    }
+
+    .error-code {
+        font-size: 76px;
+    }
+
+    .error-card h1 {
+        font-size: 22px;
+    }
+
+    .error-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+}

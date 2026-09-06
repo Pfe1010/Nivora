@@ -1,0 +1,74 @@
+{% extends "include/_base.html" %}
+{% load static %}
+
+{% block title %}
+    Page Not Found — Nivora
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/error_pages.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="error-page">
+
+    <main class="error-container">
+
+        <a href="{% url 'welcome' %}" class="error-logo">
+            <span class="error-logo-mark">N</span>
+            <span class="error-logo-name">Nivora</span>
+        </a>
+
+
+        <section class="error-card">
+
+            <span class="error-code">404</span>
+
+            <h1>
+                This page doesn't exist.
+            </h1>
+
+            <p>
+                The page you're looking for might have been removed,
+                renamed, or is temporarily unavailable.
+            </p>
+
+            <div class="error-actions">
+
+                {% if user.is_authenticated %}
+
+                    <a href="{% url 'dashboard' %}" class="error-primary-button">
+                        Back to Dashboard
+                    </a>
+
+                    <a href="{% url 'explore' %}" class="error-secondary-button">
+                        Explore Nivora
+                    </a>
+
+                {% else %}
+
+                    <a href="{% url 'welcome' %}" class="error-primary-button">
+                        Back to Home
+                    </a>
+
+                    <a href="{% url 'account_login' %}" class="error-secondary-button">
+                        Log In
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <p class="error-note">
+            Ideas worth discovering.
+        </p>
+
+    </main>
+
+</div>
+
+{% endblock %}
