@@ -203,10 +203,13 @@ else:
 
 
 # =========================================================
-# SECURITY (فقط وقتی DEBUG خاموشه، یعنی روی سرور واقعی)
+# SECURITY (فقط وقتی USE_HTTPS=True باشه، یعنی روی سرور واقعی)
 # =========================================================
+# این تنظیم عمداً به DEBUG گره نخورده، چون موقع تست محلی هم
+# ممکنه بخواید DEBUG=False بذارید (مثلاً برای دیدن صفحه‌ی 404)
+# و سرور توسعه‌ی جنگو اصلاً از HTTPS پشتیبانی نمی‌کنه.
 
-if not DEBUG:
+if os.getenv("USE_HTTPS", "False").lower() == "true":
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
