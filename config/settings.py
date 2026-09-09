@@ -216,6 +216,19 @@ if os.getenv("USE_HTTPS", "False").lower() == "true":
 
 
 # =========================================================
+# AUTHENTICATION BACKENDS
+# =========================================================
+# بدون این، جنگو فقط از ModelBackend پیش‌فرض استفاده می‌کنه که
+# فقط با یوزرنیم لاگین رو چک می‌کنه، نه ایمیل — حتی اگه
+# ACCOUNT_LOGIN_METHODS شامل "email" باشه.
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+
+# =========================================================
 # ALLAUTH
 # =========================================================
 
@@ -247,30 +260,3 @@ DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': 'django_error.log',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console', 'file'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-        'django.request': {
-            'handlers': ['console', 'file'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-    },
-}
