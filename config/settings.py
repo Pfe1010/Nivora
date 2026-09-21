@@ -155,7 +155,7 @@ USE_TZ = True
 # =========================================================
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'static'
 
 
 # =========================================================
@@ -209,10 +209,18 @@ else:
 # ممکنه بخواید DEBUG=False بذارید (مثلاً برای دیدن صفحه‌ی 404)
 # و سرور توسعه‌ی جنگو اصلاً از HTTPS پشتیبانی نمی‌کنه.
 
+SECURE_SSL_REDIRECT = False
+
 if os.getenv("USE_HTTPS", "False").lower() == "true":
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+
+    # این خط لازمه چون چابکان (مثل بیشتر PaaSها) خودش HTTPS رو
+    # مدیریت می‌کنه ولی درخواست رو با HTTP ساده به گانیکورن
+    # می‌فرسته. بدون این خط، جنگو فکر می‌کنه درخواست همیشه HTTP
+    # بوده و دوباره ریدایرکت می‌کنه -> حلقه‌ی بی‌نهایت ریدایرکت.
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # =========================================================
